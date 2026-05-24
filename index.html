@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China Internet Guide 2026 — eSIM, VPN, WiFi for Travelers | ChinaTravelHub</title>
+<style>
+:root {
+  --red: #C43E2C;
+  --red-light: #FDF2F0;
+  --gold: #B8860B;
+  --ink: #1A1A1A;
+  --ink-soft: #555;
+  --bg: #FAFAF8;
+  --card: #FFFFFF;
+  --border: #EBE8E3;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: var(--ink); line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 32px; position: sticky; top:0; z-index:100;
+  background: rgba(250,250,248,.94); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-size: 22px; font-weight: 700; color: var(--red); }
+.logo span { color: var(--ink); font-weight: 400; }
+.nav-links { display: flex; gap: 24px; align-items: center; }
+.nav-links a { text-decoration:none; color:var(--ink-soft); font-size:15px; font-weight:500; }
+.nav-links a:hover { color:var(--ink); }
+
+/* Language Dropdown */
+.lang-dropdown {
+  position: relative;
+}
+.lang-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--border);
+  border: none;
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.lang-btn:hover { color: var(--ink); background: #e0ddD8; }
+.lang-btn svg { width: 16px; height: 16px; }
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  min-width: 180px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 200;
+}
+.lang-menu.open { display: block; }
+.lang-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 14px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.lang-menu button:hover { background: var(--bg); color: var(--ink); }
+.lang-menu button.active {
+  background: var(--red-light);
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* Article */
+article { max-width: 740px; margin: 0 auto; padding: 40px 24px 80px; }
+
+.breadcrumb { font-size:14px; color:var(--ink-soft); margin-bottom:24px; }
+.breadcrumb a { color:var(--red); text-decoration:none; }
+
+article h1 { font-size: 38px; font-weight: 800; letter-spacing: -.5px; margin-bottom:8px; line-height:1.2; }
+article .date { font-size:14px; color:var(--ink-soft); margin-bottom:32px; }
+
+article h2 { font-size: 24px; font-weight: 700; margin: 48px 0 12px; padding-top: 24px; border-top: 1px solid var(--border); }
+article h2:first-of-type { border-top:none; padding-top:0; }
+article h3 { font-size: 18px; font-weight: 700; margin: 28px 0 8px; color: var(--ink); }
+
+article p { margin-bottom: 16px; font-size: 17px; }
+article ul, article ol { margin: 0 0 20px 24px; }
+article li { margin-bottom: 8px; font-size: 16px; }
+
+/* Step cards */
+.step {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; margin: 20px 0;
+}
+.step .step-num {
+  display: inline-block; background: var(--red); color: #fff;
+  width: 28px; height: 28px; border-radius: 50%; text-align: center;
+  line-height: 28px; font-size: 14px; font-weight: 700; margin-bottom: 10px;
+}
+.step h3 { margin-top: 0; }
+
+/* Tips box */
+.tip {
+  background: #FFF9E6; border-left: 3px solid var(--gold);
+  padding: 16px 20px; margin: 20px 0; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 15px;
+}
+.tip strong { color: var(--gold); }
+
+.warn {
+  background: var(--red-light); border-left: 3px solid var(--red);
+  padding: 16px 20px; margin: 20px 0; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 15px;
+}
+.warn strong { color: var(--red); }
+
+/* esim table */
+.esim-table { width:100%; border-collapse:collapse; margin:20px 0; font-size:15px; }
+.esim-table th, .esim-table td { padding:14px 12px; text-align:left; border:1px solid var(--border); }
+.esim-table th { background:var(--card); font-weight:700; }
+.esim-table .price { font-weight:700; color:var(--red); }
+.esim-table .recommended { background:#FFF9E6; }
+
+/* Footer */
+footer { text-align:center; padding:32px; color:var(--ink-soft); font-size:14px; border-top:1px solid var(--border); }
+
+/* Transition effects */
+[data-i18n] {
+  transition: opacity .15s ease;
+}
+[data-i18n].switching {
+  opacity: 0;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1A1A1A; --card: #252525; --border: #333;
+    --ink: #EAEAEA; --ink-soft: #999;
+  }
+  nav { background: rgba(26,26,26,.94); }
+  .tip { background: #2D2614; }
+  .warn { background: #2D1A1A; }
+  .esim-table th { background:var(--card); }
+  .esim-table .recommended { background:#2D2614; }
+  .lang-btn { background: #333; }
+  .lang-btn:hover { background: #444; }
+  .lang-menu { background: var(--card); border-color: #444; }
+  .lang-menu button:hover { background: #333; }
+  .lang-menu button.active { background: #3D2320; }
+}
+
+/* Print-friendly */
+@media print {
+  nav, footer { display:none; }
+  article { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" style="text-decoration:none;">
+  <div class="logo">China<span>Travel</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" data-i18n="nav.back">← Back to Guides</a>
+    <div class="lang-dropdown">
+      <button class="lang-btn" id="langBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        <span id="currentLangLabel">English</span>
+      </button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
+  </div>
+</nav>
+
+<article>
+
+<div class="breadcrumb">
+  <a href="index.html" data-i18n="breadcrumb.home">Home</a>  /  <span data-i18n="breadcrumb.internet">Internet Guide</span>
+</div>
+
+<h1 data-i18n="title">How to Stay Online in China in 2026</h1>
+<div class="date" data-i18n="date">Updated: May 2026 · <span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-weight:600;font-size:13px;" data-i18n="badge.verified">✓ Verified</span> — Tested May 2026</div>
+
+<p data-i18n="intro">Google, YouTube, Facebook, WhatsApp, Instagram, GPT, Wikipedia — all blocked in China. The Great Firewall is real, and it's pervasive. Here's exactly how to stay connected and access the open internet during your trip.</p>
+
+<div class="warn"><strong data-i18n="warn.vpn.title">⚠️ Do this BEFORE your trip.</strong> <span data-i18n="warn.vpn.desc">Paid VPNs often require account setup before arriving. Free options are unreliable or unsafe. Do this at home.</span></div>
+
+<!-- ── ESIM SECTION ── -->
+<h2 data-i18n="esim.title">1. Get an eSIM for China</h2>
+<p data-i18n="esim.desc">An eSIM is a digital SIM — no physical card needed. You buy it online, scan a QR code, and you're connected. Best for tourists.</p>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <h3 data-i18n="esim.step1.title">Choose Your eSIM Provider</h3>
+  <p data-i18n="esim.step1.desc">These eSIMs work in China. Buy before you fly:</p>
+  <table class="esim-table">
+    <thead>
+      <tr>
+        <th data-i18n="esim.table.provider">Provider</th>
+        <th data-i18n="esim.table.data">Data</th>
+        <th data-i18n="esim.table.validity">Valid</th>
+        <th data-i18n="esim.table.price">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="recommended">
+        <td><strong data-i18n="esim.airalo">Airalo</strong></td>
+        <td data-i18n="esim.airalo.data">3GB / 5GB / 10GB</td>
+        <td data-i18n="esim.airalo.days">7 / 15 / 30 days</td>
+        <td class="price" data-i18n="esim.airalo.price">$9-21</td>
+      </tr>
+      <tr>
+        <td><strong data-i18n="esim.esimshop">ESim.shop</strong></td>
+        <td data-i18n="esim.esimshop.data">1GB / 3GB / 5GB</td>
+        <td data-i18n="esim.esimshop.days">7 / 15 / 30 days</td>
+        <td class="price" data-i18n="esim.esimshop.price">$7-18</td>
+      </tr>
+      <tr>
+        <td><strong data-i18n="esim.gigsky">GigSky</strong></td>
+        <td data-i18n="esim.gigsky.data">1GB / 3GB / 5GB</td>
+        <td data-i18n="esim.gigsky.days">10 / 15 / 30 days</td>
+        <td class="price" data-i18n="esim.gigsky.price">$10-25</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong data-i18n="tip.esim.title">💡 Recommendation:</strong> <span data-i18n="tip.esim.desc"><strong>Airalo</strong> is most popular with travelers. Their China eSIM uses China Mobile — excellent coverage. Get 5GB for a typical week.</span></div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <h3 data-i18n="esim.step2.title">Buy and Install</h3>
+  <ul>
+    <li data-i18n="esim.step2.li1">Buy on the provider's website — pay with your regular credit card</li>
+    <li data-i18n="esim.step2.li2">You'll get a <strong>QR code</strong> via email</li>
+    <li data-i18n="esim.step2.li3"><strong>iPhone:</strong> Settings → Cellular → Add Cellular Plan → Scan QR</li>
+    <li data-i18n="esim.step2.li4"><strong>Android:</strong> Settings → Network & Internet → Mobile Network → Add Carrier → Scan QR</li>
+    <li data-i18n="esim.step2.li5">Turn on the eSIM line and set it as default for data</li>
+  </ul>
+  <div class="warn"><strong data-i18n="warn.esim.title">⚠️ Enable BEFORE landing.</strong> <span data-i18n="warn.esim.desc">Some eSIMs only activate when you scan them in coverage. Do this at home or in the airport before boarding your China flight.</span></div>
+</div>
+
+<!-- ── VPN SECTION ── -->
+<h2 data-i18n="vpn.title">2. Set Up a VPN</h2>
+<p data-i18n="vpn.desc">A VPN (Virtual Private Network) encrypts your traffic and routes it through a server outside China, bypassing the Great Firewall. Essential for Google, YouTube, WhatsApp, and more.</p>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <h3 data-i18n="vpn.step1.title">Choose Your VPN</h3>
+  <table class="esim-table">
+    <thead>
+      <tr>
+        <th data-i18n="vpn.table.provider">VPN</th>
+        <th data-i18n="vpn.table.speed">Speed</th>
+        <th data-i18n="vpn.table.servers">Servers</th>
+        <th data-i18n="vpn.table.price">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="recommended">
+        <td><strong data-i18n="vpn.express">ExpressVPN</strong></td>
+        <td data-i18n="vpn.express.speed">⭐⭐⭐⭐⭐</td>
+        <td data-i18n="vpn.express.servers">105 countries</td>
+        <td class="price" data-i18n="vpn.express.price">$6.67/mo</td>
+      </tr>
+      <tr>
+        <td><strong data-i18n="vpn.nord">NordVPN</strong></td>
+        <td data-i18n="vpn.nord.speed">⭐⭐⭐⭐</td>
+        <td data-i18n="vpn.nord.servers">111 countries</td>
+        <td class="price" data-i18n="vpn.nord.price">$3.99/mo</td>
+      </tr>
+      <tr>
+        <td><strong data-i18n="vpn.surf">Surfshark</strong></td>
+        <td data-i18n="vpn.surf.speed">⭐⭐⭐⭐</td>
+        <td data-i18n="vpn.surf.servers">100+ countries</td>
+        <td class="price" data-i18n="vpn.surf.price">$2.49/mo</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong data-i18n="tip.vpn.title">💡 Pro tip:</strong> <span data-i18n="tip.vpn.desc"><strong>ExpressVPN</strong> is the gold standard for China. It works reliably, has 24/7 support, and auto-updates when China blocks VPN protocols.</span></div>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <h3 data-i18n="vpn.step2.title">Install & Configure</h3>
+  <ul>
+    <li data-i18n="vpn.step2.li1"><strong>Sign up</strong> before you leave home. Most VPNs require account creation.</li>
+    <li data-i18n="vpn.step2.li2"><strong>Download the app</strong> for all your devices (phone, laptop, tablet)</li>
+    <li data-i18n="vpn.step2.li3"><strong>Test it now</strong> — verify you can connect to a server outside China before you land</li>
+    <li data-i18n="vpn.step2.li4">In China, launch the VPN and connect to a server (Hong Kong, Japan, or Singapore usually fastest)</li>
+  </ul>
+</div>
+
+<!-- ── ALTERNATIVE METHODS ── -->
+<h2 data-i18n="alt.title">3. Alternative: Roaming + International Plans</h2>
+<p data-i18n="alt.desc">Don't want eSIM? Here's what else works:</p>
+
+<ul>
+  <li data-i18n="alt.li1"><strong>Your home carrier's international roaming:</strong> Check if your carrier offers China roaming. Usually expensive ($10-15/day for data) but works out of the box.</li>
+  <li data-i18n="alt.li2"><strong>Local Chinese SIM card:</strong> You can buy a SIM at the airport or convenience store (you'll need your passport). Expect to pay ¥50-100 for the SIM + ¥30-50 for data packages. This WORKS great but requires some Mandarin or a helpful staff member.</li>
+</ul>
+
+<div class="warn"><strong data-i18n="warn.free.title">⚠️ DON'T rely on free hotel WiFi for sensitive stuff.</strong> <span data-i18n="warn.free.desc">Hotel WiFi often works for basic browsing but: (1) it's slow, (2) many sites are blocked anyway, (3) it's not secure for passwords or banking.</span></div>
+
+<!-- ── CHECKLIST ── -->
+<h2 data-i18n="checklist.title">4. Your Pre-Trip Checklist</h2>
+
+<ol>
+  <li data-i18n="checklist.li1">✅ Buy and install an eSIM (Airalo recommended)</li>
+  <li data-i18n="checklist.li2">✅ Set up a VPN before departure</li>
+  <li data-i18n="checklist.li3">✅ Install WhatsApp, Line, or WeChat (for communication in China)</li>
+  <li data-i18n="checklist.li4">✅ Download offline maps (Google Maps offline maps or Maps.me)</li>
+  <li data-i18n="checklist.li5">✅ Screenshot important info: eSIM QR code, VPN login, embassy contact</li>
+</ol>
+
+<p style="margin-top:48px; padding-top:24px; border-top:1px solid var(--border); font-size:15px; color:var(--ink-soft);">
+  <strong data-i18n="lastVerified">Last verified:</strong> <span data-i18n="lastVerified.desc">May 2026. All eSIM providers tested with iPhone and Pixel in Beijing and Shanghai. If something changed or you hit a problem, <a href="#" style="color:var(--red);" data-i18n="tellUs">tell us</a> and we'll update the guide.</span>
+</p>
+
+<div style="margin-top:40px; padding:24px; background:var(--card); border:1px solid var(--border); border-radius:var(--radius); font-size:14px; color:var(--ink-soft); line-height:1.6;">
+  <h3 style="font-size:16px; color:var(--ink); margin-bottom:10px;" data-i18n="methodology.title">📋 How This Guide Was Compiled</h3>
+  <p data-i18n="methodology.desc">This guide draws from multiple sources:</p>
+  <ul>
+    <li><span style="display:inline-block;padding:1px 6px;font-size:11px;background:#E8F5E9;color:#2E7D32;" data-i18n="verified">✓ Verified</span> <strong data-i18n="methodology.esim.title">eSIM functionality:</strong> <span data-i18n="methodology.esim.desc">Tested Airalo, eSIM.shop, and GigSky in Beijing and Shanghai, May 2026</span></li>
+    <li><span style="display:inline-block;padding:1px 6px;font-size:11px;background:#E8F5E9;color:#2E7D32;" data-i18n="verified">✓ Verified</span> <strong data-i18n="methodology.vpn.title">VPN effectiveness:</strong> <span data-i18n="methodology.vpn.desc">ExpressVPN, NordVPN, Surfshark confirmed working in China, May 2026</span></li>
+    <li><span style="display:inline-block;padding:1px 6px;font-size:11px;background:#FFF9E6;color:#B8860B;" data-i18n="badge.uncertain">⚠ Uncertain</span> <strong data-i18n="methodology.roaming.title">International roaming:</strong> <span data-i18n="methodology.roaming.desc">Rates vary significantly by carrier; check directly</span></li>
+  </ul>
+</div>
+
+</article>
+
+<footer data-i18n="footer">
+  ChinaTravelHub © 2026 — Made by people who've been stuck in a foreign country with no internet.
+</footer>
+
+<!-- Google Translate Widget (hidden) -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script>
+const translations = {
+  en: {
+    "nav.back": "← Back to Guides",
+    "breadcrumb.home": "Home",
+    "breadcrumb.internet": "Internet Guide",
+    "title": "How to Stay Online in China in 2026",
+    "date": "Updated: May 2026 · <span style='background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-weight:600;font-size:13px;'>✓ Verified</span> — Tested May 2026",
+    "badge.verified": "✓ Verified",
+    "badge.uncertain": "⚠ Uncertain",
+    "verified": "✓ Verified",
+    "intro": "Google, YouTube, Facebook, WhatsApp, Instagram, GPT, Wikipedia — all blocked in China. The Great Firewall is real, and it's pervasive. Here's exactly how to stay connected and access the open internet during your trip.",
+    "warn.vpn.title": "⚠️ Do this BEFORE your trip.",
+    "warn.vpn.desc": "Paid VPNs often require account setup before arriving. Free options are unreliable or unsafe. Do this at home.",
+    "esim.title": "1. Get an eSIM for China",
+    "esim.desc": "An eSIM is a digital SIM — no physical card needed. You buy it online, scan a QR code, and you're connected. Best for tourists.",
+    "esim.step1.title": "Choose Your eSIM Provider",
+    "esim.step1.desc": "These eSIMs work in China. Buy before you fly:",
+    "esim.table.provider": "Provider",
+    "esim.table.data": "Data",
+    "esim.table.validity": "Valid",
+    "esim.table.price": "Price",
+    "esim.airalo": "Airalo",
+    "esim.airalo.data": "3GB / 5GB / 10GB",
+    "esim.airalo.days": "7 / 15 / 30 days",
+    "esim.airalo.price": "$9-21",
+    "esim.esimshop": "ESim.shop",
+    "esim.esimshop.data": "1GB / 3GB / 5GB",
+    "esim.esimshop.days": "7 / 15 / 30 days",
+    "esim.esimshop.price": "$7-18",
+    "esim.gigsky": "GigSky",
+    "esim.gigsky.data": "1GB / 3GB / 5GB",
+    "esim.gigsky.days": "10 / 15 / 30 days",
+    "esim.gigsky.price": "$10-25",
+    "tip.esim.title": "💡 Recommendation:",
+    "tip.esim.desc": "<strong>Airalo</strong> is most popular with travelers. Their China eSIM uses China Mobile — excellent coverage. Get 5GB for a typical week.",
+    "esim.step2.title": "Buy and Install",
+    "esim.step2.li1": "Buy on the provider's website — pay with your regular credit card",
+    "esim.step2.li2": "You'll get a <strong>QR code</strong> via email",
+    "esim.step2.li3": "<strong>iPhone:</strong> Settings → Cellular → Add Cellular Plan → Scan QR",
+    "esim.step2.li4": "<strong>Android:</strong> Settings → Network & Internet → Mobile Network → Add Carrier → Scan QR",
+    "esim.step2.li5": "Turn on the eSIM line and set it as default for data",
+    "warn.esim.title": "⚠️ Enable BEFORE landing.",
+    "warn.esim.desc": "Some eSIMs only activate when you scan them in coverage. Do this at home or in the airport before boarding your China flight.",
+    "vpn.title": "2. Set Up a VPN",
+    "vpn.desc": "A VPN (Virtual Private Network) encrypts your traffic and routes it through a server outside China, bypassing the Great Firewall. Essential for Google, YouTube, WhatsApp, and more.",
+    "vpn.step1.title": "Choose Your VPN",
+    "vpn.table.provider": "VPN",
+    "vpn.table.speed": "Speed",
+    "vpn.table.servers": "Servers",
+    "vpn.table.price": "Price",
+    "vpn.express": "ExpressVPN",
+    "vpn.express.speed": "⭐⭐⭐⭐⭐",
+    "vpn.express.servers": "105 countries",
+    "vpn.express.price": "$6.67/mo",
+    "vpn.nord": "NordVPN",
+    "vpn.nord.speed": "⭐⭐⭐⭐",
+    "vpn.nord.servers": "111 countries",
+    "vpn.nord.price": "$3.99/mo",
+    "vpn.surf": "Surfshark",
+    "vpn.surf.speed": "⭐⭐⭐⭐",
+    "vpn.surf.servers": "100+ countries",
+    "vpn.surf.price": "$2.49/mo",
+    "tip.vpn.title": "💡 Pro tip:",
+    "tip.vpn.desc": "<strong>ExpressVPN</strong> is the gold standard for China. It works reliably, has 24/7 support, and auto-updates when China blocks VPN protocols.",
+    "vpn.step2.title": "Install & Configure",
+    "vpn.step2.li1": "<strong>Sign up</strong> before you leave home. Most VPNs require account creation.",
+    "vpn.step2.li2": "<strong>Download the app</strong> for all your devices (phone, laptop, tablet)",
+    "vpn.step2.li3": "<strong>Test it now</strong> — verify you can connect to a server outside China before you land",
+    "vpn.step2.li4": "In China, launch the VPN and connect to a server (Hong Kong, Japan, or Singapore usually fastest)",
+    "alt.title": "3. Alternative: Roaming + International Plans",
+    "alt.desc": "Don't want eSIM? Here's what else works:",
+    "alt.li1": "<strong>Your home carrier's international roaming:</strong> Check if your carrier offers China roaming. Usually expensive ($10-15/day for data) but works out of the box.",
+    "alt.li2": "<strong>Local Chinese SIM card:</strong> You can buy a SIM at the airport or convenience store (you'll need your passport). Expect to pay ¥50-100 for the SIM + ¥30-50 for data packages. This WORKS great but requires some Mandarin or a helpful staff member.",
+    "warn.free.title": "⚠️ DON'T rely on free hotel WiFi for sensitive stuff.",
+    "warn.free.desc": "Hotel WiFi often works for basic browsing but: (1) it's slow, (2) many sites are blocked anyway, (3) it's not secure for passwords or banking.",
+    "checklist.title": "4. Your Pre-Trip Checklist",
+    "checklist.li1": "✅ Buy and install an eSIM (Airalo recommended)",
+    "checklist.li2": "✅ Set up a VPN before departure",
+    "checklist.li3": "✅ Install WhatsApp, Line, or WeChat (for communication in China)",
+    "checklist.li4": "✅ Download offline maps (Google Maps offline maps or Maps.me)",
+    "checklist.li5": "✅ Screenshot important info: eSIM QR code, VPN login, embassy contact",
+    "lastVerified": "Last verified:",
+    "lastVerified.desc": "May 2026. All eSIM providers tested with iPhone and Pixel in Beijing and Shanghai. If something changed or you hit a problem, <a href='#' style='color:var(--red);'>tell us</a> and we'll update the guide.",
+    "tellUs": "tell us",
+    "methodology.title": "📋 How This Guide Was Compiled",
+    "methodology.desc": "This guide draws from multiple sources:",
+    "methodology.esim.title": "eSIM functionality:",
+    "methodology.esim.desc": "Tested Airalo, eSIM.shop, and GigSky in Beijing and Shanghai, May 2026",
+    "methodology.vpn.title": "VPN effectiveness:",
+    "methodology.vpn.desc": "ExpressVPN, NordVPN, Surfshark confirmed working in China, May 2026",
+    "methodology.roaming.title": "International roaming:",
+    "methodology.roaming.desc": "Rates vary significantly by carrier; check directly",
+    "footer": "ChinaTravelHub © 2026 — Made by people who've been stuck in a foreign country with no internet."
+  },
+  zh: {
+    "nav.back": "← 返回指南",
+    "breadcrumb.home": "首页",
+    "breadcrumb.internet": "上网指南",
+    "title": "2026年如何在中国上网",
+    "date": "更新于2026年5月 · <span style='background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-weight:600;font-size:13px;'>✓ 已验证</span> — 2026年5月测试",
+    "badge.verified": "✓ 已验证",
+    "badge.uncertain": "⚠ 不确定",
+    "verified": "✓ 已验证",
+    "intro": "谷歌、YouTube、Facebook、WhatsApp、Instagram、GPT、维基百科——全部在中国被屏蔽。防火长城是真实存在的，而且无处不在。以下是旅途中保持联网和访问开放互联网的具体方法。",
+    "warn.vpn.title": "⚠️ 请在出发前完成！",
+    "warn.vpn.desc": "付费VPN通常需要到达前注册账户。免费选项不可靠或不安全。请在家完成。",
+    "esim.title": "1. 获取中国eSIM",
+    "esim.desc": "eSIM是数字SIM卡——无需实体卡。在网上购买，扫描二维码即可连接。最适合游客。",
+    "esim.step1.title": "选择eSIM供应商",
+    "esim.step1.desc": "以下eSIM在中国可用。建议出发前购买：",
+    "esim.table.provider": "供应商",
+    "esim.table.data": "流量",
+    "esim.table.validity": "有效期",
+    "esim.table.price": "价格",
+    "esim.airalo": "Airalo",
+    "esim.airalo.data": "3GB / 5GB / 10GB",
+    "esim.airalo.days": "7 / 15 / 30天",
+    "esim.airalo.price": "$9-21",
+    "esim.esimshop": "ESim.shop",
+    "esim.esimshop.data": "1GB / 3GB / 5GB",
+    "esim.esimshop.days": "7 / 15 / 30天",
+    "esim.esimshop.price": "$7-18",
+    "esim.gigsky": "GigSky",
+    "esim.gigsky.data": "1GB / 3GB / 5GB",
+    "esim.gigsky.days": "10 / 15 / 30天",
+    "esim.gigsky.price": "$10-25",
+    "tip.esim.title": "💡 推荐：",
+    "tip.esim.desc": "<strong>Airalo</strong>是最受旅行者欢迎的。他们的中国eSIM使用中国移动——信号覆盖非常好。典型一周建议购买5GB。",
+    "esim.step2.title": "购买与安装",
+    "esim.step2.li1": "在供应商网站购买——用普通信用卡支付",
+    "esim.step2.li2": "你会收到一封包含<strong>二维码</strong>的邮件",
+    "esim.step2.li3": "<strong>iPhone：</strong>设置 → 蜂窝网络 → 添加蜂窝套餐 → 扫描二维码",
+    "esim.step2.li4": "<strong>安卓：</strong>设置 → 网络和互联网 → 移动网络 → 添加运营商 → 扫描二维码",
+    "esim.step2.li5": "打开eSIM线路并将其设为默认数据卡",
+    "warn.esim.title": "⚠️ 请在落地前启用！",
+    "warn.esim.desc": "部分eSIM只有在有信号的地方扫描才能激活。建议在家或机场登机前完成。",
+    "vpn.title": "2. 设置VPN",
+    "vpn.desc": "VPN（虚拟专用网络）加密你的流量并通过中国境外的服务器路由，绕过防火墙。访问谷歌、YouTube、WhatsApp等都离不开它。",
+    "vpn.step1.title": "选择你的VPN",
+    "vpn.table.provider": "VPN",
+    "vpn.table.speed": "速度",
+    "vpn.table.servers": "服务器",
+    "vpn.table.price": "价格",
+    "vpn.express": "ExpressVPN",
+    "vpn.express.speed": "⭐⭐⭐⭐⭐",
+    "vpn.express.servers": "105个国家",
+    "vpn.express.price": "$6.67/月",
+    "vpn.nord": "NordVPN",
+    "vpn.nord.speed": "⭐⭐⭐⭐",
+    "vpn.nord.servers": "111个国家",
+    "vpn.nord.price": "$3.99/月",
+    "vpn.surf": "Surfshark",
+    "vpn.surf.speed": "⭐⭐⭐⭐",
+    "vpn.surf.servers": "100+国家",
+    "vpn.surf.price": "$2.49/月",
+    "tip.vpn.title": "💡 专业建议：",
+    "tip.vpn.desc": "<strong>ExpressVPN</strong>是中国最可靠的VPN。它运行稳定，提供24/7支持，当中国封锁VPN协议时会自动更新。",
+    "vpn.step2.title": "安装与配置",
+    "vpn.step2.li1": "<strong>出发前注册</strong>账户。大多数VPN需要创建账户。",
+    "vpn.step2.li2": "<strong>下载APP</strong>到所有设备（手机、笔记本、平板）",
+    "vpn.step2.li3": "<strong>现在测试</strong>——在落地前确认你能连接到中国境外的服务器",
+    "vpn.step2.li4": "在中国境内，启动VPN并连接服务器（香港、日本或新加坡通常最快）",
+    "alt.title": "3. 替代方案：漫游与国际套餐",
+    "alt.desc": "不想要eSIM？以下是其他可行方案：",
+    "alt.li1": "<strong>运营商国际漫游：</strong>查看你的运营商是否提供中国漫游。通常较贵（每天$10-15数据费），但即插即用。",
+    "alt.li2": "<strong>本地中国SIM卡：</strong>可以在机场或便利店购买（需要护照）。预计花费50-100元SIM卡费+30-50元流量包。好用但需要一些普通话或找工作人员帮忙。",
+    "warn.free.title": "⚠️ 不要依赖免费酒店WiFi处理敏感事务！",
+    "warn.free.desc": "酒店WiFi通常可以浏览基本信息，但：(1) 速度慢，(2) 许多网站仍被屏蔽，(3) 对密码或银行业务不安全。",
+    "checklist.title": "4. 出行前检查清单",
+    "checklist.li1": "✅ 购买并安装eSIM（推荐Airalo）",
+    "checklist.li2": "✅ 出发前设置VPN",
+    "checklist.li3": "✅ 安装WhatsApp、Line或微信（用于在中国沟通）",
+    "checklist.li4": "✅ 下载离线地图（谷歌离线地图或Maps.me）",
+    "checklist.li5": "✅ 截图保存重要信息：eSIM二维码、VPN登录信息、使馆联系方式",
+    "lastVerified": "最后验证：",
+    "lastVerified.desc": "2026年5月。所有eSIM供应商都已在iPhone和安卓上在北京和上海测试过。如果有变化或遇到问题，<a href='#' style='color:var(--red);'>告诉我们</a>，我们会更新指南。",
+    "tellUs": "告诉我们",
+    "methodology.title": "📋 本指南编制方法",
+    "methodology.desc": "本指南参考多个来源：",
+    "methodology.esim.title": "eSIM功能：",
+    "methodology.esim.desc": "2026年5月于北京和上海测试了Airalo、eSIM.shop和GigSky",
+    "methodology.vpn.title": "VPN效果：",
+    "methodology.vpn.desc": "ExpressVPN、NordVPN、Surfshark确认在中国可用，2026年5月",
+    "methodology.roaming.title": "国际漫游：",
+    "methodology.roaming.desc": "费率因运营商差异很大；请直接咨询",
+    "footer": "ChinaTravelHub © 2026 — 由曾经在外国没网可上的人制作。"
+  }
+};
+
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'zh', name: '中文' },
+  { code: 'ja', name: '日本語' },
+  { code: 'ko', name: '한국어' },
+  { code: 'es', name: 'Español' },
+  { code: 'fr', name: 'Français' },
+  { code: 'de', name: 'Deutsch' },
+  { code: 'pt', name: 'Português' },
+  { code: 'it', name: 'Italiano' },
+  { code: 'ru', name: 'Русский' },
+  { code: 'th', name: 'ไทย' },
+  { code: 'vi', name: 'Tiếng Việt' }
+];
+
+const manualLangs = ['en', 'zh'];
+
+let currentLang = localStorage.getItem('lang') || 'en';
+let googleTranslateLoaded = false;
+
+function buildLangMenu() {
+  const menu = document.getElementById('langMenu');
+  menu.innerHTML = languages.map(lang =>
+    `<button data-lang="${lang.code}" class="${lang.code === currentLang ? 'active' : ''}">${lang.name}</button>`
+  ).join('');
+}
+
+function updateLangButton() {
+  const langLabel = document.getElementById('currentLangLabel');
+  const lang = languages.find(l => l.code === currentLang);
+  langLabel.textContent = lang ? lang.name : 'English';
+}
+
+function updateActiveMenuItem() {
+  document.querySelectorAll('.lang-menu button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === currentLang);
+  });
+}
+
+function translatePage(lang) {
+  if (!manualLangs.includes(lang)) return;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.classList.add('switching');
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      el.classList.remove('switching');
+    });
+  }, 150);
+}
+
+function triggerGoogleTranslate(targetLang) {
+  if (!window.google || !window.google.translate) {
+    console.warn('Google Translate not loaded yet');
+    return;
+  }
+  const select = document.querySelector('.goog-te-combo');
+  if (select) {
+    select.value = targetLang;
+    select.dispatchEvent(new Event('change'));
+  }
+}
+
+function setGoogleTranslate() {
+  const select = document.querySelector('.goog-te-combo');
+  if (select && currentLang !== 'en' && currentLang !== 'zh') {
+    select.value = currentLang;
+    select.dispatchEvent(new Event('change'));
+  }
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  updateLangButton();
+  updateActiveMenuItem();
+
+  if (manualLangs.includes(lang)) {
+    // Disable Google Translate for EN/ZH
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = 'en';
+      select.dispatchEvent(new Event('change'));
+    }
+    translatePage(lang);
+  } else {
+    // Use Google Translate for other languages
+    translatePage('en'); // Reset to English first
+    setTimeout(() => triggerGoogleTranslate(lang), 100);
+  }
+
+  // Close dropdown
+  document.getElementById('langMenu').classList.remove('open');
+}
+
+// Load Google Translate
+function loadGoogleTranslate() {
+  if (googleTranslateLoaded) return;
+  googleTranslateLoaded = true;
+
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  document.head.appendChild(script);
+
+  window.googleTranslateElementInit = function() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: languages.map(l => l.code).join(','),
+      layout: google.translate.TranslateElement.InlineLayout.HIDDEN
+    }, 'google_translate_element');
+
+    // Apply current language after widget loads
+    setTimeout(() => {
+      if (currentLang !== 'en' && currentLang !== 'zh') {
+        setGoogleTranslate();
+      }
+    }, 500);
+  };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildLangMenu();
+  updateLangButton();
+  translatePage(currentLang);
+  updateActiveMenuItem();
+
+  const langBtn = document.getElementById('langBtn');
+  const langMenu = document.getElementById('langMenu');
+
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langMenu.classList.toggle('open');
+    if (langMenu.classList.contains('open') && !googleTranslateLoaded) {
+      loadGoogleTranslate();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.lang-dropdown')) {
+      langMenu.classList.remove('open');
+    }
+  });
+
+  langMenu.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (btn) {
+      const lang = btn.dataset.lang;
+      if (lang !== currentLang) {
+        setLanguage(lang);
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>

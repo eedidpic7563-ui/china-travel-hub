@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China Payment Guide 2026 — Alipay, WeChat Pay, Cash for Travelers | ChinaTravelHub</title>
+<style>
+:root {
+  --red: #C43E2C;
+  --red-light: #FDF2F0;
+  --gold: #B8860B;
+  --ink: #1A1A1A;
+  --ink-soft: #555;
+  --bg: #FAFAF8;
+  --card: #FFFFFF;
+  --border: #EBE8E3;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: var(--ink); line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 32px; position: sticky; top:0; z-index:100;
+  background: rgba(250,250,248,.94); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.logo { font-size: 22px; font-weight: 700; color: var(--red); }
+.logo span { color: var(--ink); font-weight: 400; }
+.nav-links { display: flex; gap: 24px; align-items: center; }
+.nav-links a { text-decoration:none; color:var(--ink-soft); font-size:15px; font-weight:500; }
+.nav-links a:hover { color:var(--ink); }
+
+/* Language Dropdown */
+.lang-dropdown {
+  position: relative;
+}
+.lang-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--border);
+  border: none;
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.lang-btn:hover { color: var(--ink); background: #e0ddD8; }
+.lang-btn svg { width: 16px; height: 16px; }
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  min-width: 180px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 200;
+}
+.lang-menu.open { display: block; }
+.lang-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  font-size: 14px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.lang-menu button:hover { background: var(--bg); color: var(--ink); }
+.lang-menu button.active {
+  background: var(--red-light);
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* Article */
+article { max-width: 740px; margin: 0 auto; padding: 40px 24px 80px; }
+
+.breadcrumb { font-size:14px; color:var(--ink-soft); margin-bottom:24px; }
+.breadcrumb a { color:var(--red); text-decoration:none; }
+
+article h1 { font-size: 38px; font-weight: 800; letter-spacing: -.5px; margin-bottom:8px; line-height:1.2; }
+article .date { font-size:14px; color:var(--ink-soft); margin-bottom:32px; }
+
+article h2 { font-size: 24px; font-weight: 700; margin: 48px 0 12px; padding-top: 24px; border-top: 1px solid var(--border); }
+article h2:first-of-type { border-top:none; padding-top:0; }
+article h3 { font-size: 18px; font-weight: 700; margin: 28px 0 8px; color: var(--ink); }
+
+article p { margin-bottom: 16px; font-size: 17px; }
+article ul, article ol { margin: 0 0 20px 24px; }
+article li { margin-bottom: 8px; font-size: 16px; }
+
+/* Step cards */
+.step {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; margin: 20px 0;
+}
+.step .step-num {
+  display: inline-block; background: var(--red); color: #fff;
+  width: 28px; height: 28px; border-radius: 50%; text-align: center;
+  line-height: 28px; font-size: 14px; font-weight: 700; margin-bottom: 10px;
+}
+.step h3 { margin-top: 0; }
+
+/* Tips box */
+.tip {
+  background: #FFF9E6; border-left: 3px solid var(--gold);
+  padding: 16px 20px; margin: 20px 0; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 15px;
+}
+.tip strong { color: var(--gold); }
+
+.warn {
+  background: var(--red-light); border-left: 3px solid var(--red);
+  padding: 16px 20px; margin: 20px 0; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 15px;
+}
+.warn strong { color: var(--red); }
+
+/* Comparison table */
+.compare-table { width:100%; border-collapse:collapse; margin:20px 0; font-size:15px; }
+.compare-table th, .compare-table td { padding:14px 12px; text-align:left; border:1px solid var(--border); }
+.compare-table th { background:var(--card); font-weight:700; }
+.compare-table .price { font-weight:700; color:var(--red); }
+.compare-table .recommended { background:#FFF9E6; }
+
+/* Footer */
+footer { text-align:center; padding:32px; color:var(--ink-soft); font-size:14px; border-top:1px solid var(--border); }
+
+/* Transition effects */
+[data-i18n] {
+  transition: opacity .15s ease;
+}
+[data-i18n].switching {
+  opacity: 0;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1A1A1A; --card: #252525; --border: #333;
+    --ink: #EAEAEA; --ink-soft: #999;
+  }
+  nav { background: rgba(26,26,26,.94); }
+  .tip { background: #2D2614; }
+  .warn { background: #2D1A1A; }
+  .compare-table th { background:var(--card); }
+  .compare-table .recommended { background:#2D2614; }
+  .lang-btn { background: #333; }
+  .lang-btn:hover { background: #444; }
+  .lang-menu { background: var(--card); border-color: #444; }
+  .lang-menu button:hover { background: #333; }
+  .lang-menu button.active { background: #3D2320; }
+}
+
+/* Print-friendly */
+@media print {
+  nav, footer { display:none; }
+  article { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" style="text-decoration:none;">
+  <div class="logo">China<span>Travel</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" data-i18n="nav.back">← Back to Guides</a>
+    <div class="lang-dropdown">
+      <button class="lang-btn" id="langBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        <span id="currentLangLabel">English</span>
+      </button>
+      <div class="lang-menu" id="langMenu"></div>
+    </div>
+  </div>
+</nav>
+
+<article>
+
+<div class="breadcrumb">
+  <a href="index.html" data-i18n="breadcrumb.home">Home</a>  /  <span data-i18n="breadcrumb.payment">Payment Guide</span>
+</div>
+
+<h1 data-i18n="title">How to Pay in China in 2026</h1>
+<div class="date" data-i18n="date">Updated: May 2026 · <span style="background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-weight:600;font-size:13px;" data-i18n="badge.verified">✓ Verified</span></div>
+
+<p data-i18n="intro">China is essentially a cashless society. Alipay and WeChat Pay dominate everything from street food to luxury hotels. This guide covers how to set up mobile payments, what alternatives exist, and how to avoid common pitfalls.</p>
+
+<div class="warn"><strong data-i18n="warn.setup.title">⚠️ Set up BEFORE arriving.</strong> <span data-i18n="warn.setup.desc">Alipay and WeChat Pay accounts require a Chinese phone number and verification. Setting this up before your trip saves major headaches.</span></div>
+
+<!-- ── OVERVIEW SECTION ── -->
+<h2 data-i18n="overview.title">1. Payment Options at a Glance</h2>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th data-i18n="overview.table.method">Method</th>
+      <th data-i18n="overview.table.ease">Ease of Use</th>
+      <th data-i18n="overview.table.requirements">Requirements</th>
+      <th data-i18n="overview.table.fees">Fees</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="recommended">
+      <td><strong data-i18n="overview.alipay">Alipay</strong></td>
+      <td>⭐⭐⭐⭐⭐</td>
+      <td data-i18n="overview.alipay.req">Chinese phone + ID verification</td>
+      <td data-i18n="overview.alipay.fees">0% (linked card)</td>
+    </tr>
+    <tr>
+      <td><strong data-i18n="overview.wechat">WeChat Pay</strong></td>
+      <td>⭐⭐⭐⭐⭐</td>
+      <td data-i18n="overview.wechat.req">Chinese phone + ID verification</td>
+      <td data-i18n="overview.wechat.fees">0% (linked card)</td>
+    </tr>
+    <tr>
+      <td><strong data-i18n="overview.cash">Cash (RMB)</strong></td>
+      <td>⭐⭐</td>
+      <td data-i18n="overview.cash.req">None</td>
+      <td data-i18n="overview.cash.fees">None</td>
+    </tr>
+    <tr>
+      <td><strong data-i18n="overview.card">Foreign Cards</strong></td>
+      <td>⭐⭐</td>
+      <td data-i18n="overview.card.req">Visa/MasterCard accepted</td>
+      <td data-i18n="overview.card.fees">2-3% foreign transaction</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ── ALIPAY SECTION ── -->
+<h2 data-i18n="alipay.title">2. Setting Up Alipay (Recommended)</h2>
+<p data-i18n="alipay.desc">Alipay is the most widely accepted mobile payment in China. Even small vendors accept it.</p>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <h3 data-i18n="alipay.step1.title">Download Alipay App</h3>
+  <ul>
+    <li data-i18n="alipay.step1.li1">Download Alipay from App Store / Play Store</li>
+    <li data-i18n="alipay.step1.li2">Sign up with your email or phone number</li>
+    <li data-i18n="alipay.step1.li3">Set a strong password and enable biometric login</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <h3 data-i18n="alipay.step2.title">Verify Your Account</h3>
+  <p data-i18n="alipay.step2.desc">You'll need to complete identity verification. For foreigners:</p>
+  <ul>
+    <li data-i18n="alipay.step2.li1">Tap "Authenticate" or "Verify ID"</li>
+    <li data-i18n="alipay.step2.li2">Select passport as ID type</li>
+    <li data-i18n="alipay.step2.li3">Take a photo of your passport + selfie</li>
+    <li data-i18n="alipay.step2.li4">Verification typically takes 1-3 days</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <h3 data-i18n="alipay.step3.title">Add a Foreign Card</h3>
+  <ul>
+    <li data-i18n="alipay.step3.li1">Go to "Bank Cards" → "Add Card"</li>
+    <li data-i18n="alipay.step3.li2">Most major foreign cards (Visa, MasterCard, Amex) work</li>
+    <li data-i18n="alipay.step3.li3">Some banks require verification via SMS or app</li>
+    <li data-i18n="alipay.step3.li4">After linking, you get a virtual "China UnionPay" card</li>
+  </ul>
+  <div class="tip"><strong data-i18n="tip.alipay.title">💡 Pro tip:</strong> <span data-i18n="tip.alipay.desc">Add money to your Alipay balance before traveling. Some merchants prefer balance over linked cards.</span></div>
+</div>
+
+<div class="step">
+  <div class="step-num">4</div>
+  <h3 data-i18n="alipay.step4.title">Get a Chinese Phone Number (Required)</h3>
+  <p data-i18n="alipay.step4.desc">This is the trickiest part for tourists. Options:</p>
+  <ul>
+    <li data-i18n="alipay.step4.li1"><strong>Buy a SIM at the airport:</strong> China Mobile, China Unicom, Telecom. Cost: ¥50-100 ($7-14)</li>
+    <li data-i18n="alipay.step4.li2"><strong>Use your home carrier's roaming:</strong> Some work with Alipay verification</li>
+    <li data-i18n="alipay.step4.li3"><strong>Virtual phone services:</strong> Some travelers use services like PingMe or TextNow (unreliable)</li>
+  </ul>
+</div>
+
+<!-- ── WECHAT SECTION ── -->
+<h2 data-i18n="wechat.title">3. Setting Up WeChat Pay</h2>
+<p data-i18n="wechat.desc">WeChat Pay is essential because WeChat itself is how people communicate in China.</p>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <h3 data-i18n="wechat.step1.title">Download WeChat</h3>
+  <ul>
+    <li data-i18n="wechat.step1.li1">Download WeChat (Weixin) from app store</li>
+    <li data-i18n="wechat.step1.li2">Sign up with your phone number</li>
+    <li data-i18n="wechat.step1.li3">Verify with SMS code</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-num">2</div>
+  <h3 data-i18n="wechat.step2.title">Enable WeChat Pay</h3>
+  <ul>
+    <li data-i18n="wechat.step2.li1">Go to Me → Wallet → Cards</li>
+    <li data-i18n="wechat.step2.li2">Tap "Add Card" and follow verification steps</li>
+    <li data-i18n="wechat.step2.li3">Same passport verification process as Alipay</li>
+    <li data-i18n="wechat.step2.li4">Link your foreign credit/debit card</li>
+  </ul>
+</div>
+
+<div class="tip"><strong data-i18n="tip.wechat.title">💡 Use WeChat for:</strong> <span data-i18n="tip.wechat.desc">Communicating with Chinese contacts, paying at merchants who prefer WeChat, sending red envelopes (hongbao) to friends.</span></div>
+
+<!-- ── CASH SECTION ── -->
+<h2 data-i18n="cash.title">4. Using Cash</h2>
+<p data-i18n="cash.desc">Cash still works everywhere but is increasingly inconvenient. Here's how to manage it:</p>
+
+<ul>
+  <li data-i18n="cash.li1"><strong>Exchange before arrival:</strong> Get some RMB from your bank or currency exchange</li>
+  <li data-i18n="cash.li2"><strong>ATM withdrawals:</strong> Most ATMs accept foreign cards (2-3% fee). Look for China UnionPay or international ATMs</li>
+  <li data-i18n="cash.li3"><strong>Bank counter:</strong> Large banks (ICBC, Bank of China) can exchange currency with passport</li>
+</ul>
+
+<div class="warn"><strong data-i18n="warn.cash.title">⚠️ Carry small bills.</strong> <span data-i18n="warn.cash.desc">Many small vendors and taxis don't have change for large bills (¥100).</span></div>
+
+<!-- ── FOREIGN CARDS SECTION ── -->
+<h2 data-i18n="foreign.title">5. Using Foreign Cards Directly</h2>
+<p data-i18n="foreign.desc">Some places accept Visa/MasterCard directly. Expect hassles.</p>
+
+<ul>
+  <li data-i18n="foreign.li1"><strong>Hotels:</strong> Most 4-5 star hotels accept foreign cards</li>
+  <li data-i18n="foreign.li2"><strong>Large restaurants:</strong> Upscale restaurants may accept cards</li>
+  <li data-i18n="foreign.li3"><strong>Shopping malls:</strong> International brands usually accept foreign cards</li>
+  <li data-i18n="foreign.li4"><strong>Street food / small shops:</strong> Almost never accept foreign cards</li>
+</ul>
+
+<div class="tip"><strong data-i18n="tip.foreign.title">💡 Don't rely on it:</strong> <span data-i18n="tip.foreign.desc">Cards work at maybe 10% of places. Mobile payment (Alipay/WeChat) is practically required.</span></div>
+
+<!-- ── SCAMS SECTION ── -->
+<h2 data-i18n="scams.title">6. Common Payment Scams</h2>
+
+<div class="warn"><strong data-i18n="scams.fake.title">⚠️ Fake payment screens.</strong> <span data-i18n="scams.fake.desc">Some taxis show fake Alipay/WeChat QR codes. Always verify the merchant's official code.</span></div>
+
+<div class="warn"><strong data-i18n="scams.lucky.title">⚠️ "Lucky Money" scams.</strong> <span data-i18n="scams.lucky.desc">Don't scan random QR codes on street. Some are malicious or connected to scams.</span></div>
+
+<div class="warn"><strong data-i18n="scams.card.title">⚠️ Card skimmers.</strong> <span data-i18n="scams.card.desc">Use ATMs inside banks, not street ATMs. Cover your PIN.</span></div>
+
+<!-- ── CHECKLIST ── -->
+<h2 data-i18n="checklist.title">7. Pre-Trip Checklist</h2>
+
+<ol>
+  <li data-i18n="checklist.li1">✅ Download Alipay and WeChat apps</li>
+  <li data-i18n="checklist.li2">✅ Research getting a Chinese SIM card at airport</li>
+  <li data-i18n="checklist.li3">✅ Verify your ID on Alipay (start 1 week early)</li>
+  <li data-i18n="checklist.li4">✅ Link a credit card to Alipay</li>
+  <li data-i18n="checklist.li5">✅ Carry $50-100 USD cash as backup</li>
+</ol>
+
+<p style="margin-top:48px; padding-top:24px; border-top:1px solid var(--border); font-size:15px; color:var(--ink-soft);">
+  <strong data-i18n="lastVerified">Last verified:</strong> <span data-i18n="lastVerified.desc">May 2026. Payment methods tested in Beijing, Shanghai, and Hangzhou. <a href="#" style="color:var(--red);" data-i18n="tellUs">Tell us</a> if something changed.</span>
+</p>
+
+</article>
+
+<footer data-i18n="footer">
+  ChinaTravelHub © 2026 — Made by people who've been stuck in a foreign country with no internet.
+</footer>
+
+<!-- Google Translate Widget (hidden) -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script>
+const translations = {
+  en: {
+    "nav.back": "← Back to Guides",
+    "breadcrumb.home": "Home",
+    "breadcrumb.payment": "Payment Guide",
+    "title": "How to Pay in China in 2026",
+    "date": "Updated: May 2026 · <span style='background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-weight:600;font-size:13px;'>✓ Verified</span>",
+    "badge.verified": "✓ Verified",
+    "intro": "China is essentially a cashless society. Alipay and WeChat Pay dominate everything from street food to luxury hotels. This guide covers how to set up mobile payments, what alternatives exist, and how to avoid common pitfalls.",
+    "warn.setup.title": "⚠️ Set up BEFORE arriving.",
+    "warn.setup.desc": "Alipay and WeChat Pay accounts require a Chinese phone number and verification. Setting this up before your trip saves major headaches.",
+    "overview.title": "1. Payment Options at a Glance",
+    "overview.table.method": "Method",
+    "overview.table.ease": "Ease of Use",
+    "overview.table.requirements": "Requirements",
+    "overview.table.fees": "Fees",
+    "overview.alipay": "Alipay",
+    "overview.alipay.req": "Chinese phone + ID verification",
+    "overview.alipay.fees": "0% (linked card)",
+    "overview.wechat": "WeChat Pay",
+    "overview.wechat.req": "Chinese phone + ID verification",
+    "overview.wechat.fees": "0% (linked card)",
+    "overview.cash": "Cash (RMB)",
+    "overview.cash.req": "None",
+    "overview.cash.fees": "None",
+    "overview.card": "Foreign Cards",
+    "overview.card.req": "Visa/MasterCard accepted",
+    "overview.card.fees": "2-3% foreign transaction",
+    "alipay.title": "2. Setting Up Alipay (Recommended)",
+    "alipay.desc": "Alipay is the most widely accepted mobile payment in China. Even small vendors accept it.",
+    "alipay.step1.title": "Download Alipay App",
+    "alipay.step1.li1": "Download Alipay from App Store / Play Store",
+    "alipay.step1.li2": "Sign up with your email or phone number",
+    "alipay.step1.li3": "Set a strong password and enable biometric login",
+    "alipay.step2.title": "Verify Your Account",
+    "alipay.step2.desc": "You'll need to complete identity verification. For foreigners:",
+    "alipay.step2.li1": "Tap \"Authenticate\" or \"Verify ID\"",
+    "alipay.step2.li2": "Select passport as ID type",
+    "alipay.step2.li3": "Take a photo of your passport + selfie",
+    "alipay.step2.li4": "Verification typically takes 1-3 days",
+    "alipay.step3.title": "Add a Foreign Card",
+    "alipay.step3.li1": "Go to \"Bank Cards\" → \"Add Card\"",
+    "alipay.step3.li2": "Most major foreign cards (Visa, MasterCard, Amex) work",
+    "alipay.step3.li3": "Some banks require verification via SMS or app",
+    "alipay.step3.li4": "After linking, you get a virtual \"China UnionPay\" card",
+    "tip.alipay.title": "💡 Pro tip:",
+    "tip.alipay.desc": "Add money to your Alipay balance before traveling. Some merchants prefer balance over linked cards.",
+    "alipay.step4.title": "Get a Chinese Phone Number (Required)",
+    "alipay.step4.desc": "This is the trickiest part for tourists. Options:",
+    "alipay.step4.li1": "<strong>Buy a SIM at the airport:</strong> China Mobile, China Unicom, Telecom. Cost: ¥50-100 ($7-14)",
+    "alipay.step4.li2": "<strong>Use your home carrier's roaming:</strong> Some work with Alipay verification",
+    "alipay.step4.li3": "<strong>Virtual phone services:</strong> Some travelers use services like PingMe or TextNow (unreliable)",
+    "wechat.title": "3. Setting Up WeChat Pay",
+    "wechat.desc": "WeChat Pay is essential because WeChat itself is how people communicate in China.",
+    "wechat.step1.title": "Download WeChat",
+    "wechat.step1.li1": "Download WeChat (Weixin) from app store",
+    "wechat.step1.li2": "Sign up with your phone number",
+    "wechat.step1.li3": "Verify with SMS code",
+    "wechat.step2.title": "Enable WeChat Pay",
+    "wechat.step2.li1": "Go to Me → Wallet → Cards",
+    "wechat.step2.li2": "Tap \"Add Card\" and follow verification steps",
+    "wechat.step2.li3": "Same passport verification process as Alipay",
+    "wechat.step2.li4": "Link your foreign credit/debit card",
+    "tip.wechat.title": "💡 Use WeChat for:",
+    "tip.wechat.desc": "Communicating with Chinese contacts, paying at merchants who prefer WeChat, sending red envelopes (hongbao) to friends.",
+    "cash.title": "4. Using Cash",
+    "cash.desc": "Cash still works everywhere but is increasingly inconvenient. Here's how to manage it:",
+    "cash.li1": "<strong>Exchange before arrival:</strong> Get some RMB from your bank or currency exchange",
+    "cash.li2": "<strong>ATM withdrawals:</strong> Most ATMs accept foreign cards (2-3% fee). Look for China UnionPay or international ATMs",
+    "cash.li3": "<strong>Bank counter:</strong> Large banks (ICBC, Bank of China) can exchange currency with passport",
+    "warn.cash.title": "⚠️ Carry small bills.",
+    "warn.cash.desc": "Many small vendors and taxis don't have change for large bills (¥100).",
+    "foreign.title": "5. Using Foreign Cards Directly",
+    "foreign.desc": "Some places accept Visa/MasterCard directly. Expect hassles.",
+    "foreign.li1": "<strong>Hotels:</strong> Most 4-5 star hotels accept foreign cards",
+    "foreign.li2": "<strong>Large restaurants:</strong> Upscale restaurants may accept cards",
+    "foreign.li3": "<strong>Shopping malls:</strong> International brands usually accept foreign cards",
+    "foreign.li4": "<strong>Street food / small shops:</strong> Almost never accept foreign cards",
+    "tip.foreign.title": "💡 Don't rely on it:",
+    "tip.foreign.desc": "Cards work at maybe 10% of places. Mobile payment (Alipay/WeChat) is practically required.",
+    "scams.title": "6. Common Payment Scams",
+    "scams.fake.title": "⚠️ Fake payment screens.",
+    "scams.fake.desc": "Some taxis show fake Alipay/WeChat QR codes. Always verify the merchant's official code.",
+    "scams.lucky.title": "⚠️ \"Lucky Money\" scams.",
+    "scams.lucky.desc": "Don't scan random QR codes on street. Some are malicious or connected to scams.",
+    "scams.card.title": "⚠️ Card skimmers.",
+    "scams.card.desc": "Use ATMs inside banks, not street ATMs. Cover your PIN.",
+    "checklist.title": "7. Pre-Trip Checklist",
+    "checklist.li1": "✅ Download Alipay and WeChat apps",
+    "checklist.li2": "✅ Research getting a Chinese SIM card at airport",
+    "checklist.li3": "✅ Verify your ID on Alipay (start 1 week early)",
+    "checklist.li4": "✅ Link a credit card to Alipay",
+    "checklist.li5": "✅ Carry $50-100 USD cash as backup",
+    "lastVerified": "Last verified:",
+    "lastVerified.desc": "May 2026. Payment methods tested in Beijing, Shanghai, and Hangzhou. <a href='#' style='color:var(--red);'>Tell us</a> if something changed.",
+    "tellUs": "Tell us",
+    "footer": "ChinaTravelHub © 2026 — Made by people who've been stuck in a foreign country with no internet."
+  },
+  zh: {
+    "nav.back": "← 返回指南",
+    "breadcrumb.home": "首页",
+    "breadcrumb.payment": "支付指南",
+    "title": "2026年在中国如何支付",
+    "date": "更新于2026年5月 · <span style='background:#E8F5E9;color:#2E7D32;padding:2px 8px;border-radius:4px;font-weight:600;font-size:13px;'>✓ 已验证</span>",
+    "badge.verified": "✓ 已验证",
+    "intro": "中国实际上是无现金社会。支付宝和微信支付从街头小吃到豪华酒店无处不在。本指南涵盖如何设置移动支付、有哪些替代方案，以及如何避免常见陷阱。",
+    "warn.setup.title": "⚠️ 请在到达前设置！",
+    "warn.setup.desc": "支付宝和微信支付需要中国手机号码和验证。出发前设置好可以省去很多麻烦。",
+    "overview.title": "1. 支付方式一览",
+    "overview.table.method": "方式",
+    "overview.table.ease": "便捷程度",
+    "overview.table.requirements": "要求",
+    "overview.table.fees": "费用",
+    "overview.alipay": "支付宝",
+    "overview.alipay.req": "中国手机号+身份验证",
+    "overview.alipay.fees": "0%（绑定卡片）",
+    "overview.wechat": "微信支付",
+    "overview.wechat.req": "中国手机号+身份验证",
+    "overview.wechat.fees": "0%（绑定卡片）",
+    "overview.cash": "现金（人民币）",
+    "overview.cash.req": "无需",
+    "overview.cash.fees": "无",
+    "overview.card": "外国银行卡",
+    "overview.card.req": "支持Visa/MasterCard",
+    "overview.card.fees": "2-3%外币交易费",
+    "alipay.title": "2. 设置支付宝（推荐）",
+    "alipay.desc": "支付宝是中国最广泛接受的移动支付方式。即使是小商贩也接受。",
+    "alipay.step1.title": "下载支付宝APP",
+    "alipay.step1.li1": "从应用商店下载支付宝",
+    "alipay.step1.li2": "用邮箱或手机号注册",
+    "alipay.step1.li3": "设置强密码并启用生物识别登录",
+    "alipay.step2.title": "验证账户",
+    "alipay.step2.desc": "需要完成身份验证。外国人需要：",
+    "alipay.step2.li1": "点击"认证"或"验证身份"",
+    "alipay.step2.li2": "选择护照作为身份证件类型",
+    "alipay.step2.li3": "拍摄护照照片和自拍",
+    "alipay.step2.li4": "验证通常需要1-3天",
+    "alipay.step3.title": "绑定外国银行卡",
+    "alipay.step3.li1": "进入"银行卡"→"添加银行卡"",
+    "alipay.step3.li2": "大多数主要外国卡（Visa、MasterCard、Amex）都可以",
+    "alipay.step3.li3": "部分银行需要通过短信或APP验证",
+    "alipay.step3.li4": "绑定后，你会获得一张虚拟"银联"卡",
+    "tip.alipay.title": "💡 专业建议：",
+    "tip.alipay.desc": "出发前充值到支付宝余额。一些商户更喜欢余额支付而非绑定卡。",
+    "alipay.step4.title": "获取中国手机号码（必需）",
+    "alipay.step4.desc": "这是游客最困难的部分。有以下选择：",
+    "alipay.step4.li1": "<strong>在机场购买SIM卡：</strong>中国移动、联通、电信。费用：50-100元（7-14美元）",
+    "alipay.step4.li2": "<strong>使用本国运营商漫游：</strong>部分可配合支付宝验证使用",
+    "alipay.step4.li3": "<strong>虚拟号码服务：</strong>部分旅客使用PingMe或TextNow（不可靠）",
+    "wechat.title": "3. 设置微信支付",
+    "wechat.desc": "微信支付是必须的，因为微信本身是中国人沟通的方式。",
+    "wechat.step1.title": "下载微信",
+    "wechat.step1.li1": "从应用商店下载微信",
+    "wechat.step1.li2": "用手机号注册",
+    "wechat.step1.li3": "通过短信验证码验证",
+    "wechat.step2.title": "开通微信支付",
+    "wechat.step2.li1": "进入我→钱包→卡包",
+    "wechat.step2.li2": "点击"添加银行卡"并按步骤验证",
+    "wechat.step2.li3": "与支付宝相同的护照验证流程",
+    "wechat.step2.li4": "绑定您的外国信用卡/借记卡",
+    "tip.wechat.title": "💡 微信用于：",
+    "tip.wechat.desc": "与中国联系人沟通、在偏好微信支付的商户付款、发送红包给朋友。",
+    "cash.title": "4. 使用现金",
+    "cash.desc": "现金仍然到处可用，但越来越不方便。以下是管理方法：",
+    "cash.li1": "<strong>出发前兑换：</strong>从银行或兑换点换取一些人民币",
+    "cash.li2": "<strong>ATM取款：</strong>大多数ATM接受外国卡（2-3%手续费）。寻找银联或国际ATM",
+    "cash.li3": "<strong>银行柜台：</strong>大型银行（工商银行、中国银行）可以用护照兑换货币",
+    "warn.cash.title": "⚠️ 携带小额纸币。",
+    "warn.cash.desc": "许多小商贩和出租车没有大额纸币（100元）的零钱。",
+    "foreign.title": "5. 直接使用外国银行卡",
+    "foreign.desc": "部分地方直接接受Visa/MasterCard。但会有麻烦。",
+    "foreign.li1": "<strong>酒店：</strong>大多数四五星酒店接受外国卡",
+    "foreign.li2": "<strong>大型餐厅：</strong>高档餐厅可能接受刷卡",
+    "foreign.li3": "<strong>购物中心：</strong>国际品牌通常接受外国卡",
+    "foreign.li4": "<strong>街头小吃/小店铺：</strong>几乎从不接受外国卡",
+    "tip.foreign.title": "💡 不要依赖它：",
+    "tip.foreign.desc": "卡可能只在10%的地方能用。移动支付（支付宝/微信）几乎是必须的。",
+    "scams.title": "6. 常见支付骗局",
+    "scams.fake.title": "⚠️ 伪造支付页面。",
+    "scams.fake.desc": "一些出租车显示伪造的支付宝/微信二维码。务必核实商户的官方二维码。",
+    "scams.lucky.title": "⚠️"红包"骗局。",
+    "scams.lucky.desc": "不要扫描街上的随机二维码。一些是恶意的或与诈骗有关。",
+    "scams.card.title": "⚠️ 信用卡盗刷器。",
+    "scams.card.desc": "使用银行内的ATM，而非街头ATM。遮挡您的PIN码。",
+    "checklist.title": "7. 出行前检查清单",
+    "checklist.li1": "✅ 下载支付宝和微信APP",
+    "checklist.li2": "✅ 了解如何在机场获取中国SIM卡",
+    "checklist.li3": "✅ 在支付宝上验证身份（提前一周开始）",
+    "checklist.li4": "✅ 将信用卡绑定到支付宝",
+    "checklist.li5": "✅ 携带50-100美元现金作为备用",
+    "lastVerified": "最后验证：",
+    "lastVerified.desc": "2026年5月。支付方式在北京、上海和杭州测试过。如果有变化，<a href='#' style='color:var(--red);'>告诉我们</a>。",
+    "tellUs": "告诉我们",
+    "footer": "ChinaTravelHub © 2026 — 由曾经在外国没网可上的人制作。"
+  }
+};
+
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'zh', name: '中文' },
+  { code: 'ja', name: '日本語' },
+  { code: 'ko', name: '한국어' },
+  { code: 'es', name: 'Español' },
+  { code: 'fr', name: 'Français' },
+  { code: 'de', name: 'Deutsch' },
+  { code: 'pt', name: 'Português' },
+  { code: 'it', name: 'Italiano' },
+  { code: 'ru', name: 'Русский' },
+  { code: 'th', name: 'ไทย' },
+  { code: 'vi', name: 'Tiếng Việt' }
+];
+
+const manualLangs = ['en', 'zh'];
+
+let currentLang = localStorage.getItem('lang') || 'en';
+let googleTranslateLoaded = false;
+
+function buildLangMenu() {
+  const menu = document.getElementById('langMenu');
+  menu.innerHTML = languages.map(lang =>
+    `<button data-lang="${lang.code}" class="${lang.code === currentLang ? 'active' : ''}">${lang.name}</button>`
+  ).join('');
+}
+
+function updateLangButton() {
+  const langLabel = document.getElementById('currentLangLabel');
+  const lang = languages.find(l => l.code === currentLang);
+  langLabel.textContent = lang ? lang.name : 'English';
+}
+
+function updateActiveMenuItem() {
+  document.querySelectorAll('.lang-menu button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === currentLang);
+  });
+}
+
+function translatePage(lang) {
+  if (!manualLangs.includes(lang)) return;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.classList.add('switching');
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      el.classList.remove('switching');
+    });
+  }, 150);
+}
+
+function triggerGoogleTranslate(targetLang) {
+  if (!window.google || !window.google.translate) {
+    console.warn('Google Translate not loaded yet');
+    return;
+  }
+  const select = document.querySelector('.goog-te-combo');
+  if (select) {
+    select.value = targetLang;
+    select.dispatchEvent(new Event('change'));
+  }
+}
+
+function setGoogleTranslate() {
+  const select = document.querySelector('.goog-te-combo');
+  if (select && currentLang !== 'en' && currentLang !== 'zh') {
+    select.value = currentLang;
+    select.dispatchEvent(new Event('change'));
+  }
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  updateLangButton();
+  updateActiveMenuItem();
+
+  if (manualLangs.includes(lang)) {
+    const select = document.querySelector('.goog-te-combo');
+    if (select) {
+      select.value = 'en';
+      select.dispatchEvent(new Event('change'));
+    }
+    translatePage(lang);
+  } else {
+    translatePage('en');
+    setTimeout(() => triggerGoogleTranslate(lang), 100);
+  }
+
+  document.getElementById('langMenu').classList.remove('open');
+}
+
+function loadGoogleTranslate() {
+  if (googleTranslateLoaded) return;
+  googleTranslateLoaded = true;
+
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  document.head.appendChild(script);
+
+  window.googleTranslateElementInit = function() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: languages.map(l => l.code).join(','),
+      layout: google.translate.TranslateElement.InlineLayout.HIDDEN
+    }, 'google_translate_element');
+
+    setTimeout(() => {
+      if (currentLang !== 'en' && currentLang !== 'zh') {
+        setGoogleTranslate();
+      }
+    }, 500);
+  };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildLangMenu();
+  updateLangButton();
+  translatePage(currentLang);
+  updateActiveMenuItem();
+
+  const langBtn = document.getElementById('langBtn');
+  const langMenu = document.getElementById('langMenu');
+
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langMenu.classList.toggle('open');
+    if (langMenu.classList.contains('open') && !googleTranslateLoaded) {
+      loadGoogleTranslate();
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.lang-dropdown')) {
+      langMenu.classList.remove('open');
+    }
+  });
+
+  langMenu.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (btn) {
+      const lang = btn.dataset.lang;
+      if (lang !== currentLang) {
+        setLanguage(lang);
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>
