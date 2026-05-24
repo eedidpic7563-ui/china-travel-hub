@@ -341,154 +341,273 @@ footer .panda { font-size: 20px; }
 
   <!-- Dragon -->
   <div class="dragon-container">
-    <svg class="dragon-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+    <svg class="dragon-svg" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="dragonBody" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#8B1A1A"/>
-          <stop offset="30%" stop-color="#C4302B"/>
-          <stop offset="60%" stop-color="#D4483A"/>
-          <stop offset="100%" stop-color="#8B1A1A"/>
+        <linearGradient id="dBody" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#7A0000"/>
+          <stop offset="20%" stop-color="#B82020"/>
+          <stop offset="50%" stop-color="#D4352C"/>
+          <stop offset="80%" stop-color="#B82020"/>
+          <stop offset="100%" stop-color="#7A0000"/>
         </linearGradient>
-        <linearGradient id="dragonBelly" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#F5D78A"/>
-          <stop offset="100%" stop-color="#D4A843"/>
+        <linearGradient id="dGold" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#C5963A"/>
+          <stop offset="50%" stop-color="#F5D78A"/>
+          <stop offset="100%" stop-color="#C5963A"/>
         </linearGradient>
-        <filter id="dragonGlow">
-          <feGaussianBlur stdDeviation="8" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        <radialGradient id="dEye" cx="0.4" cy="0.4">
+          <stop offset="0%" stop-color="#FFD700"/>
+          <stop offset="60%" stop-color="#FF8C00"/>
+          <stop offset="100%" stop-color="#8B0000"/>
+        </radialGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="6" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-        <filter id="softGlow">
-          <feGaussianBlur stdDeviation="4"/>
+        <filter id="bigGlow">
+          <feGaussianBlur stdDeviation="12" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
+        <filter id="fireBlur">
+          <feGaussianBlur stdDeviation="3"/>
+        </filter>
+        <!-- Scale pattern -->
+        <pattern id="scales" width="16" height="16" patternUnits="userSpaceOnUse">
+          <circle cx="8" cy="0" r="7" fill="none" stroke="#8B0000" stroke-width="1" opacity="0.3"/>
+          <circle cx="0" cy="8" r="7" fill="none" stroke="#8B0000" stroke-width="1" opacity="0.3"/>
+          <circle cx="16" cy="8" r="7" fill="none" stroke="#8B0000" stroke-width="1" opacity="0.3"/>
+        </pattern>
       </defs>
 
-      <!-- ══ Dragon Body (serpentine) ══ -->
-      <g filter="url(#dragonGlow)">
-        <!-- Main body curve - S-shape -->
-        <path d="M100,420 
-                 C180,380 220,300 280,260 
-                 C350,220 380,280 420,240 
-                 C460,200 440,140 500,130 
-                 C560,120 580,180 620,170 
-                 C660,160 680,220 740,210 
-                 C800,200 820,160 880,180 
-                 C940,200 960,240 980,230"
-              fill="none" stroke="url(#dragonBody)" stroke-width="28" stroke-linecap="round"/>
+      <!-- ══ Background aura ══ -->
+      <ellipse cx="500" cy="350" rx="420" ry="280" fill="none" stroke="#D4352C" stroke-width="1" opacity="0.08" filter="url(#bigGlow)"/>
+      <ellipse cx="500" cy="350" rx="300" ry="200" fill="none" stroke="#D4A843" stroke-width="0.5" opacity="0.06" filter="url(#bigGlow)"/>
 
-        <!-- Belly highlight -->
-        <path d="M100,420 
-                 C180,380 220,300 280,260 
-                 C350,220 380,280 420,240 
-                 C460,200 440,140 500,130 
-                 C560,120 580,180 620,170 
-                 C660,160 680,220 740,210 
-                 C800,200 820,160 880,180 
-                 C940,200 960,240 980,230"
-              fill="none" stroke="url(#dragonBelly)" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+      <!-- ══ CLOUD PATTERNS (祥云) ══ -->
+      <g opacity="0.12" fill="#D4A843">
+        <path d="M80,200 C80,180 100,170 110,180 C120,165 140,170 140,185 C150,175 170,185 165,200 C175,210 160,225 145,220 C135,230 110,230 100,220 C85,225 70,215 80,200Z"/>
+        <path d="M800,150 C800,135 815,125 825,135 C835,122 850,128 850,140 C860,132 875,140 870,152 C878,160 865,172 852,168 C845,178 825,178 815,170 C805,175 792,162 800,150Z"/>
+        <path d="M200,500 C200,488 212,480 220,488 C228,478 242,484 242,494 C250,488 262,495 258,505 C264,512 254,520 242,516 C236,524 220,524 212,518 C204,522 194,512 200,500Z"/>
+        <path d="M700,520 C700,508 712,500 720,508 C728,498 742,504 742,514 C750,508 762,515 758,525 C764,532 754,540 742,536 C736,544 720,544 712,538 C704,542 694,532 700,520Z"/>
+      </g>
 
-        <!-- Spine ridges -->
-        <g fill="#D4483A" opacity="0.9">
-          <polygon points="180,360 190,335 195,360"/>
-          <polygon points="220,305 230,278 238,305"/>
-          <polygon points="260,265 268,240 275,265"/>
-          <polygon points="340,245 346,220 352,245"/>
-          <polygon points="445,225 450,200 455,225"/>
-          <polygon points="490,148 494,125 500,148"/>
-          <polygon points="560,155 564,132 570,155"/>
-          <polygon points="630,175 636,150 642,175"/>
-          <polygon points="720,205 726,180 730,205"/>
-          <polygon points="810,195 814,172 820,195"/>
+      <!-- ══ DRAGON BODY ══ -->
+      <g filter="url(#glow)">
+        <!-- Main body: dramatic double-coil S-curve -->
+        <!-- Tail starts bottom-left, coils up, then down, then up to head center-right -->
+        <path d="M-30,520 
+                 C60,520 120,480 160,440 
+                 C200,400 180,340 230,300 
+                 C280,260 350,310 400,280 
+                 C450,250 440,180 500,160 
+                 C560,140 600,210 660,190 
+                 C720,170 680,100 740,120 
+                 C800,140 830,200 880,210"
+              fill="none" stroke="url(#dBody)" stroke-width="52" stroke-linecap="round"/>
+
+        <!-- Gold belly line -->
+        <path d="M-20,520 
+                 C65,520 125,480 165,440 
+                 C205,400 185,340 235,300 
+                 C285,260 355,310 405,280 
+                 C455,250 445,180 505,160 
+                 C565,140 605,210 665,190 
+                 C725,170 685,100 745,120 
+                 C805,140 835,200 885,210"
+              fill="none" stroke="url(#dGold)" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
+
+        <!-- Scale overlay on body -->
+        <path d="M-30,520 
+                 C60,520 120,480 160,440 
+                 C200,400 180,340 230,300 
+                 C280,260 350,310 400,280 
+                 C450,250 440,180 500,160 
+                 C560,140 600,210 660,190 
+                 C720,170 680,100 740,120 
+                 C800,140 830,200 880,210"
+              fill="none" stroke="url(#scales)" stroke-width="52" stroke-linecap="round" opacity="0.4"/>
+
+        <!-- ══ SPINE RIDGES (脊刺) ══ -->
+        <g fill="#C4302B" opacity="0.95">
+          <!-- Tail section -->
+          <polygon points="60,505 68,475 78,505"/>
+          <polygon points="110,475 120,440 130,475"/>
+          <polygon points="158,440 170,405 180,440"/>
+          <!-- Lower coil -->
+          <polygon points="195,395 205,362 214,395"/>
+          <polygon points="215,345 224,315 233,345"/>
+          <polygon points="245,304 252,275 260,304"/>
+          <!-- Middle coil -->
+          <polygon points="295,294 300,265 308,294"/>
+          <polygon points="355,282 358,252 366,282"/>
+          <polygon points="400,270 402,242 410,270"/>
+          <!-- Upper coil -->
+          <polygon points="442,245 444,215 452,245"/>
+          <polygon points="475,200 476,172 484,200"/>
+          <polygon points="505,165 508,138 515,165"/>
+          <!-- Rising -->
+          <polygon points="555,152 555,122 562,152"/>
+          <polygon points="605,178 604,148 612,178"/>
+          <polygon points="655,188 656,158 663,188"/>
+          <!-- Neck -->
+          <polygon points="700,175 703,145 710,175"/>
+          <polygon points="735,135 740,108 747,135"/>
+          <polygon points="775,128 782,100 789,128"/>
+          <polygon points="815,155 825,130 830,155"/>
+        </g>
+
+        <!-- ══ FLOWING MANE (鬃毛) ══ -->
+        <g opacity="0.4" filter="url(#fireBlur)">
+          <!-- Along body curves -->
+          <path d="M140,465 C135,440 125,425 115,430" fill="none" stroke="#F5D78A" stroke-width="5"/>
+          <path d="M200,340 C190,315 178,300 168,310" fill="none" stroke="#F5D78A" stroke-width="6"/>
+          <path d="M330,280 C315,255 300,242 290,250" fill="none" stroke="#F5D78A" stroke-width="5"/>
+          <path d="M460,225 C445,200 430,190 420,198" fill="none" stroke="#F5D78A" stroke-width="6"/>
+          <path d="M540,150 C525,128 510,118 500,126" fill="none" stroke="#F5D78A" stroke-width="5"/>
+          <path d="M630,175 C615,155 600,148 590,158" fill="none" stroke="#F5D78A" stroke-width="6"/>
+          <path d="M730,145 C715,125 700,118 690,128" fill="none" stroke="#F5D78A" stroke-width="5"/>
         </g>
       </g>
 
-      <!-- ══ Dragon Head (facing right) ══ -->
-      <g filter="url(#dragonGlow)" transform="translate(940, 180)">
-        <!-- Neck -->
-        <path d="M-20,20 C0,20 20,15 30,10" fill="none" stroke="url(#dragonBody)" stroke-width="24"/>
+      <!-- ══ FOUR CLAWS (四爪) ══ -->
+      <g filter="url(#glow)">
+        <!-- Claw 1: lower-left, reaching down -->
+        <g transform="translate(230, 410)">
+          <path d="M0,0 C-8,15 -5,35 5,45" fill="none" stroke="#C4302B" stroke-width="12" stroke-linecap="round"/>
+          <!-- Talons -->
+          <path d="M-8,25 L-20,38 M-3,30 L-12,44 M2,32 L2,46 M7,28 L16,40" fill="none" stroke="url(#dGold)" stroke-width="3" stroke-linecap="round"/>
+          <!-- Arm gold band -->
+          <ellipse cx="0" cy="10" rx="10" ry="4" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
+        </g>
 
-        <!-- Head shape -->
-        <ellipse cx="45" cy="8" rx="35" ry="22" fill="#C4302B"/>
-        <ellipse cx="50" cy="3" rx="30" ry="18" fill="#D4483A"/>
+        <!-- Claw 2: mid-body, reaching forward -->
+        <g transform="translate(440, 310)">
+          <path d="M0,0 C-15,-5 -25,10 -20,25" fill="none" stroke="#C4302B" stroke-width="11" stroke-linecap="round"/>
+          <path d="M-20,10 L-34,15 M-22,16 L-36,24 M-18,20 L-30,32 M-14,18 L-22,32" fill="none" stroke="url(#dGold)" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="-6" cy="2" rx="9" ry="3.5" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
+        </g>
 
-        <!-- Snout -->
-        <ellipse cx="75" cy="8" rx="18" ry="12" fill="#8B1A1A"/>
-        <ellipse cx="85" cy="8" rx="10" ry="8" fill="#6B1010"/>
+        <!-- Claw 3: upper coil, reaching up -->
+        <g transform="translate(530, 200)">
+          <path d="M0,0 C5,-15 18,-20 30,-15" fill="none" stroke="#C4302B" stroke-width="10" stroke-linecap="round"/>
+          <path d="M18,-20 L26,-35 M22,-18 L32,-30 M28,-14 L38,-24 M32,-10 L44,-20" fill="none" stroke="url(#dGold)" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="10" cy="-5" rx="8" ry="3" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
+        </g>
 
-        <!-- Nostrils -->
-        <circle cx="80" cy="4" r="3" fill="#2a0505"/>
-        <circle cx="85" cy="10" r="3" fill="#2a0505"/>
-
-        <!-- Horns -->
-        <path d="M35,-8 C30,-35 35,-55 50,-60 C45,-45 42,-30 42,-12" fill="#D4A843" opacity="0.9"/>
-        <path d="M25,-2 C15,-28 18,-48 30,-55 C25,-40 25,-25 28,-6" fill="#C5963A" opacity="0.85"/>
-
-        <!-- Antlers -->
-        <path d="M20,-15 C10,-30 5,-40 0,-38 C5,-32 10,-25 15,-18" fill="#D4A843" opacity="0.8"/>
-        <path d="M15,-18 C5,-25 0,-30 -5,-28 C2,-24 8,-20 12,-16" fill="#D4A843" opacity="0.8"/>
-
-        <!-- Eye -->
-        <ellipse cx="50" cy="-2" rx="7" ry="6" fill="#F5D78A" filter="url(#softGlow)"/>
-        <ellipse cx="52" cy="-2" rx="3" ry="5" fill="#1a0000"/>
-        <circle cx="53" cy="-4" r="1.5" fill="#fff" opacity="0.8"/>
-
-        <!-- Eyebrow -->
-        <path d="M40,-10 C45,-16 55,-16 60,-10" fill="none" stroke="#D4A843" stroke-width="2.5"/>
-
-        <!-- Whiskers -->
-        <path d="M80,5 C95,0 105,-5 110,-3" fill="none" stroke="#F5D78A" stroke-width="1.5" opacity="0.8"/>
-        <path d="M78,10 C95,12 108,10 115,14" fill="none" stroke="#F5D78A" stroke-width="1.5" opacity="0.8"/>
-
-        <!-- Teeth/Fangs -->
-        <polygon points="65,18 68,28 71,18" fill="#F5D78A" opacity="0.7"/>
-        <polygon points="72,18 75,26 78,18" fill="#F5D78A" opacity="0.7"/>
-
-        <!-- Beard -->
-        <path d="M60,22 C58,35 55,45 58,50" fill="none" stroke="#F5D78A" stroke-width="2" opacity="0.6"/>
-        <path d="M68,22 C70,32 72,40 70,48" fill="none" stroke="#F5D78A" stroke-width="1.5" opacity="0.6"/>
-
-        <!-- Flames from mouth -->
-        <g opacity="0.5">
-          <ellipse cx="100" cy="5" rx="12" ry="6" fill="#FF3B30" filter="url(#softGlow)"/>
-          <ellipse cx="108" cy="8" rx="8" ry="4" fill="#FF6B40"/>
-          <circle cx="115" cy="6" r="3" fill="#FFD700" filter="url(#softGlow)"/>
+        <!-- Claw 4: near neck, reaching forward -->
+        <g transform="translate(720, 155)">
+          <path d="M0,0 C12,-8 25,0 28,18" fill="none" stroke="#C4302B" stroke-width="10" stroke-linecap="round"/>
+          <path d="M20,5 L34,10 M22,12 L36,22 M25,18 L38,30" fill="none" stroke="url(#dGold)" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="8" cy="-3" rx="8" ry="3" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
         </g>
       </g>
 
-      <!-- ══ Dragon Claws ══ -->
-      <g filter="url(#dragonGlow)">
-        <!-- Front claw 1 -->
-        <g transform="translate(380, 280)">
-          <path d="M0,0 C-10,15 -5,30 5,35" fill="none" stroke="#C4302B" stroke-width="6"/>
-          <path d="M-5,20 L-12,28 M0,22 L-5,32 M4,20 L8,30" fill="none" stroke="#D4A843" stroke-width="2"/>
+      <!-- ══ DRAGON HEAD (龙头) ══ -->
+      <g filter="url(#glow)" transform="translate(830, 140)">
+        <!-- Neck connection -->
+        <path d="M-40,65 C-20,60 0,50 15,45" fill="none" stroke="#C4302B" stroke-width="40"/>
+
+        <!-- Head base - large, imposing -->
+        <ellipse cx="55" cy="35" rx="65" ry="45" fill="#B82020"/>
+        <ellipse cx="60" cy="28" rx="58" ry="38" fill="#D4352C"/>
+
+        <!-- Upper skull highlight -->
+        <ellipse cx="50" cy="15" rx="40" ry="22" fill="#E85040" opacity="0.6"/>
+
+        <!-- Snout / Jaw -->
+        <path d="M70,55 C85,60 110,58 125,52 C135,48 140,42 140,38" fill="#8B1A1A" stroke="#6B1010" stroke-width="2"/>
+        <path d="M60,70 C75,78 105,76 120,68" fill="none" stroke="#6B1010" stroke-width="4"/>
+
+        <!-- Upper jaw -->
+        <path d="M80,30 C100,22 125,25 138,32 C145,36 148,40 145,44" fill="#B82020"/>
+
+        <!-- Nostrils - flared -->
+        <ellipse cx="130" cy="30" rx="8" ry="5" fill="#2A0505"/>
+        <ellipse cx="138" cy="34" rx="6" ry="4" fill="#1A0202"/>
+        <!-- Nostril glow -->
+        <ellipse cx="130" cy="30" rx="6" ry="3" fill="#FF3B30" opacity="0.3" filter="url(#fireBlur)"/>
+
+        <!-- ══ HORNS (龙角) ══ -->
+        <!-- Main horns sweeping back like a crown -->
+        <path d="M30,-5 C20,-40 10,-80 25,-100 C35,-110 40,-95 35,-75 C30,-55 35,-35 40,-15" fill="#D4A843" opacity="0.95"/>
+        <path d="M35,-8 C25,-38 18,-72 30,-95 C38,-108 42,-95 38,-78 C33,-58 37,-38 42,-18" fill="#F5D78A" opacity="0.8"/>
+
+        <path d="M15,5 C0,-30 -10,-65 5,-90 C15,-105 22,-92 18,-72 C14,-52 18,-32 22,-8" fill="#C5963A" opacity="0.9"/>
+        <path d="M20,2 C5,-30 -3,-60 8,-85 C18,-98 24,-88 20,-70 C16,-50 20,-32 25,-10" fill="#E8C86A" opacity="0.7"/>
+
+        <!-- ══ ANTLERS (鹿角状分枝) ══ -->
+        <path d="M50,-22 C45,-45 30,-60 20,-65 C28,-55 35,-45 40,-30" fill="#D4A843" opacity="0.85"/>
+        <path d="M38,-38 C30,-50 18,-55 10,-52 C18,-48 28,-42 35,-32" fill="#D4A843" opacity="0.75"/>
+        <path d="M48,-28 C42,-50 28,-68 15,-75 C25,-62 35,-50 42,-35" fill="#D4A843" opacity="0.7"/>
+
+        <!-- ══ EYES (龙眼) ══ -->
+        <!-- Eye socket -->
+        <ellipse cx="55" cy="10" rx="18" ry="14" fill="#4A0A0A"/>
+        <!-- Eyeball -->
+        <ellipse cx="56" cy="10" rx="13" ry="11" fill="url(#dEye)" filter="url(#fireBlur)"/>
+        <!-- Pupil - vertical slit -->
+        <ellipse cx="57" cy="10" rx="4" ry="8" fill="#0A0000"/>
+        <!-- Eye glow -->
+        <circle cx="54" cy="7" r="3" fill="#FFF" opacity="0.5"/>
+
+        <!-- Angry eyebrow ridge -->
+        <path d="M35,2 C42,-8 58,-10 72,-2" fill="none" stroke="#D4A843" stroke-width="5" stroke-linecap="round"/>
+        <path d="M38,-2 C44,-10 56,-12 68,-4" fill="none" stroke="#F5D78A" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- ══ WHISKERS (龙须) ══ -->
+        <path d="M130,35 C155,25 175,15 190,20 C195,22 192,28 185,27 C170,24 155,32 140,38" fill="none" stroke="#F5D78A" stroke-width="3" opacity="0.85"/>
+        <path d="M128,48 C155,42 180,35 195,42 C200,45 196,50 188,48 C172,44 155,48 138,52" fill="none" stroke="#F5D78A" stroke-width="2.5" opacity="0.75"/>
+
+        <!-- ══ BEARD (龙须下巴) ══ -->
+        <path d="M75,70 C70,90 60,110 55,125" fill="none" stroke="#F5D78A" stroke-width="3" opacity="0.6"/>
+        <path d="M85,72 C82,95 78,112 75,128" fill="none" stroke="#F5D78A" stroke-width="2" opacity="0.5"/>
+        <path d="M95,68 C98,88 100,105 98,120" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.45"/>
+
+        <!-- ══ FANGS (獠牙) ══ -->
+        <polygon points="85,60 92,82 98,58" fill="#F5D78A" opacity="0.85"/>
+        <polygon points="100,58 108,78 114,56" fill="#F5D78A" opacity="0.8"/>
+        <!-- Small teeth -->
+        <polygon points="78,56 82,68 86,54" fill="#F5D78A" opacity="0.6"/>
+        <polygon points="108,54 112,65 116,52" fill="#F5D78A" opacity="0.6"/>
+
+        <!-- ══ MANE AROUND HEAD ══ -->
+        <g opacity="0.35" filter="url(#fireBlur)">
+          <path d="M15,30 C-5,20 -20,15 -30,20" fill="none" stroke="#F5D78A" stroke-width="6"/>
+          <path d="M10,40 C-10,35 -28,32 -40,38" fill="none" stroke="#F5D78A" stroke-width="5"/>
+          <path d="M20,50 C5,52 -10,55 -25,60" fill="none" stroke="#D4A843" stroke-width="4"/>
+          <path d="M-5,20 C-15,5 -25,-5 -35,0" fill="none" stroke="#F5D78A" stroke-width="5"/>
         </g>
-        <!-- Front claw 2 -->
-        <g transform="translate(420, 240)">
-          <path d="M0,0 C-15,10 -20,25 -15,30" fill="none" stroke="#C4302B" stroke-width="5"/>
-          <path d="M-12,18 L-20,28 M-6,20 L-10,32 M-2,18 L2,28" fill="none" stroke="#D4A843" stroke-width="2"/>
-        </g>
-        <!-- Back claw -->
-        <g transform="translate(560, 120)">
-          <path d="M0,0 C10,15 5,30 -5,35" fill="none" stroke="#C4302B" stroke-width="5"/>
-          <path d="M2,18 L8,30 M-2,20 L-8,32 M-5,18 L-10,28" fill="none" stroke="#D4A843" stroke-width="2"/>
+
+        <!-- ══ FIRE BREATH (龙息火焰) ══ -->
+        <g opacity="0.6" filter="url(#fireBlur)">
+          <ellipse cx="160" cy="35" rx="25" ry="18" fill="#FF3B30" opacity="0.7"/>
+          <ellipse cx="175" cy="30" rx="20" ry="14" fill="#FF6B40" opacity="0.6"/>
+          <ellipse cx="190" cy="28" rx="18" ry="12" fill="#FF8C00" opacity="0.5"/>
+          <ellipse cx="205" cy="32" rx="15" ry="10" fill="#FFD700" opacity="0.4"/>
+          <circle cx="218" cy="30" r="8" fill="#FFD700" opacity="0.6"/>
+          <circle cx="225" cy="28" r="5" fill="#FFF" opacity="0.4"/>
         </g>
       </g>
 
-      <!-- ══ Dragon Tail (tapering off left) ══ -->
-      <g filter="url(#dragonGlow)">
-        <path d="M100,420 C60,440 20,460 -20,470" fill="none" stroke="#8B1A1A" stroke-width="14" stroke-linecap="round"/>
-        <path d="M-20,470 C-40,465 -50,460 -55,455" fill="none" stroke="#6B1010" stroke-width="6" stroke-linecap="round"/>
-        <!-- Tail tuft -->
-        <path d="M-50,455 C-58,448 -62,440 -58,435" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
-        <path d="M-52,458 C-60,455 -65,450 -62,445" fill="none" stroke="#D4A843" stroke-width="1.5" opacity="0.5"/>
+      <!-- ══ TAIL (龙尾) ══ -->
+      <g filter="url(#glow)">
+        <path d="M-30,520 C-60,525 -90,535 -120,540 C-140,543 -155,538 -165,530" fill="none" stroke="#7A0000" stroke-width="30" stroke-linecap="round"/>
+        <path d="M-120,540 C-150,545 -170,542 -185,530" fill="none" stroke="#5A0000" stroke-width="18" stroke-linecap="round"/>
+        <path d="M-165,530 C-180,522 -190,510 -195,500" fill="none" stroke="#4A0000" stroke-width="8" stroke-linecap="round"/>
+        <!-- Tail flame tuft -->
+        <path d="M-190,505 C-200,495 -208,485 -205,478" fill="none" stroke="#F5D78A" stroke-width="3" opacity="0.5" filter="url(#fireBlur)"/>
+        <path d="M-192,510 C-205,505 -215,498 -212,490" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.4" filter="url(#fireBlur)"/>
       </g>
 
-      <!-- ══ Floating mane along body ══ -->
-      <g opacity="0.25" filter="url(#softGlow)">
-        <path d="M200,340 C205,320 215,310 220,315" fill="none" stroke="#F5D78A" stroke-width="3"/>
-        <path d="M300,260 C310,245 320,240 325,248" fill="none" stroke="#F5D78A" stroke-width="3"/>
-        <path d="M500,140 C510,125 520,120 525,128" fill="none" stroke="#F5D78A" stroke-width="3"/>
-        <path d="M700,195 C710,180 720,175 725,182" fill="none" stroke="#F5D78A" stroke-width="3"/>
+      <!-- ══ PEARL (龙珠) ══ -->
+      <g transform="translate(550, 90)" filter="url(#glow)">
+        <circle cx="0" cy="0" r="18" fill="#FFD700" opacity="0.35"/>
+        <circle cx="0" cy="0" r="12" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
+        <circle cx="-4" cy="-4" r="5" fill="#FFF" opacity="0.4"/>
+        <!-- Pearl flame aura -->
+        <circle cx="0" cy="0" r="25" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.2" filter="url(#bigGlow)"/>
       </g>
+
     </svg>
   </div>
 
