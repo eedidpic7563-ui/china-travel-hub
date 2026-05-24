@@ -8,11 +8,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
 
 :root {
-  --red: #C43E2C;
-  --red-dark: #A83227;
-  --red-bright: #E8483A;
-  --gold: #C5963A;
-  --gold-light: #F5E6C8;
+  --red: #D4352C;
+  --red-glow: #FF3B30;
+  --gold: #D4A843;
+  --gold-light: #F5D78A;
   --cream: #FFF8EF;
   --ink: #2C1810;
   --ink-soft: #6B4C3B;
@@ -27,19 +26,133 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
   background: var(--cream); color: var(--ink); line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(196, 62, 44, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 90% 80%, rgba(197, 150, 58, 0.04) 0%, transparent 50%);
 }
 
-/* ── Top Banner ── */
-.top-banner {
-  background: linear-gradient(135deg, var(--red-dark), var(--red));
-  color: #fff; text-align: center; padding: 8px 16px;
-  font-size: 13px; letter-spacing: .5px;
+/* ═══════════════ HERO — Dragon + Architecture ═══════════════ */
+.hero {
+  position: relative;
+  width: 100%; height: 100vh; min-height: 700px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 30%, #1a0a0a 0%, #0a0303 40%, #020101 100%);
 }
 
-/* ── Nav ── */
+/* ── Atmosphere layers ── */
+.hero-atmo {
+  position: absolute; inset: 0; pointer-events: none;
+  background: 
+    radial-gradient(ellipse at 60% 40%, rgba(212, 53, 44, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 60%, rgba(212, 168, 67, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(180, 120, 40, 0.1) 0%, transparent 60%);
+  animation: atmoPulse 8s ease-in-out infinite;
+}
+@keyframes atmoPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* ── Fog layer ── */
+.hero-fog {
+  position: absolute; bottom: 0; left: -10%; width: 120%; height: 40%;
+  background: linear-gradient(0deg, rgba(10,3,3,0.95) 0%, rgba(10,3,3,0.6) 30%, transparent 70%);
+  z-index: 3; pointer-events: none;
+  animation: fogDrift 12s ease-in-out infinite;
+}
+.hero-fog:nth-child(2) {
+  height: 30%; bottom: 10%;
+  animation: fogDrift 16s ease-in-out infinite reverse;
+  opacity: 0.6;
+}
+@keyframes fogDrift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3%); }
+}
+
+/* ── Palace Architecture ── */
+.architecture {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+  z-index: 2; pointer-events: none;
+}
+.palace-svg {
+  position: absolute; bottom: 0; width: 100%; height: auto;
+}
+
+/* ── Dragon Container ── */
+.dragon-container {
+  position: absolute; top: 5%; left: 0; right: 0; bottom: 35%;
+  z-index: 4; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.dragon-svg {
+  width: 65%; max-width: 900px; height: auto;
+  animation: dragonFloat 6s ease-in-out infinite, dragonSway 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(255, 60, 48, 0.3)) drop-shadow(0 0 60px rgba(212, 168, 67, 0.2));
+}
+@keyframes dragonFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+@keyframes dragonSway {
+  0%, 100% { transform: translateX(0) translateY(var(--float-y, 0px)); }
+  25% { transform: translateX(8px) translateY(var(--float-y, 0px)); }
+  75% { transform: translateX(-8px) translateY(var(--float-y, 0px)); }
+}
+
+/* ── Particles ── */
+.particles {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+}
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  animation: particleFloat linear infinite;
+  box-shadow: 0 0 6px 2px rgba(245, 215, 138, 0.5);
+}
+.particle.red {
+  background: var(--red-glow);
+  box-shadow: 0 0 8px 3px rgba(255, 60, 48, 0.4);
+}
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-600px) translateX(40px); opacity: 0; }
+}
+
+/* ── Title Overlay ── */
+.hero-title {
+  position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+  z-index: 5; text-align: center; color: #fff;
+}
+.hero-title h1 {
+  font-family: "Noto Serif SC", serif;
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 900; letter-spacing: 4px;
+  text-shadow: 0 0 40px rgba(212,53,44,0.6), 0 0 80px rgba(212,168,67,0.3), 0 4px 8px rgba(0,0,0,0.8);
+  margin-bottom: 12px;
+}
+.hero-title h1 .gold { color: var(--gold-light); }
+.hero-title p {
+  font-size: clamp(14px, 2vw, 18px);
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 1px; max-width: 500px; margin: 0 auto;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+/* ── Scroll hint ── */
+.scroll-hint {
+  position: absolute; bottom: 6%; left: 50%; transform: translateX(-50%);
+  z-index: 5; color: rgba(255,255,255,0.5); font-size: 13px;
+  letter-spacing: 2px; animation: bounce 2s ease-in-out infinite;
+  cursor: default; pointer-events: none;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ═══════════════ Nav ═══════════════ */
 nav {
   display: flex; justify-content: space-between; align-items: center;
   padding: 14px 32px; position: sticky; top:0; z-index:100;
@@ -47,15 +160,11 @@ nav {
   border-bottom: 2px solid var(--red);
   box-shadow: 0 2px 20px rgba(196, 62, 44, 0.08);
 }
-.logo { 
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none;
-}
-.logo-icon { font-size: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.1)); }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { font-size: 28px; }
 .logo-text { 
   font-family: "Noto Serif SC", serif;
-  font-size: 24px; font-weight: 900; color: var(--red);
-  letter-spacing: -1px;
+  font-size: 22px; font-weight: 900; color: var(--red); letter-spacing: -1px;
 }
 .logo-text span { color: var(--ink); font-weight: 700; }
 
@@ -67,7 +176,6 @@ nav {
   transition: all .25s ease; font-family: inherit;
 }
 .lang-btn:hover { border-color: var(--red); color: var(--red); }
-
 .lang-dropdown { position: relative; }
 .lang-menu {
   display: none; position: absolute; top: calc(100% + 8px); right: 0;
@@ -82,75 +190,24 @@ nav {
   padding: 11px 18px; cursor: pointer; transition: all .15s;
   font-family: inherit;
 }
-.lang-menu button:hover { background: var(--gold-light); color: var(--ink); }
+.lang-menu button:hover { background: #FDF2F0; color: var(--ink); }
 .lang-menu button.active { background: #FDF2F0; color: var(--red); font-weight: 700; }
 
-/* ── Hero ── */
-.hero {
-  text-align: center; padding: 80px 24px 70px;
-  position: relative; overflow: hidden;
-  background: linear-gradient(180deg, transparent 0%, rgba(197, 150, 58, 0.06) 100%);
-}
-.hero::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(196,62,44,0.02) 40px, rgba(196,62,44,0.02) 42px),
-    repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(197,150,58,0.02) 40px, rgba(197,150,58,0.02) 42px);
-  pointer-events: none;
-}
+/* ═══════════════ Guides ═══════════════ */
+.divider { text-align: center; padding: 32px 0 16px; color: var(--gold); font-size: 20px; letter-spacing: 8px; opacity: .5; }
 
-/* Dragon ornament */
-.hero-ornament {
-  width: 280px; height: 120px; margin: 0 auto 20px;
-  opacity: .15; position: relative;
-}
-.hero-panda { font-size: 100px; line-height: 1; position: relative; z-index: 2; }
-
-.hero h1 {
-  font-family: "Noto Serif SC", serif;
-  font-size: 48px; font-weight: 900; letter-spacing: -1px;
-  margin: 8px 0 16px; line-height: 1.2; position: relative; z-index: 2;
-  text-shadow: 0 2px 8px rgba(196,62,44,0.08);
-}
-.hero h1 .cn {
-  color: var(--red);
-  position: relative;
-}
-.hero h1 .cn::after {
-  content: ''; position: absolute; bottom: 4px; left: 0; right: 0;
-  height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  border-radius: 2px;
-}
-.hero .subtitle {
-  font-size: 18px; color: var(--ink-soft); max-width: 520px;
-  margin: 0 auto; position: relative; z-index: 2;
-}
-
-/* ── Divider ── */
-.divider {
-  text-align: center; padding: 0 0 20px;
-  color: var(--gold); font-size: 20px; letter-spacing: 8px;
-  opacity: .6;
-}
-
-/* ── Guides ── */
 .guides {
   max-width: 1060px; margin: 0 auto; padding: 0 24px 80px;
 }
 .guides h2 {
-  text-align: center; font-size: 26px; font-weight: 700;
-  margin-bottom: 40px; color: var(--ink);
+  text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 36px; color: var(--ink);
 }
-.guides h2 .red-dot { color: var(--red); }
-
 .guide-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 22px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px;
 }
-
 .guide-card {
   background: var(--card); border: 1.5px solid var(--border);
-  border-radius: var(--radius); padding: 32px 28px;
+  border-radius: var(--radius); padding: 30px 26px;
   text-decoration: none; color: var(--ink);
   transition: all .35s cubic-bezier(.4,0,.2,1); display: block;
   position: relative; overflow: hidden;
@@ -167,146 +224,356 @@ nav {
   border-color: var(--red);
 }
 .guide-card:hover::before { transform: scaleX(1); }
-
-.guide-card .card-icon { font-size: 44px; margin-bottom: 14px; }
-.guide-card h3 { font-size: 21px; font-weight: 700; margin-bottom: 8px; }
-.guide-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.65; }
-
+.guide-card .card-icon { font-size: 40px; margin-bottom: 12px; }
+.guide-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+.guide-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
 .guide-card .card-tag {
-  display: inline-block; margin-top: 16px;
-  font-size: 12px; font-weight: 700; padding: 5px 12px;
-  border-radius: 20px; letter-spacing: .3px;
+  display: inline-block; margin-top: 14px;
+  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 16px;
 }
 .tag-verified { background: #E8F5E9; color: #2E7D32; }
 .tag-partial { background: #FFF8E1; color: #B8860B; }
 .tag-coming { background: #F5F2ED; color: #B0A89E; }
-
-.guide-card.coming-soon {
-  opacity: .5; cursor: default;
-}
-.guide-card.coming-soon:hover {
-  transform: none; box-shadow: none; border-color: var(--border);
-}
+.guide-card.coming-soon { opacity: .45; cursor: default; }
+.guide-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--border); }
 .guide-card.coming-soon:hover::before { transform: scaleX(0); }
 
-/* ── Footer ── */
+/* ═══════════════ Footer ═══════════════ */
 footer {
-  text-align: center; padding: 40px 24px; color: var(--ink-soft);
+  text-align: center; padding: 36px 24px; color: var(--ink-soft);
   font-size: 14px; border-top: 2px solid var(--border);
-  background: linear-gradient(180deg, transparent, rgba(197,150,58,0.04));
 }
-footer .panda { font-size: 24px; }
+footer .panda { font-size: 20px; }
 
-/* ── Responsive ── */
+/* ═══════════════ Responsive ═══════════════ */
 @media (max-width: 640px) {
-  .hero { padding: 48px 20px 40px; }
-  .hero h1 { font-size: 32px; }
-  .hero .subtitle { font-size: 16px; }
-  .hero-panda { font-size: 72px; }
+  .hero { min-height: 500px; height: 80vh; }
+  .hero-title { bottom: 22%; }
+  .hero-title h1 { font-size: 28px; letter-spacing: 2px; }
+  .dragon-svg { width: 90%; }
   .guides { padding: 0 16px 48px; }
   .guide-grid { grid-template-columns: 1fr; }
   nav { padding: 10px 16px; }
-  .logo-text { font-size: 20px; }
+  .logo-text { font-size: 18px; }
 }
-
-/* ── Cloud pattern ── */
-.cloud-pattern {
-  position: absolute; pointer-events: none; opacity: .04;
-  width: 200px; height: 200px;
-}
-
-/* Decorative corner */
-.corner-decor {
-  position: absolute; width: 80px; height: 80px; pointer-events: none;
-}
-.corner-decor::before, .corner-decor::after {
-  content: ''; position: absolute;
-  border: 2px solid var(--gold); opacity: .2;
-}
-.corner-decor::before { top: 0; left: 0; width: 24px; height: 24px; border-right: none; border-bottom: none; }
-.corner-decor::after { bottom: 0; right: 0; width: 24px; height: 24px; border-left: none; border-top: none; }
 </style>
 </head>
 <body>
 
-<div class="top-banner">
-  🏮 <span data-i18n="banner">Free travel guides for China · Updated May 2026</span> 🏮
-</div>
+<!-- ═══════════════ HERO: Dragon over Architecture ═══════════════ -->
+<section class="hero">
+  <div class="hero-atmo"></div>
+  <div class="hero-fog"></div>
+  <div class="hero-fog"></div>
 
+  <!-- Palace Architecture SVG -->
+  <div class="architecture">
+    <svg class="palace-svg" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="palaceGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a1010"/>
+          <stop offset="100%" stop-color="#050202"/>
+        </linearGradient>
+        <linearGradient id="roofGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2a1510"/>
+          <stop offset="100%" stop-color="#1a0a08"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Far background -->
+      <rect width="1200" height="500" fill="url(#palaceGrad)"/>
+
+      <!-- Back layer buildings -->
+      <g opacity="0.3">
+        <polygon points="50,500 50,250 80,230 110,250 110,500" fill="#1a0a08"/>
+        <polygon points="100,500 100,220 140,195 180,220 180,500" fill="#1a0a08"/>
+        <polygon points="850,500 850,210 900,180 950,210 950,500" fill="#1a0a08"/>
+        <polygon points="930,500 930,240 970,215 1010,240 1010,500" fill="#1a0a08"/>
+      </g>
+
+      <!-- Mid layer roofs -->
+      <g opacity="0.55">
+        <!-- Center pagoda -->
+        <polygon points="420,500 420,200 490,160 560,200 560,500" fill="url(#roofGrad)"/>
+        <!-- Roof curves center -->
+        <path d="M400,200 Q490,140 580,200" fill="none" stroke="#3a2010" stroke-width="4"/>
+        <path d="M410,220 Q490,170 570,220" fill="none" stroke="#2a1510" stroke-width="2"/>
+        <!-- Roof tips -->
+        <polygon points="490,160 485,140 490,130 495,140" fill="#4a2820"/>
+        <!-- Columns -->
+        <rect x="440" y="200" width="6" height="300" fill="#1a0a08"/>
+        <rect x="555" y="200" width="6" height="300" fill="#1a0a08"/>
+        <rect x="470" y="200" width="4" height="300" fill="#1a0a08"/>
+        <rect x="525" y="200" width="4" height="300" fill="#1a0a08"/>
+      </g>
+
+      <!-- Left wings -->
+      <g opacity="0.45">
+        <polygon points="0,500 0,280 120,250 240,280 240,500" fill="url(#roofGrad)"/>
+        <path d="M-20,280 Q120,210 260,280" fill="none" stroke="#3a2010" stroke-width="3"/>
+        <rect x="40" y="280" width="4" height="220" fill="#150808"/>
+        <rect x="100" y="280" width="4" height="220" fill="#150808"/>
+        <rect x="160" y="280" width="4" height="220" fill="#150808"/>
+      </g>
+
+      <!-- Right wings -->
+      <g opacity="0.45">
+        <polygon points="960,500 960,280 1080,250 1200,280 1200,500" fill="url(#roofGrad)"/>
+        <path d="M940,280 Q1080,210 1220,280" fill="none" stroke="#3a2010" stroke-width="3"/>
+        <rect x="1000" y="280" width="4" height="220" fill="#150808"/>
+        <rect x="1060" y="280" width="4" height="220" fill="#150808"/>
+        <rect x="1120" y="280" width="3" height="220" fill="#150808"/>
+      </g>
+
+      <!-- Foreground wall -->
+      <rect x="0" y="400" width="1200" height="100" fill="#080404"/>
+      <rect x="0" y="400" width="1200" height="3" fill="#1a0a08"/>
+      <g opacity="0.3">
+        <rect x="80" y="410" width="40" height="90" fill="#0a0404"/>
+        <rect x="200" y="410" width="40" height="90" fill="#0a0404"/>
+        <rect x="500" y="410" width="50" height="90" fill="#0a0404"/>
+        <rect x="700" y="410" width="40" height="90" fill="#0a0404"/>
+        <rect x="880" y="410" width="50" height="90" fill="#0a0404"/>
+        <rect x="1050" y="410" width="40" height="90" fill="#0a0404"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Dragon -->
+  <div class="dragon-container">
+    <svg class="dragon-svg" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dragonBody" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8B1A1A"/>
+          <stop offset="30%" stop-color="#C4302B"/>
+          <stop offset="60%" stop-color="#D4483A"/>
+          <stop offset="100%" stop-color="#8B1A1A"/>
+        </linearGradient>
+        <linearGradient id="dragonBelly" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F5D78A"/>
+          <stop offset="100%" stop-color="#D4A843"/>
+        </linearGradient>
+        <filter id="dragonGlow">
+          <feGaussianBlur stdDeviation="8" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="softGlow">
+          <feGaussianBlur stdDeviation="4"/>
+        </filter>
+      </defs>
+
+      <!-- ══ Dragon Body (serpentine) ══ -->
+      <g filter="url(#dragonGlow)">
+        <!-- Main body curve - S-shape -->
+        <path d="M100,420 
+                 C180,380 220,300 280,260 
+                 C350,220 380,280 420,240 
+                 C460,200 440,140 500,130 
+                 C560,120 580,180 620,170 
+                 C660,160 680,220 740,210 
+                 C800,200 820,160 880,180 
+                 C940,200 960,240 980,230"
+              fill="none" stroke="url(#dragonBody)" stroke-width="28" stroke-linecap="round"/>
+
+        <!-- Belly highlight -->
+        <path d="M100,420 
+                 C180,380 220,300 280,260 
+                 C350,220 380,280 420,240 
+                 C460,200 440,140 500,130 
+                 C560,120 580,180 620,170 
+                 C660,160 680,220 740,210 
+                 C800,200 820,160 880,180 
+                 C940,200 960,240 980,230"
+              fill="none" stroke="url(#dragonBelly)" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+
+        <!-- Spine ridges -->
+        <g fill="#D4483A" opacity="0.9">
+          <polygon points="180,360 190,335 195,360"/>
+          <polygon points="220,305 230,278 238,305"/>
+          <polygon points="260,265 268,240 275,265"/>
+          <polygon points="340,245 346,220 352,245"/>
+          <polygon points="445,225 450,200 455,225"/>
+          <polygon points="490,148 494,125 500,148"/>
+          <polygon points="560,155 564,132 570,155"/>
+          <polygon points="630,175 636,150 642,175"/>
+          <polygon points="720,205 726,180 730,205"/>
+          <polygon points="810,195 814,172 820,195"/>
+        </g>
+      </g>
+
+      <!-- ══ Dragon Head (facing right) ══ -->
+      <g filter="url(#dragonGlow)" transform="translate(940, 180)">
+        <!-- Neck -->
+        <path d="M-20,20 C0,20 20,15 30,10" fill="none" stroke="url(#dragonBody)" stroke-width="24"/>
+
+        <!-- Head shape -->
+        <ellipse cx="45" cy="8" rx="35" ry="22" fill="#C4302B"/>
+        <ellipse cx="50" cy="3" rx="30" ry="18" fill="#D4483A"/>
+
+        <!-- Snout -->
+        <ellipse cx="75" cy="8" rx="18" ry="12" fill="#8B1A1A"/>
+        <ellipse cx="85" cy="8" rx="10" ry="8" fill="#6B1010"/>
+
+        <!-- Nostrils -->
+        <circle cx="80" cy="4" r="3" fill="#2a0505"/>
+        <circle cx="85" cy="10" r="3" fill="#2a0505"/>
+
+        <!-- Horns -->
+        <path d="M35,-8 C30,-35 35,-55 50,-60 C45,-45 42,-30 42,-12" fill="#D4A843" opacity="0.9"/>
+        <path d="M25,-2 C15,-28 18,-48 30,-55 C25,-40 25,-25 28,-6" fill="#C5963A" opacity="0.85"/>
+
+        <!-- Antlers -->
+        <path d="M20,-15 C10,-30 5,-40 0,-38 C5,-32 10,-25 15,-18" fill="#D4A843" opacity="0.8"/>
+        <path d="M15,-18 C5,-25 0,-30 -5,-28 C2,-24 8,-20 12,-16" fill="#D4A843" opacity="0.8"/>
+
+        <!-- Eye -->
+        <ellipse cx="50" cy="-2" rx="7" ry="6" fill="#F5D78A" filter="url(#softGlow)"/>
+        <ellipse cx="52" cy="-2" rx="3" ry="5" fill="#1a0000"/>
+        <circle cx="53" cy="-4" r="1.5" fill="#fff" opacity="0.8"/>
+
+        <!-- Eyebrow -->
+        <path d="M40,-10 C45,-16 55,-16 60,-10" fill="none" stroke="#D4A843" stroke-width="2.5"/>
+
+        <!-- Whiskers -->
+        <path d="M80,5 C95,0 105,-5 110,-3" fill="none" stroke="#F5D78A" stroke-width="1.5" opacity="0.8"/>
+        <path d="M78,10 C95,12 108,10 115,14" fill="none" stroke="#F5D78A" stroke-width="1.5" opacity="0.8"/>
+
+        <!-- Teeth/Fangs -->
+        <polygon points="65,18 68,28 71,18" fill="#F5D78A" opacity="0.7"/>
+        <polygon points="72,18 75,26 78,18" fill="#F5D78A" opacity="0.7"/>
+
+        <!-- Beard -->
+        <path d="M60,22 C58,35 55,45 58,50" fill="none" stroke="#F5D78A" stroke-width="2" opacity="0.6"/>
+        <path d="M68,22 C70,32 72,40 70,48" fill="none" stroke="#F5D78A" stroke-width="1.5" opacity="0.6"/>
+
+        <!-- Flames from mouth -->
+        <g opacity="0.5">
+          <ellipse cx="100" cy="5" rx="12" ry="6" fill="#FF3B30" filter="url(#softGlow)"/>
+          <ellipse cx="108" cy="8" rx="8" ry="4" fill="#FF6B40"/>
+          <circle cx="115" cy="6" r="3" fill="#FFD700" filter="url(#softGlow)"/>
+        </g>
+      </g>
+
+      <!-- ══ Dragon Claws ══ -->
+      <g filter="url(#dragonGlow)">
+        <!-- Front claw 1 -->
+        <g transform="translate(380, 280)">
+          <path d="M0,0 C-10,15 -5,30 5,35" fill="none" stroke="#C4302B" stroke-width="6"/>
+          <path d="M-5,20 L-12,28 M0,22 L-5,32 M4,20 L8,30" fill="none" stroke="#D4A843" stroke-width="2"/>
+        </g>
+        <!-- Front claw 2 -->
+        <g transform="translate(420, 240)">
+          <path d="M0,0 C-15,10 -20,25 -15,30" fill="none" stroke="#C4302B" stroke-width="5"/>
+          <path d="M-12,18 L-20,28 M-6,20 L-10,32 M-2,18 L2,28" fill="none" stroke="#D4A843" stroke-width="2"/>
+        </g>
+        <!-- Back claw -->
+        <g transform="translate(560, 120)">
+          <path d="M0,0 C10,15 5,30 -5,35" fill="none" stroke="#C4302B" stroke-width="5"/>
+          <path d="M2,18 L8,30 M-2,20 L-8,32 M-5,18 L-10,28" fill="none" stroke="#D4A843" stroke-width="2"/>
+        </g>
+      </g>
+
+      <!-- ══ Dragon Tail (tapering off left) ══ -->
+      <g filter="url(#dragonGlow)">
+        <path d="M100,420 C60,440 20,460 -20,470" fill="none" stroke="#8B1A1A" stroke-width="14" stroke-linecap="round"/>
+        <path d="M-20,470 C-40,465 -50,460 -55,455" fill="none" stroke="#6B1010" stroke-width="6" stroke-linecap="round"/>
+        <!-- Tail tuft -->
+        <path d="M-50,455 C-58,448 -62,440 -58,435" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
+        <path d="M-52,458 C-60,455 -65,450 -62,445" fill="none" stroke="#D4A843" stroke-width="1.5" opacity="0.5"/>
+      </g>
+
+      <!-- ══ Floating mane along body ══ -->
+      <g opacity="0.25" filter="url(#softGlow)">
+        <path d="M200,340 C205,320 215,310 220,315" fill="none" stroke="#F5D78A" stroke-width="3"/>
+        <path d="M300,260 C310,245 320,240 325,248" fill="none" stroke="#F5D78A" stroke-width="3"/>
+        <path d="M500,140 C510,125 520,120 525,128" fill="none" stroke="#F5D78A" stroke-width="3"/>
+        <path d="M700,195 C710,180 720,175 725,182" fill="none" stroke="#F5D78A" stroke-width="3"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Particles -->
+  <div class="particles">
+    <div class="particle" style="left:10%;bottom:40%;animation-duration:8s;animation-delay:0s;"></div>
+    <div class="particle red" style="left:20%;bottom:50%;animation-duration:10s;animation-delay:1s;"></div>
+    <div class="particle" style="left:35%;bottom:45%;animation-duration:7s;animation-delay:2s;"></div>
+    <div class="particle red" style="left:50%;bottom:55%;animation-duration:9s;animation-delay:0.5s;"></div>
+    <div class="particle" style="left:65%;bottom:40%;animation-duration:11s;animation-delay:3s;"></div>
+    <div class="particle red" style="left:75%;bottom:50%;animation-duration:8s;animation-delay:1.5s;"></div>
+    <div class="particle" style="left:85%;bottom:35%;animation-duration:10s;animation-delay:2.5s;"></div>
+    <div class="particle red" style="left:90%;bottom:48%;animation-duration:7s;animation-delay:4s;"></div>
+    <div class="particle" style="left:15%;bottom:60%;animation-duration:12s;animation-delay:0.8s;"></div>
+    <div class="particle red" style="left:55%;bottom:42%;animation-duration:9s;animation-delay:3.5s;"></div>
+  </div>
+
+  <!-- Title -->
+  <div class="hero-title">
+    <h1 data-i18n="hero.title">中国<span class="gold">·</span>CHINA</h1>
+    <p data-i18n="hero.subtitle">Essential travel guides for 2026</p>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint">▼ SCROLL ▼</div>
+</section>
+
+<!-- ═══════════════ Navigation ═══════════════ -->
 <nav>
   <a href="index.html" class="logo">
     <span class="logo-icon">🐼</span>
     <span class="logo-text">China<span>Travel</span></span>
   </a>
-  <div class="nav-links">
-    <div class="lang-dropdown">
-      <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
-        🌐 <span id="currentLangLabel">English</span> ▾
-      </button>
-      <div class="lang-menu" id="langMenu"></div>
-    </div>
+  <div class="lang-dropdown">
+    <button class="lang-btn" id="langBtn">🌐 <span id="currentLangLabel">English</span> ▾</button>
+    <div class="lang-menu" id="langMenu"></div>
   </div>
 </nav>
 
-<section class="hero">
-  <!-- Cloud SVGs -->
-  <svg class="cloud-pattern" style="top:60px;left:10%;" viewBox="0 0 200 200"><path d="M40 100c0-22 18-40 40-40 5-18 20-30 38-28 16-14 42-10 52 10 18-3 32 12 30 30 10 6 14 20 8 30 18 5 30 24 22 42-10 20-36 26-56 16H80c-22 0-40-18-40-40z" fill="#C43E2C"/></svg>
-  <svg class="cloud-pattern" style="bottom:80px;right:8%;" viewBox="0 0 200 200"><path d="M160 160c0-20-16-36-36-36-4-18-18-28-34-26-14-14-38-10-48 10-16-3-30 12-28 28-8 6-12 20-6 30-16 5-28 24-20 40 8 18 32 24 52 16H120c20 0 38-18 38-38z" fill="#C43E2C"/></svg>
-
-  <div class="hero-panda">🐼</div>
-  <h1>
-    <span data-i18n="hero.title">Explore</span>
-    <span class="cn" data-i18n="hero.cn">中国</span>
-  </h1>
-  <p class="subtitle" data-i18n="hero.subtitle">Everything you need before landing in China. Payments, internet, trains — no surprises, just smooth travels.</p>
-</section>
-
+<!-- ═══════════════ Guides ═══════════════ -->
 <div class="divider">◆ ◇ ◆</div>
 
-<section class="guides">
-  <h2 data-i18n="guides.heading"><span class="red-dot">●</span> Essential Travel Guides</h2>
-
+<section class="guides" id="guides">
+  <h2 data-i18n="guides.heading">Essential Travel Guides</h2>
   <div class="guide-grid">
 
     <a href="payment-guide.html" class="guide-card">
       <div class="card-icon">💳</div>
       <h3 data-i18n="card.payment.title">Payment Guide</h3>
-      <p data-i18n="card.payment.desc">Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China — here's how to pay like a local.</p>
+      <p data-i18n="card.payment.desc">Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China.</p>
       <span class="card-tag tag-verified">✓ Step‑by‑step</span>
     </a>
 
     <a href="internet-guide.html" class="guide-card">
       <div class="card-icon">📶</div>
       <h3 data-i18n="card.internet.title">Internet Guide</h3>
-      <p data-i18n="card.internet.desc">eSIM, VPN, WiFi — stay online and access Google, WhatsApp & more behind the Great Firewall.</p>
+      <p data-i18n="card.internet.desc">eSIM, VPN, WiFi — stay online behind the Great Firewall.</p>
       <span class="card-tag tag-verified">✓ Verified May 2026</span>
     </a>
 
     <a href="train-guide.html" class="guide-card">
       <div class="card-icon">🚄</div>
       <h3 data-i18n="card.train.title">Train Guide</h3>
-      <p data-i18n="card.train.desc">Book high‑speed trains on 12306 or Trip.com. Seat classes, station hacks, all covered.</p>
+      <p data-i18n="card.train.desc">Book high‑speed trains on 12306 or Trip.com. All covered.</p>
       <span class="card-tag tag-partial">⚠ Partially verified</span>
     </a>
 
     <div class="guide-card coming-soon">
       <div class="card-icon">🏨</div>
-      <h3 data-i18n="card.hotel.title">Hotel Guide</h3>
-      <p data-i18n="card.hotel.desc">Where to stay, how to book, which hotels accept foreigners.</p>
+      <h3>Hotel Guide</h3>
+      <p>Where to stay and which hotels accept foreigners.</p>
       <span class="card-tag tag-coming">Coming soon</span>
     </div>
 
     <div class="guide-card coming-soon">
       <div class="card-icon">🗺️</div>
-      <h3 data-i18n="card.nav.title">Navigation</h3>
-      <p data-i18n="card.nav.desc">Baidu Maps, Amap, Metro — navigate without Google Maps.</p>
+      <h3>Navigation</h3>
+      <p>Baidu Maps, Amap, Metro — navigate without Google Maps.</p>
       <span class="card-tag tag-coming">Coming soon</span>
     </div>
 
     <div class="guide-card coming-soon">
       <div class="card-icon">🎫</div>
-      <h3 data-i18n="card.attractions.title">Attractions</h3>
-      <p data-i18n="card.attractions.desc">Book Forbidden City, Great Wall & more — skip the queues.</p>
+      <h3>Attractions</h3>
+      <p>Book Forbidden City, Great Wall & more — skip the queues.</p>
       <span class="card-tag tag-coming">Coming soon</span>
     </div>
 
@@ -318,47 +585,31 @@ footer .panda { font-size: 24px; }
   <p data-i18n="footer">ChinaTravelHub © 2026 — Independent guides by travelers, for travelers.</p>
 </footer>
 
-<!-- ── Scripts ── -->
+<!-- ═══════════════ Scripts ═══════════════ -->
 <script>
 const translations = {
   en: {
-    "banner": "Free travel guides for China · Updated May 2026",
-    "hero.title": "Explore",
-    "hero.cn": "中国",
-    "hero.subtitle": "Everything you need before landing in China. Payments, internet, trains — no surprises, just smooth travels.",
-    "guides.heading": "● Essential Travel Guides",
+    "hero.title": "中国<span class='gold'>·</span>CHINA",
+    "hero.subtitle": "Essential travel guides for 2026",
+    "guides.heading": "Essential Travel Guides",
     "card.payment.title": "Payment Guide",
-    "card.payment.desc": "Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China — here's how to pay like a local.",
+    "card.payment.desc": "Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China.",
     "card.internet.title": "Internet Guide",
-    "card.internet.desc": "eSIM, VPN, WiFi — stay online and access Google, WhatsApp & more behind the Great Firewall.",
+    "card.internet.desc": "eSIM, VPN, WiFi — stay online behind the Great Firewall.",
     "card.train.title": "Train Guide",
-    "card.train.desc": "Book high‑speed trains on 12306 or Trip.com. Seat classes, station hacks, all covered.",
-    "card.hotel.title": "Hotel Guide",
-    "card.hotel.desc": "Where to stay, how to book, which hotels accept foreigners.",
-    "card.nav.title": "Navigation",
-    "card.nav.desc": "Baidu Maps, Amap, Metro — navigate without Google Maps.",
-    "card.attractions.title": "Attractions",
-    "card.attractions.desc": "Book Forbidden City, Great Wall & more — skip the queues.",
+    "card.train.desc": "Book high‑speed trains on 12306 or Trip.com. All covered.",
     "footer": "ChinaTravelHub © 2026 — Independent guides by travelers, for travelers."
   },
   zh: {
-    "banner": "中国旅行免费指南 · 2026年5月更新",
-    "hero.title": "探索",
-    "hero.cn": "中国",
-    "hero.subtitle": "落地中国前你需要知道的一切。支付、上网、火车——没有意外，只有顺畅的旅程。",
-    "guides.heading": "● 旅行必备指南",
+    "hero.title": "中国<span class='gold'>·</span>CHINA",
+    "hero.subtitle": "2026 中国旅行必备指南",
+    "guides.heading": "旅行必备指南",
     "card.payment.title": "支付指南",
-    "card.payment.desc": "提前搞定支付宝和微信支付。在中国现金几乎绝迹——像本地人一样付钱。",
+    "card.payment.desc": "提前搞定支付宝和微信支付。在中国现金几乎绝迹。",
     "card.internet.title": "上网指南",
-    "card.internet.desc": "eSIM、VPN、WiFi——如何在防火墙后访问谷歌、WhatsApp 等。",
+    "card.internet.desc": "eSIM、VPN、WiFi——防火墙后也能畅通无阻。",
     "card.train.title": "火车指南",
-    "card.train.desc": "在12306或Trip.com上订高铁票。座位等级、车站技巧全覆盖。",
-    "card.hotel.title": "酒店指南",
-    "card.hotel.desc": "住哪里、怎么订、哪些酒店接待外国人。",
-    "card.nav.title": "导航指南",
-    "card.nav.desc": "百度地图、高德地图、地铁——没有谷歌地图也能导航。",
-    "card.attractions.title": "景点指南",
-    "card.attractions.desc": "预约故宫、长城等——免排队技巧。",
+    "card.train.desc": "在12306或Trip.com上订高铁票，全覆盖。",
     "footer": "ChinaTravelHub © 2026 — 旅行者写给旅行者的独立指南。"
   }
 };
@@ -380,11 +631,11 @@ function switchLang(lang) {
   currentLang = lang;
   localStorage.setItem('cth_lang', lang);
   document.getElementById('currentLangLabel').textContent = languages.find(l=>l.code===lang).name;
-  const t = translations[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    if (t[el.getAttribute('data-i18n')]) el.innerHTML = t[el.getAttribute('data-i18n')];
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
   });
-  document.title = lang==='zh' ? 'China Travel Hub — 2026年中国旅行必备指南' : 'China Travel Hub — Essential Guides for Traveling China in 2026';
+  document.title = lang==='zh' ? 'China Travel Hub — 中国旅行指南' : 'China Travel Hub — Essential Guides for Traveling China in 2026';
   buildLangMenu();
   document.getElementById('langMenu').classList.remove('open');
 }
