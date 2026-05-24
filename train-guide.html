@@ -572,23 +572,10 @@ const translations = {
 
 const languages = [
   { code: 'en', name: 'English' },
-  { code: 'zh', name: '中文' },
-  { code: 'ja', name: '日本語' },
-  { code: 'ko', name: '한국어' },
-  { code: 'es', name: 'Español' },
-  { code: 'fr', name: 'Français' },
-  { code: 'de', name: 'Deutsch' },
-  { code: 'pt', name: 'Português' },
-  { code: 'it', name: 'Italiano' },
-  { code: 'ru', name: 'Русский' },
-  { code: 'th', name: 'ไทย' },
-  { code: 'vi', name: 'Tiếng Việt' }
+  { code: 'zh', name: '中文' }
 ];
 
-const manualLangs = ['en', 'zh'];
-
-let currentLang = localStorage.getItem('lang') || 'en';
-let googleTranslateLoaded = false;
+let currentLang = localStorage.getItem('cth_lang') || 'en';
 
 function buildLangMenu() {
   const menu = document.getElementById('langMenu');
@@ -610,8 +597,6 @@ function updateActiveMenuItem() {
 }
 
 function translatePage(lang) {
-  if (!manualLangs.includes(lang)) return;
-
   document.querySelectorAll('[data-i18n]').forEach(el => {
     el.classList.add('switching');
   });
@@ -630,69 +615,13 @@ function translatePage(lang) {
   }, 150);
 }
 
-function triggerGoogleTranslate(targetLang) {
-  if (!window.google || !window.google.translate) {
-    console.warn('Google Translate not loaded yet');
-    return;
-  }
-  const select = document.querySelector('.goog-te-combo');
-  if (select) {
-    select.value = targetLang;
-    select.dispatchEvent(new Event('change'));
-  }
-}
-
-function setGoogleTranslate() {
-  const select = document.querySelector('.goog-te-combo');
-  if (select && currentLang !== 'en' && currentLang !== 'zh') {
-    select.value = currentLang;
-    select.dispatchEvent(new Event('change'));
-  }
-}
-
 function setLanguage(lang) {
   currentLang = lang;
-  localStorage.setItem('lang', lang);
+  localStorage.setItem('cth_lang', lang);
   updateLangButton();
-  updateActiveMenuItem();
-
-  if (manualLangs.includes(lang)) {
-    const select = document.querySelector('.goog-te-combo');
-    if (select) {
-      select.value = 'en';
-      select.dispatchEvent(new Event('change'));
-    }
-    translatePage(lang);
-  } else {
-    translatePage('en');
-    setTimeout(() => triggerGoogleTranslate(lang), 100);
-  }
-
+  buildLangMenu();
+  translatePage(lang);
   document.getElementById('langMenu').classList.remove('open');
-}
-
-function loadGoogleTranslate() {
-  if (googleTranslateLoaded) return;
-  googleTranslateLoaded = true;
-
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-  document.head.appendChild(script);
-
-  window.googleTranslateElementInit = function() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: languages.map(l => l.code).join(','),
-      layout: google.translate.TranslateElement.InlineLayout.HIDDEN
-    }, 'google_translate_element');
-
-    setTimeout(() => {
-      if (currentLang !== 'en' && currentLang !== 'zh') {
-        setGoogleTranslate();
-      }
-    }, 500);
-  };
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -707,9 +636,6 @@ document.addEventListener('DOMContentLoaded', () => {
   langBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     langMenu.classList.toggle('open');
-    if (langMenu.classList.contains('open') && !googleTranslateLoaded) {
-      loadGoogleTranslate();
-    }
   });
 
   document.addEventListener('click', (e) => {
@@ -729,6 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
 
 </body>
 </html>
