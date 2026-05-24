@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>China Travel Hub — Essential Guides for Traveling China in 2026</title>
+<title>China Travel Hub — The East Is Wild</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Cinzel:wght@400;700;900&display=swap');
 
 :root {
-  --red: #D4352C;
-  --red-glow: #FF3B30;
+  --red: #C43E2C;
   --gold: #D4A843;
   --gold-light: #F5D78A;
   --cream: #FFF8EF;
@@ -28,147 +27,140 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ═══════════════ HERO — Night Sky + Dragon + Great Wall ═══════════════ */
+/* ═══════════════ HERO ═══════════════ */
 .hero {
   position: relative;
   width: 100%; height: 100vh; min-height: 700px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 40% 40%, #0d1020 0%, #060812 40%, #020308 100%);
+  background: #020202;
 }
 
-/* ── Atmosphere layers ── */
-.hero-atmo {
-  position: absolute; inset: 0; pointer-events: none;
-  background: 
-    radial-gradient(ellipse at 50% 35%, rgba(60, 180, 160, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 60%, rgba(212, 168, 67, 0.06) 0%, transparent 40%),
-    radial-gradient(ellipse at 30% 50%, rgba(30, 60, 80, 0.05) 0%, transparent 60%);
-  animation: atmoPulse 10s ease-in-out infinite;
+/* ── Red circle (blood moon / sun) ── */
+.blood-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(65vw, 600px); height: min(65vw, 600px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180,30,20,0.25) 0%, rgba(120,15,10,0.15) 40%, transparent 70%);
+  animation: bloodPulse 6s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
 }
-@keyframes atmoPulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
+.blood-circle::after {
+  content: '';
+  position: absolute; inset: -30px;
+  border-radius: 50%;
+  border: 1px solid rgba(180,30,20,0.12);
+  animation: bloodPulse 6s ease-in-out infinite reverse;
+}
+@keyframes bloodPulse {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%,-50%) scale(1.08); opacity: 1; }
 }
 
-/* ── Fog layer ── */
-.hero-fog {
-  position: absolute; bottom: 0; left: -10%; width: 120%; height: 40%;
-  background: linear-gradient(0deg, rgba(10,3,3,0.95) 0%, rgba(10,3,3,0.6) 30%, transparent 70%);
+/* ── Fog layers ── */
+.fog {
+  position: absolute; bottom: 0; left: -20%; width: 140%; height: 50%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 40%, transparent 70%);
   z-index: 3; pointer-events: none;
-  animation: fogDrift 12s ease-in-out infinite;
 }
-.hero-fog:nth-child(2) {
-  height: 30%; bottom: 10%;
-  animation: fogDrift 16s ease-in-out infinite reverse;
+.fog:nth-child(2) {
+  height: 35%; bottom: 15%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
   opacity: 0.6;
 }
-@keyframes fogDrift {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(3%); }
-}
 
-/* ── Palace Architecture ── */
-.architecture {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+/* ── Mountain & Wall silhouette ── */
+.landscape {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
   z-index: 2; pointer-events: none;
 }
-.palace-svg {
-  position: absolute; bottom: 0; width: 100%; height: auto;
-}
 
-/* ── Dragon Container ── */
-.dragon-container {
-  position: absolute; top: 5%; left: 0; right: 0; bottom: 35%;
+/* ── Dragon ── */
+.dragon-wrap {
+  position: absolute; top: 5%; left: 5%; right: 5%; bottom: 30%;
   z-index: 4; pointer-events: none;
   display: flex; align-items: center; justify-content: center;
 }
 .dragon-svg {
-  width: 60%; max-width: 850px; height: auto;
-  animation: dragonFloat 7s ease-in-out infinite, dragonSway 10s ease-in-out infinite;
-  filter: drop-shadow(0 0 40px rgba(60, 180, 160, 0.25)) drop-shadow(0 0 80px rgba(212, 168, 67, 0.15));
+  width: 70%; max-width: 800px; height: auto;
+  animation: float 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(200,160,60,0.3)) drop-shadow(0 0 60px rgba(200,30,20,0.15));
 }
-@keyframes dragonFloat {
+@keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
-}
-@keyframes dragonSway {
-  0%, 100% { transform: translateX(0) translateY(var(--float-y, 0px)); }
-  25% { transform: translateX(8px) translateY(var(--float-y, 0px)); }
-  75% { transform: translateX(-8px) translateY(var(--float-y, 0px)); }
+  50% { transform: translateY(-14px); }
 }
 
 /* ── Particles ── */
 .particles {
   position: absolute; inset: 0; z-index: 3; pointer-events: none;
 }
-.particle {
-  position: absolute;
-  width: 3px; height: 3px;
-  background: var(--gold-light);
-  border-radius: 50%;
-  animation: particleFloat linear infinite;
-  box-shadow: 0 0 6px 2px rgba(245, 215, 138, 0.5);
+.p {
+  position: absolute; border-radius: 50%;
+  animation: rise linear infinite;
 }
-.particle.red {
-  background: var(--red-glow);
-  box-shadow: 0 0 8px 3px rgba(255, 60, 48, 0.4);
-}
-@keyframes particleFloat {
+.p.gold { background: var(--gold-light); box-shadow: 0 0 8px rgba(245,215,138,0.6); }
+.p.red { background: #FF3B30; box-shadow: 0 0 10px rgba(255,60,48,0.5); }
+@keyframes rise {
   0% { transform: translateY(0) translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 0.6; }
-  100% { transform: translateY(-600px) translateX(40px); opacity: 0; }
+  15% { opacity: 0.8; }
+  85% { opacity: 0.3; }
+  100% { transform: translateY(-700px) translateX(30px); opacity: 0; }
 }
 
-/* ── Title Overlay ── */
+/* ── Title ── */
 .hero-title {
-  position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%);
+  position: absolute; bottom: 16%; left: 50%; transform: translateX(-50%);
   z-index: 5; text-align: center; color: #fff;
+}
+.hero-title .tagline {
+  font-family: "Cinzel", "Noto Serif SC", serif;
+  font-size: clamp(14px, 1.6vw, 18px);
+  letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-bottom: 8px;
 }
 .hero-title h1 {
   font-family: "Noto Serif SC", serif;
-  font-size: clamp(36px, 7vw, 72px);
-  font-weight: 900; letter-spacing: 6px;
-  text-shadow: 0 0 60px rgba(60,180,160,0.4), 0 0 100px rgba(212,168,67,0.25), 0 4px 12px rgba(0,0,0,0.9);
-  margin-bottom: 16px;
+  font-size: clamp(40px, 8vw, 88px);
+  font-weight: 900; letter-spacing: 8px; line-height: 1;
+  background: linear-gradient(180deg, #fff 0%, #D4A843 50%, #C43E2C 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(212,168,67,0.4));
+  margin-bottom: 18px;
 }
-.hero-title h1 .gold { color: var(--gold-light); }
 .hero-title p {
-  font-size: clamp(15px, 2.2vw, 20px);
-  color: rgba(255,255,255,0.7);
-  letter-spacing: 2px; max-width: 520px; margin: 0 auto;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
-  font-weight: 300;
+  font-size: clamp(16px, 2vw, 22px);
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 3px; font-weight: 300;
 }
 
-/* ── Scroll hint ── */
+/* ── Scroll ── */
 .scroll-hint {
-  position: absolute; bottom: 6%; left: 50%; transform: translateX(-50%);
-  z-index: 5; color: rgba(255,255,255,0.5); font-size: 13px;
-  letter-spacing: 2px; animation: bounce 2s ease-in-out infinite;
-  cursor: default; pointer-events: none;
+  position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+  z-index: 5; color: rgba(255,255,255,0.3); font-size: 12px;
+  letter-spacing: 3px; animation: bounce 2s ease-in-out infinite;
+  pointer-events: none;
 }
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(8px); }
 }
 
-/* ═══════════════ Nav ═══════════════ */
+/* ═══════════════ NAV ═══════════════ */
 nav {
   display: flex; justify-content: space-between; align-items: center;
   padding: 14px 32px; position: sticky; top:0; z-index:100;
-  background: rgba(255, 248, 239, 0.96); backdrop-filter: blur(12px);
+  background: rgba(255,248,239,0.96); backdrop-filter: blur(12px);
   border-bottom: 2px solid var(--red);
-  box-shadow: 0 2px 20px rgba(196, 62, 44, 0.08);
+  box-shadow: 0 2px 20px rgba(196,62,44,0.08);
 }
 .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .logo-icon { font-size: 28px; }
-.logo-text { 
-  font-family: "Noto Serif SC", serif;
-  font-size: 22px; font-weight: 900; color: var(--red); letter-spacing: -1px;
-}
+.logo-text { font-family: "Noto Serif SC", serif; font-size: 22px; font-weight: 900; color: var(--red); letter-spacing: -1px; }
 .logo-text span { color: var(--ink); font-weight: 700; }
-
 .lang-btn {
   display: flex; align-items: center; gap: 6px;
   background: #fff; border: 1.5px solid var(--border);
@@ -179,7 +171,7 @@ nav {
 .lang-btn:hover { border-color: var(--red); color: var(--red); }
 .lang-dropdown { position: relative; }
 .lang-menu {
-  display: none; position: absolute; top: calc(100% + 8px); right: 0;
+  display: none; position: absolute; top: calc(100%+8px); right: 0;
   background: #fff; border: 1.5px solid var(--border);
   border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.12);
   min-width: 200px; z-index: 200; overflow: hidden;
@@ -188,30 +180,21 @@ nav {
 .lang-menu button {
   display: block; width: 100%; text-align: left; background: none;
   border: none; color: var(--ink-soft); font-size: 14px;
-  padding: 11px 18px; cursor: pointer; transition: all .15s;
-  font-family: inherit;
+  padding: 11px 18px; cursor: pointer; font-family: inherit;
 }
-.lang-menu button:hover { background: #FDF2F0; color: var(--ink); }
+.lang-menu button:hover { background: #FDF2F0; }
 .lang-menu button.active { background: #FDF2F0; color: var(--red); font-weight: 700; }
 
-/* ═══════════════ Guides ═══════════════ */
+/* ═══════════════ GUIDES ═══════════════ */
 .divider { text-align: center; padding: 32px 0 16px; color: var(--gold); font-size: 20px; letter-spacing: 8px; opacity: .5; }
-
-.guides {
-  max-width: 1060px; margin: 0 auto; padding: 0 24px 80px;
-}
-.guides h2 {
-  text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 36px; color: var(--ink);
-}
-.guide-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px;
-}
+.guides { max-width: 1060px; margin: 0 auto; padding: 0 24px 80px; }
+.guides h2 { text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 36px; }
+.guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
 .guide-card {
   background: var(--card); border: 1.5px solid var(--border);
   border-radius: var(--radius); padding: 30px 26px;
   text-decoration: none; color: var(--ink);
-  transition: all .35s cubic-bezier(.4,0,.2,1); display: block;
-  position: relative; overflow: hidden;
+  transition: all .35s cubic-bezier(.4,0,.2,1); position: relative; overflow: hidden;
 }
 .guide-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
@@ -219,582 +202,225 @@ nav {
   transform: scaleX(0); transform-origin: left;
   transition: transform .35s cubic-bezier(.4,0,.2,1);
 }
-.guide-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(196, 62, 44, 0.12);
-  border-color: var(--red);
-}
+.guide-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(196,62,44,0.12); border-color: var(--red); }
 .guide-card:hover::before { transform: scaleX(1); }
-.guide-card .card-icon { font-size: 40px; margin-bottom: 12px; }
+.guide-card .ci { font-size: 40px; margin-bottom: 12px; }
 .guide-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
 .guide-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
-.guide-card .card-tag {
-  display: inline-block; margin-top: 14px;
-  font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 16px;
+.guide-card .tag {
+  display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 16px;
 }
-.tag-verified { background: #E8F5E9; color: #2E7D32; }
-.tag-partial { background: #FFF8E1; color: #B8860B; }
-.tag-coming { background: #F5F2ED; color: #B0A89E; }
-.guide-card.coming-soon { opacity: .45; cursor: default; }
-.guide-card.coming-soon:hover { transform: none; box-shadow: none; border-color: var(--border); }
-.guide-card.coming-soon:hover::before { transform: scaleX(0); }
+.tag-ok { background: #E8F5E9; color: #2E7D32; }
+.tag-warn { background: #FFF8E1; color: #B8860B; }
+.tag-soon { background: #F5F2ED; color: #B0A89E; }
+.guide-card.soon { opacity: .45; cursor: default; }
+.guide-card.soon:hover { transform: none; box-shadow: none; border-color: var(--border); }
+.guide-card.soon:hover::before { transform: scaleX(0); }
+footer { text-align: center; padding: 36px 24px; color: var(--ink-soft); font-size: 14px; border-top: 2px solid var(--border); }
 
-/* ═══════════════ Footer ═══════════════ */
-footer {
-  text-align: center; padding: 36px 24px; color: var(--ink-soft);
-  font-size: 14px; border-top: 2px solid var(--border);
-}
-footer .panda { font-size: 20px; }
-
-/* ═══════════════ Responsive ═══════════════ */
 @media (max-width: 640px) {
   .hero { min-height: 500px; height: 80vh; }
-  .hero-title { bottom: 22%; }
-  .hero-title h1 { font-size: 28px; letter-spacing: 2px; }
-  .dragon-svg { width: 90%; }
+  .hero-title { bottom: 20%; }
+  .hero-title h1 { font-size: 32px; letter-spacing: 4px; }
+  .dragon-svg { width: 95%; }
   .guides { padding: 0 16px 48px; }
   .guide-grid { grid-template-columns: 1fr; }
   nav { padding: 10px 16px; }
-  .logo-text { font-size: 18px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════ HERO: Dragon over Architecture ═══════════════ -->
+<!-- ═══ HERO ═══ -->
 <section class="hero">
-  <div class="hero-atmo"></div>
-  <div class="hero-fog"></div>
-  <div class="hero-fog"></div>
+  <div class="blood-circle"></div>
+  <div class="fog"></div>
+  <div class="fog"></div>
 
-  <!-- Palace Architecture SVG -->
-  <div class="architecture">
-    <svg class="wall-svg" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice">
-      <defs>
-        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0a0a14"/>
-          <stop offset="60%" stop-color="#0d0d1a"/>
-          <stop offset="100%" stop-color="#050510"/>
-        </linearGradient>
-        <linearGradient id="mtnGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0d0d18"/>
-          <stop offset="100%" stop-color="#050510"/>
-        </linearGradient>
-      </defs>
-
-      <rect width="1200" height="500" fill="url(#skyGrad)"/>
-
+  <!-- Great Wall & Mountains -->
+  <div class="landscape">
+    <svg viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" style="position:absolute;bottom:0;width:100%;height:100%;">
       <!-- Stars -->
-      <g fill="#fff" opacity="0.3">
-        <circle cx="100" cy="40" r="1"/><circle cx="300" cy="80" r="0.8"/><circle cx="550" cy="30" r="1.2"/>
-        <circle cx="800" cy="60" r="0.7"/><circle cx="950" cy="25" r="1"/><circle cx="1150" cy="70" r="0.9"/>
-        <circle cx="180" cy="50" r="0.5"/><circle cx="680" cy="45" r="0.8"/><circle cx="1050" cy="90" r="0.6"/>
+      <g fill="#fff" opacity="0.25">
+        <circle cx="80" cy="40" r="1"/><circle cx="250" cy="70" r="0.8"/><circle cx="500" cy="20" r="1.2"/>
+        <circle cx="750" cy="50" r="0.7"/><circle cx="900" cy="15" r="1"/><circle cx="1100" cy="60" r="0.9"/>
+        <circle cx="150" cy="35" r="0.6"/><circle cx="650" cy="35" r="0.8"/>
       </g>
-
-      <!-- Moon glow -->
-      <circle cx="900" cy="80" r="40" fill="#fff" opacity="0.03"/>
-      <circle cx="900" cy="80" r="25" fill="#fff" opacity="0.06"/>
-      <circle cx="900" cy="80" r="15" fill="#F5E6C8" opacity="0.15"/>
-
-      <!-- ══ Mountains: Far layer ══ -->
-      <g opacity="0.3" fill="#0a0a14">
-        <path d="M0,450 L50,300 L100,350 L160,280 L220,340 L280,250 L350,320 L400,270 L450,350 L500,290 L560,340 L620,260 L700,320 L750,290 L820,350 L880,310 L930,360 L1000,300 L1060,340 L1120,280 L1200,330 L1200,500 L0,500Z"/>
+      <!-- Mountains far -->
+      <path d="M0,350 L60,200 L120,240 L200,180 L280,230 L360,170 L440,220 L520,190 L600,250 L680,210 L760,260 L840,200 L920,240 L1000,180 L1080,220 L1160,190 L1200,230 L1200,400 L0,400Z" fill="#0a0a10" opacity="0.5"/>
+      <!-- Mountains mid -->
+      <path d="M0,400 L50,260 L120,290 L200,240 L280,300 L360,250 L440,290 L520,230 L600,270 L680,250 L760,300 L840,260 L920,300 L1000,240 L1080,270 L1160,220 L1200,260 L1200,400 L0,400Z" fill="#060610" opacity="0.7"/>
+      <!-- Mountains front -->
+      <path d="M0,400 L40,300 L100,320 L180,280 L260,340 L340,300 L420,340 L500,290 L580,320 L660,300 L740,350 L820,310 L900,340 L980,290 L1060,310 L1140,270 L1200,300 L1200,400 L0,400Z" fill="#030306" opacity="0.85"/>
+      <!-- Great Wall path -->
+      <path d="M-20,360 C40,340 100,310 180,320 C250,328 320,295 400,305 C480,315 540,285 620,295 C700,305 760,275 840,288 C920,300 980,270 1060,280 C1120,288 1180,268 1220,278" fill="none" stroke="#322820" stroke-width="7" opacity="0.9"/>
+      <path d="M-20,360 C40,340 100,310 180,320 C250,328 320,295 400,305 C480,315 540,285 620,295 C700,305 760,275 840,288 C920,300 980,270 1060,280 C1120,288 1180,268 1220,278 L1220,288 C1180,278 1120,298 1060,290 C980,280 920,310 840,298 C760,285 700,315 620,305 C540,295 480,325 400,315 C320,305 250,338 180,330 C100,320 40,350 -20,370Z" fill="#4a3830" opacity="0.7"/>
+      <!-- Watchtowers -->
+      <g fill="#2a1a12" opacity="0.9">
+        <rect x="176" y="305" width="14" height="22" rx="1"/><rect x="173" y="300" width="20" height="6" rx="1"/>
+        <rect x="396" y="292" width="16" height="25" rx="1"/><rect x="393" y="287" width="22" height="6" rx="1"/>
+        <rect x="616" y="282" width="14" height="22" rx="1"/><rect x="613" y="277" width="20" height="6" rx="1"/>
+        <rect x="836" y="275" width="16" height="25" rx="1"/><rect x="833" y="270" width="22" height="6" rx="1"/>
+        <rect x="1056" y="267" width="14" height="22" rx="1"/><rect x="1053" y="262" width="20" height="6" rx="1"/>
       </g>
-
-      <!-- ══ Mountains: Mid layer ══ -->
-      <g opacity="0.55" fill="#080812">
-        <path d="M0,480 L40,350 L90,380 L150,320 L210,400 L270,340 L340,390 L400,330 L460,380 L520,310 L590,370 L650,340 L710,390 L770,350 L830,400 L890,360 L950,410 L1020,350 L1100,390 L1160,340 L1200,380 L1200,500 L0,500Z"/>
-      </g>
-
-      <!-- ══ Mountains: Front layer ══ -->
-      <g opacity="0.75" fill="#060610">
-        <path d="M0,500 L30,420 L80,440 L130,390 L190,430 L250,400 L310,450 L380,410 L440,440 L500,380 L560,420 L620,400 L680,440 L750,410 L820,450 L890,420 L960,450 L1030,400 L1100,430 L1160,390 L1200,420 L1200,500 L0,500Z"/>
-      </g>
-
-      <!-- ══ THE GREAT WALL ══ -->
-      <g opacity="0.9">
-        <!-- Wall path winding across mountains -->
-        <path d="M-20,445 C50,435 100,410 160,420 C200,425 240,405 290,415 C340,425 370,390 420,400 C460,410 490,380 540,390 C580,398 610,370 660,382 C710,394 750,365 800,378 C850,392 890,360 940,375 C990,388 1030,355 1080,370 C1120,382 1160,365 1220,375"
-              fill="none" stroke="#3a3030" stroke-width="8"/>
-
-        <!-- Wall body (parallelogram effect) -->
-        <path d="M-20,445 C50,435 100,410 160,420 C200,425 240,405 290,415 C340,425 370,390 420,400 C460,410 490,380 540,390 C580,398 610,370 660,382 C710,394 750,365 800,378 C850,392 890,360 940,375 C990,388 1030,355 1080,370 C1120,382 1160,365 1220,375 L1220,385 C1160,375 1120,392 1080,380 C1030,365 990,398 940,385 C890,370 850,402 800,388 C750,375 710,404 660,392 C610,380 580,408 540,400 C490,390 460,420 420,410 C370,400 340,435 290,425 C240,415 200,435 160,430 C100,420 50,445 -20,455Z"
-              fill="#4a3830" opacity="0.8"/>
-
-        <!-- Wall crenellations -->
-        <path d="M50,432 L55,425 L60,432 M120,418 L125,411 L130,418 M200,422 L205,415 L210,422 
-                 M300,412 L305,405 L310,412 M380,397 L385,390 L390,397 M460,387 L465,380 L470,387
-                 M550,387 L555,380 L560,387 M640,379 L645,372 L650,379 M720,375 L725,368 L730,375
-                 M810,385 L815,378 L820,385 M900,372 L905,365 L910,372 M990,365 L995,358 L1000,365
-                 M1070,377 L1075,370 L1080,377 M1150,370 L1155,363 L1160,370"
-              fill="none" stroke="#5a4840" stroke-width="3"/>
-      </g>
-
-      <!-- ══ WATCHTOWERS ══ -->
-      <g fill="#322820" opacity="0.9">
-        <!-- Tower 1 -->
-        <rect x="155" y="395" width="16" height="28" rx="1"/>
-        <rect x="152" y="390" width="22" height="7" rx="1"/>
-        <rect x="155" y="386" width="16" height="4" rx="1"/>
-        <!-- Tower 2 -->
-        <rect x="415" y="375" width="18" height="30" rx="1"/>
-        <rect x="412" y="370" width="24" height="7" rx="1"/>
-        <rect x="415" y="366" width="18" height="4" rx="1"/>
-        <!-- Tower 3 -->
-        <rect x="655" y="357" width="16" height="28" rx="1"/>
-        <rect x="652" y="352" width="22" height="7" rx="1"/>
-        <rect x="655" y="348" width="16" height="4" rx="1"/>
-        <!-- Tower 4 (closer, larger) -->
-        <rect x="935" y="350" width="20" height="32" rx="1"/>
-        <rect x="932" y="345" width="26" height="8" rx="1"/>
-        <rect x="935" y="340" width="20" height="5" rx="1"/>
-      </g>
-
-      <!-- Tower window glow -->
-      <g fill="#FF6B40" opacity="0.15">
-        <rect x="160" y="402" width="6" height="4" rx="1"/>
-        <rect x="420" y="382" width="7" height="4" rx="1"/>
-        <rect x="660" y="363" width="6" height="4" rx="1"/>
-        <rect x="942" y="358" width="7" height="5" rx="1"/>
+      <!-- Tower glow -->
+      <g fill="#FF6B40" opacity="0.12">
+        <rect x="180" y="310" width="6" height="4" rx="1"/><rect x="400" y="297" width="8" height="5" rx="1"/>
+        <rect x="620" y="287" width="6" height="4" rx="1"/><rect x="840" y="280" width="8" height="5" rx="1"/>
       </g>
     </svg>
   </div>
 
   <!-- Dragon -->
-  <div class="dragon-container">
-    <svg class="dragon-svg" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <div class="dragon-wrap">
+    <svg class="dragon-svg" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="dBody" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#7A0000"/>
-          <stop offset="20%" stop-color="#B82020"/>
-          <stop offset="50%" stop-color="#D4352C"/>
-          <stop offset="80%" stop-color="#B82020"/>
-          <stop offset="100%" stop-color="#7A0000"/>
+        <linearGradient id="ds" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8B1A1A"/><stop offset="50%" stop-color="#D4352C"/><stop offset="100%" stop-color="#8B1A1A"/>
         </linearGradient>
-        <linearGradient id="dGold" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#C5963A"/>
-          <stop offset="50%" stop-color="#F5D78A"/>
-          <stop offset="100%" stop-color="#C5963A"/>
+        <linearGradient id="dg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#C5963A"/><stop offset="50%" stop-color="#F5D78A"/><stop offset="100%" stop-color="#C5963A"/>
         </linearGradient>
-        <radialGradient id="dEye" cx="0.4" cy="0.4">
-          <stop offset="0%" stop-color="#FFD700"/>
-          <stop offset="60%" stop-color="#FF8C00"/>
-          <stop offset="100%" stop-color="#8B0000"/>
-        </radialGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="6" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="bigGlow">
-          <feGaussianBlur stdDeviation="12" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        <filter id="fireBlur">
-          <feGaussianBlur stdDeviation="3"/>
-        </filter>
-        <!-- Scale pattern -->
-        <pattern id="scales" width="16" height="16" patternUnits="userSpaceOnUse">
-          <circle cx="8" cy="0" r="7" fill="none" stroke="#8B0000" stroke-width="1" opacity="0.3"/>
-          <circle cx="0" cy="8" r="7" fill="none" stroke="#8B0000" stroke-width="1" opacity="0.3"/>
-          <circle cx="16" cy="8" r="7" fill="none" stroke="#8B0000" stroke-width="1" opacity="0.3"/>
-        </pattern>
+        <filter id="g"><feGaussianBlur stdDeviation="5"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
 
-      <!-- ══ Background aura ══ -->
-      <ellipse cx="500" cy="350" rx="420" ry="280" fill="none" stroke="#D4352C" stroke-width="1" opacity="0.08" filter="url(#bigGlow)"/>
-      <ellipse cx="500" cy="350" rx="300" ry="200" fill="none" stroke="#D4A843" stroke-width="0.5" opacity="0.06" filter="url(#bigGlow)"/>
+      <!-- Dragon body: elegant flowing curve -->
+      <g filter="url(#g)">
+        <path d="M-10,480 C100,450 180,380 250,340 C320,300 350,370 420,330 C490,290 520,180 580,170 C640,160 670,240 730,220 C790,200 810,260 870,250"
+          fill="none" stroke="url(#ds)" stroke-width="36" stroke-linecap="round"/>
+        <path d="M0,480 C108,450 186,380 255,340 C325,300 355,370 425,330 C495,290 525,180 585,170 C645,160 675,240 735,220 C795,200 815,260 875,250"
+          fill="none" stroke="url(#dg)" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
 
-      <!-- ══ CLOUD PATTERNS (祥云) ══ -->
-      <g opacity="0.12" fill="#D4A843">
-        <path d="M80,200 C80,180 100,170 110,180 C120,165 140,170 140,185 C150,175 170,185 165,200 C175,210 160,225 145,220 C135,230 110,230 100,220 C85,225 70,215 80,200Z"/>
-        <path d="M800,150 C800,135 815,125 825,135 C835,122 850,128 850,140 C860,132 875,140 870,152 C878,160 865,172 852,168 C845,178 825,178 815,170 C805,175 792,162 800,150Z"/>
-        <path d="M200,500 C200,488 212,480 220,488 C228,478 242,484 242,494 C250,488 262,495 258,505 C264,512 254,520 242,516 C236,524 220,524 212,518 C204,522 194,512 200,500Z"/>
-        <path d="M700,520 C700,508 712,500 720,508 C728,498 742,504 742,514 C750,508 762,515 758,525 C764,532 754,540 742,536 C736,544 720,544 712,538 C704,542 694,532 700,520Z"/>
-      </g>
-
-      <!-- ══ DRAGON BODY ══ -->
-      <g filter="url(#glow)">
-        <!-- Main body: dramatic double-coil S-curve -->
-        <!-- Tail starts bottom-left, coils up, then down, then up to head center-right -->
-        <path d="M-30,520 
-                 C60,520 120,480 160,440 
-                 C200,400 180,340 230,300 
-                 C280,260 350,310 400,280 
-                 C450,250 440,180 500,160 
-                 C560,140 600,210 660,190 
-                 C720,170 680,100 740,120 
-                 C800,140 830,200 880,210"
-              fill="none" stroke="url(#dBody)" stroke-width="52" stroke-linecap="round"/>
-
-        <!-- Gold belly line -->
-        <path d="M-20,520 
-                 C65,520 125,480 165,440 
-                 C205,400 185,340 235,300 
-                 C285,260 355,310 405,280 
-                 C455,250 445,180 505,160 
-                 C565,140 605,210 665,190 
-                 C725,170 685,100 745,120 
-                 C805,140 835,200 885,210"
-              fill="none" stroke="url(#dGold)" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
-
-        <!-- Scale overlay on body -->
-        <path d="M-30,520 
-                 C60,520 120,480 160,440 
-                 C200,400 180,340 230,300 
-                 C280,260 350,310 400,280 
-                 C450,250 440,180 500,160 
-                 C560,140 600,210 660,190 
-                 C720,170 680,100 740,120 
-                 C800,140 830,200 880,210"
-              fill="none" stroke="url(#scales)" stroke-width="52" stroke-linecap="round" opacity="0.4"/>
-
-        <!-- ══ SPINE RIDGES (脊刺) ══ -->
-        <g fill="#C4302B" opacity="0.95">
-          <!-- Tail section -->
-          <polygon points="60,505 68,475 78,505"/>
-          <polygon points="110,475 120,440 130,475"/>
-          <polygon points="158,440 170,405 180,440"/>
-          <!-- Lower coil -->
-          <polygon points="195,395 205,362 214,395"/>
-          <polygon points="215,345 224,315 233,345"/>
-          <polygon points="245,304 252,275 260,304"/>
-          <!-- Middle coil -->
-          <polygon points="295,294 300,265 308,294"/>
-          <polygon points="355,282 358,252 366,282"/>
-          <polygon points="400,270 402,242 410,270"/>
-          <!-- Upper coil -->
-          <polygon points="442,245 444,215 452,245"/>
-          <polygon points="475,200 476,172 484,200"/>
-          <polygon points="505,165 508,138 515,165"/>
-          <!-- Rising -->
-          <polygon points="555,152 555,122 562,152"/>
-          <polygon points="605,178 604,148 612,178"/>
-          <polygon points="655,188 656,158 663,188"/>
-          <!-- Neck -->
-          <polygon points="700,175 703,145 710,175"/>
-          <polygon points="735,135 740,108 747,135"/>
-          <polygon points="775,128 782,100 789,128"/>
-          <polygon points="815,155 825,130 830,155"/>
-        </g>
-
-        <!-- ══ FLOWING MANE (鬃毛) ══ -->
-        <g opacity="0.4" filter="url(#fireBlur)">
-          <!-- Along body curves -->
-          <path d="M140,465 C135,440 125,425 115,430" fill="none" stroke="#F5D78A" stroke-width="5"/>
-          <path d="M200,340 C190,315 178,300 168,310" fill="none" stroke="#F5D78A" stroke-width="6"/>
-          <path d="M330,280 C315,255 300,242 290,250" fill="none" stroke="#F5D78A" stroke-width="5"/>
-          <path d="M460,225 C445,200 430,190 420,198" fill="none" stroke="#F5D78A" stroke-width="6"/>
-          <path d="M540,150 C525,128 510,118 500,126" fill="none" stroke="#F5D78A" stroke-width="5"/>
-          <path d="M630,175 C615,155 600,148 590,158" fill="none" stroke="#F5D78A" stroke-width="6"/>
-          <path d="M730,145 C715,125 700,118 690,128" fill="none" stroke="#F5D78A" stroke-width="5"/>
+        <!-- Spine ridges -->
+        <g fill="#C4302B">
+          <polygon points="120,430 125,405 132,430"/><polygon points="180,385 186,360 193,385"/>
+          <polygon points="240,348 246,322 253,348"/><polygon points="310,326 315,300 322,326"/>
+          <polygon points="430,307 434,282 441,307"/><polygon points="490,248 493,224 500,248"/>
+          <polygon points="550,185 554,160 560,185"/><polygon points="620,195 624,170 630,195"/>
+          <polygon points="700,215 705,190 710,215"/><polygon points="770,230 776,208 782,230"/>
         </g>
       </g>
 
-      <!-- ══ FOUR CLAWS (四爪) ══ -->
-      <g filter="url(#glow)">
-        <!-- Claw 1: lower-left, reaching down -->
-        <g transform="translate(230, 410)">
-          <path d="M0,0 C-8,15 -5,35 5,45" fill="none" stroke="#C4302B" stroke-width="12" stroke-linecap="round"/>
-          <!-- Talons -->
-          <path d="M-8,25 L-20,38 M-3,30 L-12,44 M2,32 L2,46 M7,28 L16,40" fill="none" stroke="url(#dGold)" stroke-width="3" stroke-linecap="round"/>
-          <!-- Arm gold band -->
-          <ellipse cx="0" cy="10" rx="10" ry="4" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
-        </g>
+      <!-- Claws -->
+      <g filter="url(#g)">
+        <g transform="translate(360,380)"><path d="M0,0 C-10,12 -5,28 5,32" fill="none" stroke="#C4302B" stroke-width="9"/><path d="M-5,18 L-14,30 M0,22 L-6,36 M5,20 L12,32" fill="none" stroke="url(#dg)" stroke-width="2.5"/></g>
+        <g transform="translate(530,215)"><path d="M0,0 C12,-8 25,2 28,18" fill="none" stroke="#C4302B" stroke-width="9"/><path d="M20,5 L34,14 M22,12 L36,24 M25,18 L38,30" fill="none" stroke="url(#dg)" stroke-width="2.5"/></g>
+        <g transform="translate(730,225)"><path d="M0,0 C-12,-10 -20,5 -18,20" fill="none" stroke="#C4302B" stroke-width="8"/><path d="M-16,8 L-28,15 M-14,14 L-26,24 M-10,18 L-20,30" fill="none" stroke="url(#dg)" stroke-width="2.5"/></g>
+      </g>
 
-        <!-- Claw 2: mid-body, reaching forward -->
-        <g transform="translate(440, 310)">
-          <path d="M0,0 C-15,-5 -25,10 -20,25" fill="none" stroke="#C4302B" stroke-width="11" stroke-linecap="round"/>
-          <path d="M-20,10 L-34,15 M-22,16 L-36,24 M-18,20 L-30,32 M-14,18 L-22,32" fill="none" stroke="url(#dGold)" stroke-width="3" stroke-linecap="round"/>
-          <ellipse cx="-6" cy="2" rx="9" ry="3.5" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
-        </g>
-
-        <!-- Claw 3: upper coil, reaching up -->
-        <g transform="translate(530, 200)">
-          <path d="M0,0 C5,-15 18,-20 30,-15" fill="none" stroke="#C4302B" stroke-width="10" stroke-linecap="round"/>
-          <path d="M18,-20 L26,-35 M22,-18 L32,-30 M28,-14 L38,-24 M32,-10 L44,-20" fill="none" stroke="url(#dGold)" stroke-width="3" stroke-linecap="round"/>
-          <ellipse cx="10" cy="-5" rx="8" ry="3" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
-        </g>
-
-        <!-- Claw 4: near neck, reaching forward -->
-        <g transform="translate(720, 155)">
-          <path d="M0,0 C12,-8 25,0 28,18" fill="none" stroke="#C4302B" stroke-width="10" stroke-linecap="round"/>
-          <path d="M20,5 L34,10 M22,12 L36,22 M25,18 L38,30" fill="none" stroke="url(#dGold)" stroke-width="3" stroke-linecap="round"/>
-          <ellipse cx="8" cy="-3" rx="8" ry="3" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.6"/>
+      <!-- Head -->
+      <g filter="url(#g)" transform="translate(830,195)">
+        <path d="M-30,50 C-10,45 10,35 20,30" fill="none" stroke="#C4302B" stroke-width="32"/>
+        <ellipse cx="42" cy="25" rx="48" ry="34" fill="#B82020"/>
+        <ellipse cx="47" cy="20" rx="42" ry="28" fill="#D4352C"/>
+        <path d="M55,40 C70,44 90,42 100,38 C105,36 108,32 108,28" fill="#8B1A1A"/>
+        <path d="M45,52 C58,60 82,58 95,50" fill="none" stroke="#6B1010" stroke-width="3"/>
+        <!-- Nostrils -->
+        <ellipse cx="95" cy="22" rx="6" ry="4" fill="#1a0505"/>
+        <ellipse cx="100" cy="26" rx="4" ry="3" fill="#0a0202"/>
+        <!-- Horns -->
+        <path d="M25,-5 C15,-30 8,-60 20,-78 C28,-88 32,-75 28,-58 C24,-40 28,-25 32,-10" fill="#D4A843" opacity="0.9"/>
+        <path d="M12,4 C-2,-20 -6,-48 8,-68 C16,-80 20,-70 16,-55 C12,-38 15,-24 18,-5" fill="#C5963A" opacity="0.85"/>
+        <path d="M38,-18 C34,-38 22,-52 14,-55 C22,-48 28,-38 32,-25" fill="#D4A843" opacity="0.7"/>
+        <!-- Eye -->
+        <ellipse cx="42" cy="8" rx="12" ry="10" fill="#2a0505"/>
+        <ellipse cx="43" cy="8" rx="8" ry="7" fill="#FFD700" opacity="0.9"/>
+        <ellipse cx="44" cy="8" rx="3" ry="6" fill="#0a0000"/>
+        <circle cx="41" cy="5" r="2" fill="#fff" opacity="0.5"/>
+        <!-- Brow -->
+        <path d="M28,0 C34,-8 46,-10 58,-2" fill="none" stroke="#D4A843" stroke-width="4" stroke-linecap="round"/>
+        <!-- Whiskers -->
+        <path d="M100,28 C120,18 140,10 150,14 C154,16 152,22 145,20 C132,18 118,26 108,32" fill="none" stroke="#F5D78A" stroke-width="2.5" opacity="0.8"/>
+        <path d="M95,38 C115,35 135,28 148,33 C152,36 150,40 142,38 C128,34 115,38 100,42" fill="none" stroke="#F5D78A" stroke-width="2" opacity="0.7"/>
+        <!-- Fangs -->
+        <polygon points="70,45 76,60 80,43" fill="#F5D78A" opacity="0.8"/>
+        <polygon points="82,43 88,56 92,41" fill="#F5D78A" opacity="0.7"/>
+        <!-- Fire -->
+        <g opacity="0.5">
+          <ellipse cx="125" cy="28" rx="18" ry="12" fill="#FF3B30" opacity="0.6"/>
+          <ellipse cx="138" cy="24" rx="14" ry="9" fill="#FF6B40" opacity="0.5"/>
+          <ellipse cx="150" cy="26" rx="10" ry="7" fill="#FF8C00" opacity="0.4"/>
+          <circle cx="160" cy="24" r="5" fill="#FFD700" opacity="0.5"/>
         </g>
       </g>
 
-      <!-- ══ DRAGON HEAD (龙头) ══ -->
-      <g filter="url(#glow)" transform="translate(830, 140)">
-        <!-- Neck connection -->
-        <path d="M-40,65 C-20,60 0,50 15,45" fill="none" stroke="#C4302B" stroke-width="40"/>
-
-        <!-- Head base - large, imposing -->
-        <ellipse cx="55" cy="35" rx="65" ry="45" fill="#B82020"/>
-        <ellipse cx="60" cy="28" rx="58" ry="38" fill="#D4352C"/>
-
-        <!-- Upper skull highlight -->
-        <ellipse cx="50" cy="15" rx="40" ry="22" fill="#E85040" opacity="0.6"/>
-
-        <!-- Snout / Jaw -->
-        <path d="M70,55 C85,60 110,58 125,52 C135,48 140,42 140,38" fill="#8B1A1A" stroke="#6B1010" stroke-width="2"/>
-        <path d="M60,70 C75,78 105,76 120,68" fill="none" stroke="#6B1010" stroke-width="4"/>
-
-        <!-- Upper jaw -->
-        <path d="M80,30 C100,22 125,25 138,32 C145,36 148,40 145,44" fill="#B82020"/>
-
-        <!-- Nostrils - flared -->
-        <ellipse cx="130" cy="30" rx="8" ry="5" fill="#2A0505"/>
-        <ellipse cx="138" cy="34" rx="6" ry="4" fill="#1A0202"/>
-        <!-- Nostril glow -->
-        <ellipse cx="130" cy="30" rx="6" ry="3" fill="#FF3B30" opacity="0.3" filter="url(#fireBlur)"/>
-
-        <!-- ══ HORNS (龙角) ══ -->
-        <!-- Main horns sweeping back like a crown -->
-        <path d="M30,-5 C20,-40 10,-80 25,-100 C35,-110 40,-95 35,-75 C30,-55 35,-35 40,-15" fill="#D4A843" opacity="0.95"/>
-        <path d="M35,-8 C25,-38 18,-72 30,-95 C38,-108 42,-95 38,-78 C33,-58 37,-38 42,-18" fill="#F5D78A" opacity="0.8"/>
-
-        <path d="M15,5 C0,-30 -10,-65 5,-90 C15,-105 22,-92 18,-72 C14,-52 18,-32 22,-8" fill="#C5963A" opacity="0.9"/>
-        <path d="M20,2 C5,-30 -3,-60 8,-85 C18,-98 24,-88 20,-70 C16,-50 20,-32 25,-10" fill="#E8C86A" opacity="0.7"/>
-
-        <!-- ══ ANTLERS (鹿角状分枝) ══ -->
-        <path d="M50,-22 C45,-45 30,-60 20,-65 C28,-55 35,-45 40,-30" fill="#D4A843" opacity="0.85"/>
-        <path d="M38,-38 C30,-50 18,-55 10,-52 C18,-48 28,-42 35,-32" fill="#D4A843" opacity="0.75"/>
-        <path d="M48,-28 C42,-50 28,-68 15,-75 C25,-62 35,-50 42,-35" fill="#D4A843" opacity="0.7"/>
-
-        <!-- ══ EYES (龙眼) ══ -->
-        <!-- Eye socket -->
-        <ellipse cx="55" cy="10" rx="18" ry="14" fill="#4A0A0A"/>
-        <!-- Eyeball -->
-        <ellipse cx="56" cy="10" rx="13" ry="11" fill="url(#dEye)" filter="url(#fireBlur)"/>
-        <!-- Pupil - vertical slit -->
-        <ellipse cx="57" cy="10" rx="4" ry="8" fill="#0A0000"/>
-        <!-- Eye glow -->
-        <circle cx="54" cy="7" r="3" fill="#FFF" opacity="0.5"/>
-
-        <!-- Angry eyebrow ridge -->
-        <path d="M35,2 C42,-8 58,-10 72,-2" fill="none" stroke="#D4A843" stroke-width="5" stroke-linecap="round"/>
-        <path d="M38,-2 C44,-10 56,-12 68,-4" fill="none" stroke="#F5D78A" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- ══ WHISKERS (龙须) ══ -->
-        <path d="M130,35 C155,25 175,15 190,20 C195,22 192,28 185,27 C170,24 155,32 140,38" fill="none" stroke="#F5D78A" stroke-width="3" opacity="0.85"/>
-        <path d="M128,48 C155,42 180,35 195,42 C200,45 196,50 188,48 C172,44 155,48 138,52" fill="none" stroke="#F5D78A" stroke-width="2.5" opacity="0.75"/>
-
-        <!-- ══ BEARD (龙须下巴) ══ -->
-        <path d="M75,70 C70,90 60,110 55,125" fill="none" stroke="#F5D78A" stroke-width="3" opacity="0.6"/>
-        <path d="M85,72 C82,95 78,112 75,128" fill="none" stroke="#F5D78A" stroke-width="2" opacity="0.5"/>
-        <path d="M95,68 C98,88 100,105 98,120" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.45"/>
-
-        <!-- ══ FANGS (獠牙) ══ -->
-        <polygon points="85,60 92,82 98,58" fill="#F5D78A" opacity="0.85"/>
-        <polygon points="100,58 108,78 114,56" fill="#F5D78A" opacity="0.8"/>
-        <!-- Small teeth -->
-        <polygon points="78,56 82,68 86,54" fill="#F5D78A" opacity="0.6"/>
-        <polygon points="108,54 112,65 116,52" fill="#F5D78A" opacity="0.6"/>
-
-        <!-- ══ MANE AROUND HEAD ══ -->
-        <g opacity="0.35" filter="url(#fireBlur)">
-          <path d="M15,30 C-5,20 -20,15 -30,20" fill="none" stroke="#F5D78A" stroke-width="6"/>
-          <path d="M10,40 C-10,35 -28,32 -40,38" fill="none" stroke="#F5D78A" stroke-width="5"/>
-          <path d="M20,50 C5,52 -10,55 -25,60" fill="none" stroke="#D4A843" stroke-width="4"/>
-          <path d="M-5,20 C-15,5 -25,-5 -35,0" fill="none" stroke="#F5D78A" stroke-width="5"/>
-        </g>
-
-        <!-- ══ FIRE BREATH (龙息火焰) ══ -->
-        <g opacity="0.6" filter="url(#fireBlur)">
-          <ellipse cx="160" cy="35" rx="25" ry="18" fill="#FF3B30" opacity="0.7"/>
-          <ellipse cx="175" cy="30" rx="20" ry="14" fill="#FF6B40" opacity="0.6"/>
-          <ellipse cx="190" cy="28" rx="18" ry="12" fill="#FF8C00" opacity="0.5"/>
-          <ellipse cx="205" cy="32" rx="15" ry="10" fill="#FFD700" opacity="0.4"/>
-          <circle cx="218" cy="30" r="8" fill="#FFD700" opacity="0.6"/>
-          <circle cx="225" cy="28" r="5" fill="#FFF" opacity="0.4"/>
-        </g>
+      <!-- Tail -->
+      <g filter="url(#g)">
+        <path d="M-10,480 C-40,485 -65,495 -85,500 C-100,503 -112,498 -118,490" fill="none" stroke="#7A0000" stroke-width="22" stroke-linecap="round"/>
+        <path d="M-85,500 C-105,505 -118,502 -128,492" fill="none" stroke="#5A0000" stroke-width="12" stroke-linecap="round"/>
+        <path d="M-118,490 C-125,485 -130,478 -132,470" fill="none" stroke="#4A0000" stroke-width="5" stroke-linecap="round"/>
       </g>
 
-      <!-- ══ TAIL (龙尾) ══ -->
-      <g filter="url(#glow)">
-        <path d="M-30,520 C-60,525 -90,535 -120,540 C-140,543 -155,538 -165,530" fill="none" stroke="#7A0000" stroke-width="30" stroke-linecap="round"/>
-        <path d="M-120,540 C-150,545 -170,542 -185,530" fill="none" stroke="#5A0000" stroke-width="18" stroke-linecap="round"/>
-        <path d="M-165,530 C-180,522 -190,510 -195,500" fill="none" stroke="#4A0000" stroke-width="8" stroke-linecap="round"/>
-        <!-- Tail flame tuft -->
-        <path d="M-190,505 C-200,495 -208,485 -205,478" fill="none" stroke="#F5D78A" stroke-width="3" opacity="0.5" filter="url(#fireBlur)"/>
-        <path d="M-192,510 C-205,505 -215,498 -212,490" fill="none" stroke="#D4A843" stroke-width="2" opacity="0.4" filter="url(#fireBlur)"/>
+      <!-- Pearl -->
+      <g transform="translate(510, 100)" filter="url(#g)">
+        <circle cx="0" cy="0" r="14" fill="#FFD700" opacity="0.25"/>
+        <circle cx="0" cy="0" r="8" fill="none" stroke="#FFD700" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="-3" cy="-3" r="3" fill="#FFF" opacity="0.3"/>
       </g>
-
-      <!-- ══ PEARL (龙珠) ══ -->
-      <g transform="translate(550, 90)" filter="url(#glow)">
-        <circle cx="0" cy="0" r="18" fill="#FFD700" opacity="0.35"/>
-        <circle cx="0" cy="0" r="12" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.6"/>
-        <circle cx="-4" cy="-4" r="5" fill="#FFF" opacity="0.4"/>
-        <!-- Pearl flame aura -->
-        <circle cx="0" cy="0" r="25" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.2" filter="url(#bigGlow)"/>
-      </g>
-
     </svg>
   </div>
 
   <!-- Particles -->
   <div class="particles">
-    <div class="particle" style="left:10%;bottom:40%;animation-duration:8s;animation-delay:0s;"></div>
-    <div class="particle red" style="left:20%;bottom:50%;animation-duration:10s;animation-delay:1s;"></div>
-    <div class="particle" style="left:35%;bottom:45%;animation-duration:7s;animation-delay:2s;"></div>
-    <div class="particle red" style="left:50%;bottom:55%;animation-duration:9s;animation-delay:0.5s;"></div>
-    <div class="particle" style="left:65%;bottom:40%;animation-duration:11s;animation-delay:3s;"></div>
-    <div class="particle red" style="left:75%;bottom:50%;animation-duration:8s;animation-delay:1.5s;"></div>
-    <div class="particle" style="left:85%;bottom:35%;animation-duration:10s;animation-delay:2.5s;"></div>
-    <div class="particle red" style="left:90%;bottom:48%;animation-duration:7s;animation-delay:4s;"></div>
-    <div class="particle" style="left:15%;bottom:60%;animation-duration:12s;animation-delay:0.8s;"></div>
-    <div class="particle red" style="left:55%;bottom:42%;animation-duration:9s;animation-delay:3.5s;"></div>
+    <div class="p gold" style="left:10%;bottom:35%;width:3px;height:3px;animation-duration:9s;animation-delay:0s;"></div>
+    <div class="p red" style="left:20%;bottom:40%;width:4px;height:4px;animation-duration:11s;animation-delay:1s;"></div>
+    <div class="p gold" style="left:35%;bottom:30%;width:2px;height:2px;animation-duration:8s;animation-delay:2s;"></div>
+    <div class="p red" style="left:50%;bottom:45%;width:3px;height:3px;animation-duration:10s;animation-delay:0.5s;"></div>
+    <div class="p gold" style="left:65%;bottom:35%;width:4px;height:4px;animation-duration:12s;animation-delay:3s;"></div>
+    <div class="p red" style="left:75%;bottom:40%;width:2px;height:2px;animation-duration:9s;animation-delay:1.5s;"></div>
+    <div class="p gold" style="left:85%;bottom:30%;width:3px;height:3px;animation-duration:11s;animation-delay:2.5s;"></div>
+    <div class="p red" style="left:90%;bottom:42%;width:4px;height:4px;animation-duration:8s;animation-delay:4s;"></div>
+    <div class="p gold" style="left:15%;bottom:50%;width:2px;height:2px;animation-duration:13s;animation-delay:0.8s;"></div>
+    <div class="p red" style="left:55%;bottom:38%;width:3px;height:3px;animation-duration:10s;animation-delay:3.5s;"></div>
+    <div class="p gold" style="left:28%;bottom:25%;width:2px;height:2px;animation-duration:7s;animation-delay:1.8s;"></div>
+    <div class="p red" style="left:70%;bottom:48%;width:3px;height:3px;animation-duration:14s;animation-delay:2.2s;"></div>
   </div>
 
   <!-- Title -->
   <div class="hero-title">
-    <h1 data-i18n="hero.title">THE EAST<span class="gold"> IS </span>WILD</h1>
-    <p data-i18n="hero.subtitle">China. Closer than the myth.</p>
+    <div class="tagline">CHINA TRAVEL HUB</div>
+    <h1>THE EAST IS WILD</h1>
+    <p>China. Closer than the myth.</p>
   </div>
 
-  <!-- Scroll hint -->
   <div class="scroll-hint">▼ SCROLL ▼</div>
 </section>
 
-<!-- ═══════════════ Navigation ═══════════════ -->
+<!-- ═══ NAV ═══ -->
 <nav>
-  <a href="index.html" class="logo">
-    <span class="logo-icon">🐼</span>
-    <span class="logo-text">China<span>Travel</span></span>
-  </a>
+  <a href="index.html" class="logo"><span class="logo-icon">🐼</span><span class="logo-text">China<span>Travel</span></span></a>
   <div class="lang-dropdown">
     <button class="lang-btn" id="langBtn">🌐 <span id="currentLangLabel">English</span> ▾</button>
     <div class="lang-menu" id="langMenu"></div>
   </div>
 </nav>
 
-<!-- ═══════════════ Guides ═══════════════ -->
 <div class="divider">◆ ◇ ◆</div>
 
-<section class="guides" id="guides">
-  <h2 data-i18n="guides.heading">Essential Travel Guides</h2>
+<!-- ═══ GUIDES ═══ -->
+<section class="guides">
+  <h2>Essential Travel Guides</h2>
   <div class="guide-grid">
-
-    <a href="payment-guide.html" class="guide-card">
-      <div class="card-icon">💳</div>
-      <h3 data-i18n="card.payment.title">Payment Guide</h3>
-      <p data-i18n="card.payment.desc">Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China.</p>
-      <span class="card-tag tag-verified">✓ Step‑by‑step</span>
-    </a>
-
-    <a href="internet-guide.html" class="guide-card">
-      <div class="card-icon">📶</div>
-      <h3 data-i18n="card.internet.title">Internet Guide</h3>
-      <p data-i18n="card.internet.desc">eSIM, VPN, WiFi — stay online behind the Great Firewall.</p>
-      <span class="card-tag tag-verified">✓ Verified May 2026</span>
-    </a>
-
-    <a href="train-guide.html" class="guide-card">
-      <div class="card-icon">🚄</div>
-      <h3 data-i18n="card.train.title">Train Guide</h3>
-      <p data-i18n="card.train.desc">Book high‑speed trains on 12306 or Trip.com. All covered.</p>
-      <span class="card-tag tag-partial">⚠ Partially verified</span>
-    </a>
-
-    <div class="guide-card coming-soon">
-      <div class="card-icon">🏨</div>
-      <h3>Hotel Guide</h3>
-      <p>Where to stay and which hotels accept foreigners.</p>
-      <span class="card-tag tag-coming">Coming soon</span>
-    </div>
-
-    <div class="guide-card coming-soon">
-      <div class="card-icon">🗺️</div>
-      <h3>Navigation</h3>
-      <p>Baidu Maps, Amap, Metro — navigate without Google Maps.</p>
-      <span class="card-tag tag-coming">Coming soon</span>
-    </div>
-
-    <div class="guide-card coming-soon">
-      <div class="card-icon">🎫</div>
-      <h3>Attractions</h3>
-      <p>Book Forbidden City, Great Wall & more — skip the queues.</p>
-      <span class="card-tag tag-coming">Coming soon</span>
-    </div>
-
+    <a href="payment-guide.html" class="guide-card"><div class="ci">💳</div><h3>Payment Guide</h3><p>Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China.</p><span class="tag tag-ok">✓ Step‑by‑step</span></a>
+    <a href="internet-guide.html" class="guide-card"><div class="ci">📶</div><h3>Internet Guide</h3><p>eSIM, VPN, WiFi — stay online behind the Great Firewall.</p><span class="tag tag-ok">✓ Verified</span></a>
+    <a href="train-guide.html" class="guide-card"><div class="ci">🚄</div><h3>Train Guide</h3><p>Book high‑speed trains on 12306 or Trip.com. All covered.</p><span class="tag tag-warn">⚠ Partial</span></a>
+    <div class="guide-card soon"><div class="ci">🏨</div><h3>Hotel Guide</h3><p>Where to stay and which hotels accept foreigners.</p><span class="tag tag-soon">Soon</span></div>
+    <div class="guide-card soon"><div class="ci">🗺️</div><h3>Navigation</h3><p>Baidu Maps, Amap, Metro — without Google Maps.</p><span class="tag tag-soon">Soon</span></div>
+    <div class="guide-card soon"><div class="ci">🎫</div><h3>Attractions</h3><p>Book Forbidden City, Great Wall — skip queues.</p><span class="tag tag-soon">Soon</span></div>
   </div>
 </section>
 
-<footer>
-  <span class="panda">🐼</span>
-  <p data-i18n="footer">ChinaTravelHub © 2026 — Independent guides by travelers, for travelers.</p>
-</footer>
+<footer><span>🐼</span><p>ChinaTravelHub © 2026 — Independent guides by travelers, for travelers.</p></footer>
 
-<!-- ═══════════════ Scripts ═══════════════ -->
 <script>
-const translations = {
-  en: {
-    "hero.title": "THE EAST<span class='gold'> IS </span>WILD",
-    "hero.subtitle": "China. Closer than the myth.",
-    "guides.heading": "Essential Travel Guides",
-    "card.payment.title": "Payment Guide",
-    "card.payment.desc": "Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China.",
-    "card.internet.title": "Internet Guide",
-    "card.internet.desc": "eSIM, VPN, WiFi — stay online behind the Great Firewall.",
-    "card.train.title": "Train Guide",
-    "card.train.desc": "Book high‑speed trains on 12306 or Trip.com. All covered.",
-    "footer": "ChinaTravelHub © 2026 — Independent guides by travelers, for travelers."
-  },
-  zh: {
-    "hero.title": "东方<span class='gold'>·</span>秘境",
-    "hero.subtitle": "中国。比传说更近。",
-    "guides.heading": "旅行必备指南",
-    "card.payment.title": "支付指南",
-    "card.payment.desc": "提前搞定支付宝和微信支付。在中国现金几乎绝迹。",
-    "card.internet.title": "上网指南",
-    "card.internet.desc": "eSIM、VPN、WiFi——防火墙后也能畅通无阻。",
-    "card.train.title": "火车指南",
-    "card.train.desc": "在12306或Trip.com上订高铁票，全覆盖。",
-    "footer": "ChinaTravelHub © 2026 — 旅行者写给旅行者的独立指南。"
-  }
-};
-
-const languages = [
-  { code: 'en', name: 'English' },
-  { code: 'zh', name: '中文' }
-];
-
-let currentLang = localStorage.getItem('cth_lang') || 'en';
-
-function buildLangMenu() {
-  document.getElementById('langMenu').innerHTML = languages.map(l =>
-    `<button data-lang="${l.code}" class="${l.code===currentLang?'active':''}">${l.name}</button>`
-  ).join('');
-}
-
-function switchLang(lang) {
-  currentLang = lang;
-  localStorage.setItem('cth_lang', lang);
-  document.getElementById('currentLangLabel').textContent = languages.find(l=>l.code===lang).name;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
-  });
-  document.title = lang==='zh' ? 'China Travel Hub — 中国旅行指南' : 'China Travel Hub — Essential Guides for Traveling China in 2026';
-  buildLangMenu();
-  document.getElementById('langMenu').classList.remove('open');
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  buildLangMenu();
-  document.getElementById('currentLangLabel').textContent = languages.find(l=>l.code===currentLang).name;
-  switchLang(currentLang);
-});
-
-document.addEventListener('click', e => {
-  if (!e.target.closest('.lang-dropdown')) document.getElementById('langMenu').classList.remove('open');
-});
-
-document.getElementById('langMenu').addEventListener('click', e => {
-  const btn = e.target.closest('button');
-  if (btn && btn.dataset.lang !== currentLang) switchLang(btn.dataset.lang);
-});
+const languages=[{code:'en',name:'English'},{code:'zh',name:'中文'}];
+let cl=localStorage.getItem('cth_lang')||'en';
+function bm(){document.getElementById('langMenu').innerHTML=languages.map(l=>`<button data-lang="${l.code}" class="${l.code===cl?'active':''}">${l.name}</button>`).join('')}
+function sl(l){cl=l;localStorage.setItem('cth_lang',l);document.getElementById('currentLangLabel').textContent=languages.find(x=>x.code===l).name;bm();document.getElementById('langMenu').classList.remove('open')}
+document.addEventListener('DOMContentLoaded',()=>{bm();document.getElementById('currentLangLabel').textContent=languages.find(l=>l.code===cl).name});
+document.addEventListener('click',e=>{if(!e.target.closest('.lang-dropdown'))document.getElementById('langMenu').classList.remove('open')});
+document.getElementById('langMenu').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.lang!==cl)sl(b.dataset.lang)});
 </script>
-
 </body>
 </html>
