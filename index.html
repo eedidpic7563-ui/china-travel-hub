@@ -5,185 +5,234 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>China Travel Hub — Essential Guides for Traveling China in 2026</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
+
 :root {
   --red: #C43E2C;
-  --red-light: #FDF2F0;
-  --gold: #B8860B;
-  --ink: #1A1A1A;
-  --ink-soft: #555;
-  --bg: #FAFAF8;
+  --red-dark: #A83227;
+  --red-bright: #E8483A;
+  --gold: #C5963A;
+  --gold-light: #F5E6C8;
+  --cream: #FFF8EF;
+  --ink: #2C1810;
+  --ink-soft: #6B4C3B;
   --card: #FFFFFF;
-  --border: #EBE8E3;
-  --radius: 12px;
-  --shadow: 0 1px 3px rgba(0,0,0,.06);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.08);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+  --border: #E8DDD0;
+  --radius: 14px;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg); color: var(--ink); line-height: 1.7;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Serif SC", serif;
+  background: var(--cream); color: var(--ink); line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(196, 62, 44, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(197, 150, 58, 0.04) 0%, transparent 50%);
+}
+
+/* ── Top Banner ── */
+.top-banner {
+  background: linear-gradient(135deg, var(--red-dark), var(--red));
+  color: #fff; text-align: center; padding: 8px 16px;
+  font-size: 13px; letter-spacing: .5px;
 }
 
 /* ── Nav ── */
 nav {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 32px; position: sticky; top:0; z-index:100;
-  background: rgba(250,250,248,.94); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  padding: 14px 32px; position: sticky; top:0; z-index:100;
+  background: rgba(255, 248, 239, 0.96); backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--red);
+  box-shadow: 0 2px 20px rgba(196, 62, 44, 0.08);
 }
 .logo { 
   display: flex; align-items: center; gap: 10px;
   text-decoration: none;
 }
-.logo-icon { font-size: 28px; }
-.logo-text { font-size: 22px; font-weight: 700; color: var(--red); }
-.logo-text span { color: var(--ink); font-weight: 400; }
-.nav-links { display: flex; gap: 24px; align-items: center; }
+.logo-icon { font-size: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.1)); }
+.logo-text { 
+  font-family: "Noto Serif SC", serif;
+  font-size: 24px; font-weight: 900; color: var(--red);
+  letter-spacing: -1px;
+}
+.logo-text span { color: var(--ink); font-weight: 700; }
 
 .lang-btn {
   display: flex; align-items: center; gap: 6px;
-  background: var(--border); border: none;
+  background: #fff; border: 1.5px solid var(--border);
   color: var(--ink-soft); font-size: 13px; font-weight: 600;
-  padding: 8px 12px; border-radius: 8px; cursor: pointer;
-  transition: all .25s ease;
+  padding: 8px 14px; border-radius: 20px; cursor: pointer;
+  transition: all .25s ease; font-family: inherit;
 }
-.lang-btn:hover { color: var(--ink); background: #e0ddD8; }
-.lang-btn svg { width: 16px; height: 16px; }
+.lang-btn:hover { border-color: var(--red); color: var(--red); }
 
 .lang-dropdown { position: relative; }
 .lang-menu {
-  display: none; position: absolute; top: calc(100% + 6px); right: 0;
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 10px; box-shadow: var(--shadow-md);
-  min-width: 180px; max-height: 320px; overflow-y: auto; z-index: 200;
+  display: none; position: absolute; top: calc(100% + 8px); right: 0;
+  background: #fff; border: 1.5px solid var(--border);
+  border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.12);
+  min-width: 200px; z-index: 200; overflow: hidden;
 }
 .lang-menu.open { display: block; }
 .lang-menu button {
   display: block; width: 100%; text-align: left; background: none;
   border: none; color: var(--ink-soft); font-size: 14px;
-  padding: 10px 14px; cursor: pointer; transition: background .15s;
+  padding: 11px 18px; cursor: pointer; transition: all .15s;
+  font-family: inherit;
 }
-.lang-menu button:hover { background: var(--bg); color: var(--ink); }
-.lang-menu button.active { background: var(--red-light); color: var(--red); font-weight: 600; }
+.lang-menu button:hover { background: var(--gold-light); color: var(--ink); }
+.lang-menu button.active { background: #FDF2F0; color: var(--red); font-weight: 700; }
 
 /* ── Hero ── */
 .hero {
-  text-align: center; padding: 80px 24px 60px;
+  text-align: center; padding: 80px 24px 70px;
   position: relative; overflow: hidden;
+  background: linear-gradient(180deg, transparent 0%, rgba(197, 150, 58, 0.06) 100%);
 }
-.hero-dragon {
-  position: absolute; right: -20px; top: 20px;
-  opacity: .08; width: 200px; height: 200px;
+.hero::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(196,62,44,0.02) 40px, rgba(196,62,44,0.02) 42px),
+    repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(197,150,58,0.02) 40px, rgba(197,150,58,0.02) 42px);
   pointer-events: none;
 }
-.hero-panda {
-  font-size: 120px; line-height: 1;
-  animation: float 4s ease-in-out infinite;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-.hero h1 {
-  font-size: 44px; font-weight: 800; letter-spacing: -.5px;
-  margin: 16px 0 12px; line-height: 1.2;
-}
-.hero p {
-  font-size: 18px; color: var(--ink-soft); max-width: 560px;
-  margin: 0 auto 0;
-}
-.hero .accent { color: var(--red); }
 
-/* ── Guides Section ── */
+/* Dragon ornament */
+.hero-ornament {
+  width: 280px; height: 120px; margin: 0 auto 20px;
+  opacity: .15; position: relative;
+}
+.hero-panda { font-size: 100px; line-height: 1; position: relative; z-index: 2; }
+
+.hero h1 {
+  font-family: "Noto Serif SC", serif;
+  font-size: 48px; font-weight: 900; letter-spacing: -1px;
+  margin: 8px 0 16px; line-height: 1.2; position: relative; z-index: 2;
+  text-shadow: 0 2px 8px rgba(196,62,44,0.08);
+}
+.hero h1 .cn {
+  color: var(--red);
+  position: relative;
+}
+.hero h1 .cn::after {
+  content: ''; position: absolute; bottom: 4px; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 2px;
+}
+.hero .subtitle {
+  font-size: 18px; color: var(--ink-soft); max-width: 520px;
+  margin: 0 auto; position: relative; z-index: 2;
+}
+
+/* ── Divider ── */
+.divider {
+  text-align: center; padding: 0 0 20px;
+  color: var(--gold); font-size: 20px; letter-spacing: 8px;
+  opacity: .6;
+}
+
+/* ── Guides ── */
 .guides {
-  max-width: 1000px; margin: 0 auto; padding: 0 24px 80px;
+  max-width: 1060px; margin: 0 auto; padding: 0 24px 80px;
 }
 .guides h2 {
-  text-align: center; font-size: 28px; font-weight: 700;
-  margin-bottom: 40px;
+  text-align: center; font-size: 26px; font-weight: 700;
+  margin-bottom: 40px; color: var(--ink);
 }
-.guides h2 .emoji { font-size: 32px; vertical-align: middle; }
+.guides h2 .red-dot { color: var(--red); }
 
 .guide-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
 }
 
 .guide-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px;
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--radius); padding: 32px 28px;
   text-decoration: none; color: var(--ink);
-  transition: all .3s ease; display: block;
-  box-shadow: var(--shadow);
+  transition: all .35s cubic-bezier(.4,0,.2,1); display: block;
+  position: relative; overflow: hidden;
+}
+.guide-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--gold));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
 }
 .guide-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(196, 62, 44, 0.12);
   border-color: var(--red);
 }
-.guide-card .card-icon { font-size: 40px; margin-bottom: 12px; }
-.guide-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-.guide-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+.guide-card:hover::before { transform: scaleX(1); }
+
+.guide-card .card-icon { font-size: 44px; margin-bottom: 14px; }
+.guide-card h3 { font-size: 21px; font-weight: 700; margin-bottom: 8px; }
+.guide-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.65; }
+
 .guide-card .card-tag {
-  display: inline-block; margin-top: 14px;
-  font-size: 12px; font-weight: 600; padding: 4px 10px;
-  border-radius: 20px;
+  display: inline-block; margin-top: 16px;
+  font-size: 12px; font-weight: 700; padding: 5px 12px;
+  border-radius: 20px; letter-spacing: .3px;
 }
 .tag-verified { background: #E8F5E9; color: #2E7D32; }
-.tag-partial { background: #FFF9E6; color: #B8860B; }
-.tag-coming { background: #F5F5F5; color: #999; }
+.tag-partial { background: #FFF8E1; color: #B8860B; }
+.tag-coming { background: #F5F2ED; color: #B0A89E; }
 
 .guide-card.coming-soon {
-  opacity: .6; cursor: default;
+  opacity: .5; cursor: default;
 }
 .guide-card.coming-soon:hover {
-  transform: none; box-shadow: var(--shadow); border-color: var(--border);
+  transform: none; box-shadow: none; border-color: var(--border);
 }
+.guide-card.coming-soon:hover::before { transform: scaleX(0); }
 
 /* ── Footer ── */
 footer {
-  text-align: center; padding: 32px; color: var(--ink-soft);
-  font-size: 14px; border-top: 1px solid var(--border);
+  text-align: center; padding: 40px 24px; color: var(--ink-soft);
+  font-size: 14px; border-top: 2px solid var(--border);
+  background: linear-gradient(180deg, transparent, rgba(197,150,58,0.04));
 }
-
-/* ── Dark Mode ── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1A1A1A; --card: #252525; --border: #333;
-    --ink: #EAEAEA; --ink-soft: #999;
-  }
-  nav { background: rgba(26,26,26,.94); }
-  .lang-btn { background: #333; }
-  .lang-btn:hover { background: #444; }
-  .lang-menu { background: var(--card); border-color: #444; }
-  .lang-menu button:hover { background: #333; }
-  .lang-menu button.active { background: #3D2320; }
-  .hero-dragon { opacity: .04; }
-  .tag-coming { background: #333; color: #777; }
-  .tag-verified { background: #1B3D1B; color: #4CAF50; }
-  .tag-partial { background: #3D3010; color: #D4A017; }
-}
+footer .panda { font-size: 24px; }
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
   .hero { padding: 48px 20px 40px; }
-  .hero h1 { font-size: 30px; }
-  .hero p { font-size: 16px; }
-  .hero-panda { font-size: 80px; }
+  .hero h1 { font-size: 32px; }
+  .hero .subtitle { font-size: 16px; }
+  .hero-panda { font-size: 72px; }
   .guides { padding: 0 16px 48px; }
   .guide-grid { grid-template-columns: 1fr; }
-  nav { padding: 12px 16px; }
-  .logo-text { font-size: 18px; }
+  nav { padding: 10px 16px; }
+  .logo-text { font-size: 20px; }
 }
+
+/* ── Cloud pattern ── */
+.cloud-pattern {
+  position: absolute; pointer-events: none; opacity: .04;
+  width: 200px; height: 200px;
+}
+
+/* Decorative corner */
+.corner-decor {
+  position: absolute; width: 80px; height: 80px; pointer-events: none;
+}
+.corner-decor::before, .corner-decor::after {
+  content: ''; position: absolute;
+  border: 2px solid var(--gold); opacity: .2;
+}
+.corner-decor::before { top: 0; left: 0; width: 24px; height: 24px; border-right: none; border-bottom: none; }
+.corner-decor::after { bottom: 0; right: 0; width: 24px; height: 24px; border-left: none; border-top: none; }
 </style>
 </head>
 <body>
 
-<!-- ── Navigation ── -->
+<div class="top-banner">
+  🏮 <span data-i18n="banner">Free travel guides for China · Updated May 2026</span> 🏮
+</div>
+
 <nav>
   <a href="index.html" class="logo">
     <span class="logo-icon">🐼</span>
@@ -192,33 +241,30 @@ footer {
   <div class="nav-links">
     <div class="lang-dropdown">
       <button class="lang-btn" id="langBtn" onclick="toggleLangMenu()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        </svg>
-        <span id="currentLangLabel">English</span>
+        🌐 <span id="currentLangLabel">English</span> ▾
       </button>
       <div class="lang-menu" id="langMenu"></div>
     </div>
   </div>
 </nav>
 
-<!-- ── Hero ── -->
 <section class="hero">
-  <svg class="hero-dragon" viewBox="0 0 200 200" fill="var(--red)">
-    <path d="M100 20c-5 10-10 30-5 45 8 22 30 35 45 50 18 18 25 40 25 60 0 15-5 25-15 25s-20-15-15-35c3-12 10-22 10-35 0-10-8-18-15-18-10 0-15 15-10 30 5 18 12 30 12 48 0 15-8 25-18 25s-18-12-15-28c3-20 15-40 15-55 0-10-5-12-10-12-8 0-12 12-10 25 5 28 12 50 5 65-5 10-15 5-20-8-8-25-10-55 8-75 12-15 25-30 25-42 0-10-8-12-15-8-10 5-15 20-15 35 0 20 8 40 8 58 0 10-5 18-12 18s-15-12-18-28c-5-28-5-60 12-80 10-12 22-20 30-35 5-10 12-8 12 0 0 8-8 22-15 32z"/>
-  </svg>
+  <!-- Cloud SVGs -->
+  <svg class="cloud-pattern" style="top:60px;left:10%;" viewBox="0 0 200 200"><path d="M40 100c0-22 18-40 40-40 5-18 20-30 38-28 16-14 42-10 52 10 18-3 32 12 30 30 10 6 14 20 8 30 18 5 30 24 22 42-10 20-36 26-56 16H80c-22 0-40-18-40-40z" fill="#C43E2C"/></svg>
+  <svg class="cloud-pattern" style="bottom:80px;right:8%;" viewBox="0 0 200 200"><path d="M160 160c0-20-16-36-36-36-4-18-18-28-34-26-14-14-38-10-48 10-16-3-30 12-28 28-8 6-12 20-6 30-16 5-28 24-20 40 8 18 32 24 52 16H120c20 0 38-18 38-38z" fill="#C43E2C"/></svg>
+
   <div class="hero-panda">🐼</div>
   <h1>
-    <span data-i18n="hero.title1">Welcome to</span>
-    <span class="accent" data-i18n="hero.title2">China</span>
+    <span data-i18n="hero.title">Explore</span>
+    <span class="cn" data-i18n="hero.cn">中国</span>
   </h1>
-  <p data-i18n="hero.subtitle">Essential guides for traveling China in 2026. Payment, internet, trains — everything you need before you land.</p>
+  <p class="subtitle" data-i18n="hero.subtitle">Everything you need before landing in China. Payments, internet, trains — no surprises, just smooth travels.</p>
 </section>
 
-<!-- ── Guide Cards ── -->
+<div class="divider">◆ ◇ ◆</div>
+
 <section class="guides">
-  <h2 data-i18n="guides.heading"><span class="emoji">🧭</span> Travel Guides</h2>
+  <h2 data-i18n="guides.heading"><span class="red-dot">●</span> Essential Travel Guides</h2>
 
   <div class="guide-grid">
 
@@ -226,161 +272,136 @@ footer {
       <div class="card-icon">💳</div>
       <h3 data-i18n="card.payment.title">Payment Guide</h3>
       <p data-i18n="card.payment.desc">Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China — here's how to pay like a local.</p>
-      <span class="card-tag tag-verified" data-i18n="card.payment.tag">✓ Step-by-step</span>
+      <span class="card-tag tag-verified">✓ Step‑by‑step</span>
     </a>
 
     <a href="internet-guide.html" class="guide-card">
       <div class="card-icon">📶</div>
       <h3 data-i18n="card.internet.title">Internet Guide</h3>
-      <p data-i18n="card.internet.desc">eSIM, VPN, WiFi — how to stay online and access Google, WhatsApp & more behind the Great Firewall.</p>
-      <span class="card-tag tag-verified" data-i18n="card.internet.tag">✓ Verified May 2026</span>
+      <p data-i18n="card.internet.desc">eSIM, VPN, WiFi — stay online and access Google, WhatsApp & more behind the Great Firewall.</p>
+      <span class="card-tag tag-verified">✓ Verified May 2026</span>
     </a>
 
     <a href="train-guide.html" class="guide-card">
       <div class="card-icon">🚄</div>
       <h3 data-i18n="card.train.title">Train Guide</h3>
-      <p data-i18n="card.train.desc">Book high-speed trains on 12306 or Trip.com. Airport express, seat classes, station navigation — all covered.</p>
-      <span class="card-tag tag-partial" data-i18n="card.train.tag">⚠ Partially verified</span>
+      <p data-i18n="card.train.desc">Book high‑speed trains on 12306 or Trip.com. Seat classes, station hacks, all covered.</p>
+      <span class="card-tag tag-partial">⚠ Partially verified</span>
     </a>
 
     <div class="guide-card coming-soon">
       <div class="card-icon">🏨</div>
       <h3 data-i18n="card.hotel.title">Hotel Guide</h3>
-      <p data-i18n="card.hotel.desc">Where to stay, how to book, which hotels accept foreigners — coming soon.</p>
-      <span class="card-tag tag-coming" data-i18n="card.hotel.tag">Coming soon</span>
+      <p data-i18n="card.hotel.desc">Where to stay, how to book, which hotels accept foreigners.</p>
+      <span class="card-tag tag-coming">Coming soon</span>
     </div>
 
     <div class="guide-card coming-soon">
       <div class="card-icon">🗺️</div>
-      <h3 data-i18n="card.nav.title">Navigation Guide</h3>
-      <p data-i18n="card.nav.desc">Baidu Maps, Amap, Metro — how to navigate Chinese cities without Google Maps.</p>
-      <span class="card-tag tag-coming" data-i18n="card.nav.tag">Coming soon</span>
+      <h3 data-i18n="card.nav.title">Navigation</h3>
+      <p data-i18n="card.nav.desc">Baidu Maps, Amap, Metro — navigate without Google Maps.</p>
+      <span class="card-tag tag-coming">Coming soon</span>
     </div>
 
     <div class="guide-card coming-soon">
       <div class="card-icon">🎫</div>
-      <h3 data-i18n="card.attractions.title">Attractions Guide</h3>
-      <p data-i18n="card.attractions.desc">Book Forbidden City, Great Wall & more — skip the queues with these booking tricks.</p>
-      <span class="card-tag tag-coming" data-i18n="card.attractions.tag">Coming soon</span>
+      <h3 data-i18n="card.attractions.title">Attractions</h3>
+      <p data-i18n="card.attractions.desc">Book Forbidden City, Great Wall & more — skip the queues.</p>
+      <span class="card-tag tag-coming">Coming soon</span>
     </div>
 
   </div>
 </section>
 
-<!-- ── Footer ── -->
 <footer>
-  <p>🐼 <span data-i18n="footer">ChinaTravelHub © 2026 — Independent guides by travelers, for travelers.</span></p>
+  <span class="panda">🐼</span>
+  <p data-i18n="footer">ChinaTravelHub © 2026 — Independent guides by travelers, for travelers.</p>
 </footer>
 
 <!-- ── Scripts ── -->
 <script>
-// ============ LANGUAGE DATA ============
 const translations = {
   en: {
-    "hero.title1": "Welcome to",
-    "hero.title2": "China",
-    "hero.subtitle": "Essential guides for traveling China in 2026. Payment, internet, trains — everything you need before you land.",
-    "guides.heading": "🧭 Travel Guides",
+    "banner": "Free travel guides for China · Updated May 2026",
+    "hero.title": "Explore",
+    "hero.cn": "中国",
+    "hero.subtitle": "Everything you need before landing in China. Payments, internet, trains — no surprises, just smooth travels.",
+    "guides.heading": "● Essential Travel Guides",
     "card.payment.title": "Payment Guide",
     "card.payment.desc": "Set up Alipay & WeChat Pay before you arrive. Cash is nearly dead in China — here's how to pay like a local.",
-    "card.payment.tag": "✓ Step-by-step",
     "card.internet.title": "Internet Guide",
-    "card.internet.desc": "eSIM, VPN, WiFi — how to stay online and access Google, WhatsApp & more behind the Great Firewall.",
-    "card.internet.tag": "✓ Verified May 2026",
+    "card.internet.desc": "eSIM, VPN, WiFi — stay online and access Google, WhatsApp & more behind the Great Firewall.",
     "card.train.title": "Train Guide",
-    "card.train.desc": "Book high-speed trains on 12306 or Trip.com. Airport express, seat classes, station navigation — all covered.",
-    "card.train.tag": "⚠ Partially verified",
+    "card.train.desc": "Book high‑speed trains on 12306 or Trip.com. Seat classes, station hacks, all covered.",
     "card.hotel.title": "Hotel Guide",
-    "card.hotel.desc": "Where to stay, how to book, which hotels accept foreigners — coming soon.",
-    "card.hotel.tag": "Coming soon",
-    "card.nav.title": "Navigation Guide",
-    "card.nav.desc": "Baidu Maps, Amap, Metro — how to navigate Chinese cities without Google Maps.",
-    "card.nav.tag": "Coming soon",
-    "card.attractions.title": "Attractions Guide",
-    "card.attractions.desc": "Book Forbidden City, Great Wall & more — skip the queues with these booking tricks.",
-    "card.attractions.tag": "Coming soon",
+    "card.hotel.desc": "Where to stay, how to book, which hotels accept foreigners.",
+    "card.nav.title": "Navigation",
+    "card.nav.desc": "Baidu Maps, Amap, Metro — navigate without Google Maps.",
+    "card.attractions.title": "Attractions",
+    "card.attractions.desc": "Book Forbidden City, Great Wall & more — skip the queues.",
     "footer": "ChinaTravelHub © 2026 — Independent guides by travelers, for travelers."
   },
   zh: {
-    "hero.title1": "欢迎来到",
-    "hero.title2": "中国",
-    "hero.subtitle": "2026年中国旅行必备指南。支付、上网、火车——出发前你需要知道的一切。",
-    "guides.heading": "🧭 旅行指南",
+    "banner": "中国旅行免费指南 · 2026年5月更新",
+    "hero.title": "探索",
+    "hero.cn": "中国",
+    "hero.subtitle": "落地中国前你需要知道的一切。支付、上网、火车——没有意外，只有顺畅的旅程。",
+    "guides.heading": "● 旅行必备指南",
     "card.payment.title": "支付指南",
     "card.payment.desc": "提前搞定支付宝和微信支付。在中国现金几乎绝迹——像本地人一样付钱。",
-    "card.payment.tag": "✓ 手把手教程",
     "card.internet.title": "上网指南",
     "card.internet.desc": "eSIM、VPN、WiFi——如何在防火墙后访问谷歌、WhatsApp 等。",
-    "card.internet.tag": "✓ 2026年5月实测",
     "card.train.title": "火车指南",
-    "card.train.desc": "在12306或Trip.com上订高铁票。机场快线、座位等级、车站导航全覆盖。",
-    "card.train.tag": "⚠ 部分已验证",
+    "card.train.desc": "在12306或Trip.com上订高铁票。座位等级、车站技巧全覆盖。",
     "card.hotel.title": "酒店指南",
-    "card.hotel.desc": "住哪里、怎么订、哪些酒店接待外国人——即将上线。",
-    "card.hotel.tag": "即将上线",
+    "card.hotel.desc": "住哪里、怎么订、哪些酒店接待外国人。",
     "card.nav.title": "导航指南",
-    "card.nav.desc": "百度地图、高德地图、地铁——没有谷歌地图怎么在中国导航。",
-    "card.nav.tag": "即将上线",
+    "card.nav.desc": "百度地图、高德地图、地铁——没有谷歌地图也能导航。",
     "card.attractions.title": "景点指南",
-    "card.attractions.desc": "预约故宫、长城等——用这些购票技巧免排队。",
-    "card.attractions.tag": "即将上线",
+    "card.attractions.desc": "预约故宫、长城等——免排队技巧。",
     "footer": "ChinaTravelHub © 2026 — 旅行者写给旅行者的独立指南。"
   }
 };
 
-// ============ STATE ============
-let currentLang = localStorage.getItem('cth_lang') || 'en';
-
-// ============ LANG DROPDOWN ============
-const supportedLangs = [
-  { code: 'en', label: 'English', native: 'English' },
-  { code: 'zh', label: '中文（简体）', native: '中文（简体）' },
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'zh', name: '中文' }
 ];
 
-function buildLangMenu() {
-  const menu = document.getElementById('langMenu');
-  menu.innerHTML = supportedLangs.map(l => {
-    const active = l.code === currentLang ? ' class="active"' : '';
-    return `<button${active} onclick="switchLang('${l.code}')">${l.native}</button>`;
-  }).join('');
-}
+let currentLang = localStorage.getItem('cth_lang') || 'en';
 
-function toggleLangMenu() {
-  document.getElementById('langMenu').classList.toggle('open');
+function buildLangMenu() {
+  document.getElementById('langMenu').innerHTML = languages.map(l =>
+    `<button data-lang="${l.code}" class="${l.code===currentLang?'active':''}">${l.name}</button>`
+  ).join('');
 }
 
 function switchLang(lang) {
   currentLang = lang;
   localStorage.setItem('cth_lang', lang);
-  applyTranslations();
-  document.getElementById('currentLangLabel').textContent = supportedLangs.find(l => l.code === lang).native;
-  document.getElementById('langMenu').classList.remove('open');
-  buildLangMenu();
-}
-
-function applyTranslations() {
-  const t = translations[currentLang] || translations['en'];
+  document.getElementById('currentLangLabel').textContent = languages.find(l=>l.code===lang).name;
+  const t = translations[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key]) el.innerHTML = t[key];
+    if (t[el.getAttribute('data-i18n')]) el.innerHTML = t[el.getAttribute('data-i18n')];
   });
-  document.title = currentLang === 'zh' 
-    ? 'China Travel Hub — 2026年中国旅行必备指南'
-    : 'China Travel Hub — Essential Guides for Traveling China in 2026';
+  document.title = lang==='zh' ? 'China Travel Hub — 2026年中国旅行必备指南' : 'China Travel Hub — Essential Guides for Traveling China in 2026';
+  buildLangMenu();
+  document.getElementById('langMenu').classList.remove('open');
 }
 
-// ============ INIT ============
 document.addEventListener('DOMContentLoaded', () => {
   buildLangMenu();
-  applyTranslations();
-  document.getElementById('currentLangLabel').textContent = supportedLangs.find(l => l.code === currentLang).native;
+  document.getElementById('currentLangLabel').textContent = languages.find(l=>l.code===currentLang).name;
+  switchLang(currentLang);
 });
 
-// Close dropdown on outside click
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.lang-dropdown')) {
-    document.getElementById('langMenu').classList.remove('open');
-  }
+document.addEventListener('click', e => {
+  if (!e.target.closest('.lang-dropdown')) document.getElementById('langMenu').classList.remove('open');
+});
+
+document.getElementById('langMenu').addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (btn && btn.dataset.lang !== currentLang) switchLang(btn.dataset.lang);
 });
 </script>
 
